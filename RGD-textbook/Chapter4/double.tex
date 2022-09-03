@@ -1,0 +1,515 @@
+\chapter{Fast spectral method for gas mixtures}
+\label{chap:double}
+
+\section{The Boltzmann equation for binary gas mixture}
+
+Consider the binary gas mixture of monoatomic gases, where the mass of a molecular of the first component $c_1$ is $m_1$, while that of the second component $c_2$ is $m_2$. Let $f^{c_1}(t,\textbf{x},\textbf{v})$ and $f^{c_2}(t,\textbf{x},\textbf{v})$ be respectively the VDFs of the first  and second components. The macroscopic quantities, such as the molecular number density, bulk velocity, and temperature of each component ($\imath$ is the species index), are defined as
+\begin{equation}
+\begin{aligned}
+n^\imath=\int f^\imath{d\textbf{v}},\ \ \
+\textbf{V}^\imath=\frac{1}{n^\imath}\int{}\textbf{v}f^\imath{}d\textbf{v},\ \ \
+T^\imath=\frac{m_\imath}{3n^\imath{}k_B}\int{}|\textbf{v}-\textbf{V}^\imath|^2f^\imath{}d\textbf{v},
+\end{aligned}
+\end{equation}
+while the molecular number density, bulk velocity, and temperature of the mixture are defined as
+\begin{equation}
+\begin{aligned}
+n=&\sum_{\imath}n^\imath,\ \
+\overline{\textbf{V}}=\frac{\sum_{\imath}m_\imath{n^\imath}\textbf{V}^\imath}{\sum_{\imath}m_\imath{n^\imath}},\ \
+T=\frac{1}{3n{}k_B}\sum_{\imath}\int{}m_\imath|\textbf{v}-\textbf{V}^\imath|^2f^\imath{}d\textbf{v}.
+\end{aligned}
+\end{equation}
+
+
+In the absence of external force, the BE for the binary gas mixture of monatomic molecules takes the form of
+\begin{equation}\label{Boltzmann_2}
+\begin{split}
+ \frac{\partial f^\imath}{\partial t}+{\textbf{v}}\cdot\frac{\partial
+f^\imath}{\partial \textbf{x}}=\sum_{\jmath=1,2}Q^{\imath\jmath}, %\ \(\imath=A,B),
+\end{split}
+\end{equation}
+where collision operators $Q^{\imath\jmath}(f^\imath,f^\jmath_*)$ consist of the gain parts $Q^{\imath\jmath+}$ and loss parts $Q^{\imath\jmath-}$. They are self-collision operators when $\imath=\jmath$ and cross-collision operators when $\imath\neq\jmath$. The collision operators are local in time and spatial space. For simplicity, $t$ and $\textbf{x}$ will be omitted in writing the collision operators
+\begin{equation}\label{collision_binary}
+Q^{\imath\jmath}(f^\imath,f^\jmath_*)=\underbrace{\int_{\mathbb{R}^3}\int_{\mathbb{S}^{2}}B^{\imath\jmath}(\cos\theta,|\textbf{u}|)
+    f^\jmath('\textbf{v}^{\imath\jmath}_{\ast})f^\imath('\textbf{v}^{\imath\jmath})d\Omega
+    d\textbf{v}_\ast}_{Q^{\imath\jmath+}}-\underbrace{\nu^{\imath\jmath}f^\imath(\textbf{v})}_{Q^{\imath\jmath-}},
+\end{equation}
+where
+\begin{equation}
+\nu^{\imath\jmath}(\textbf{v})=\int_{\mathbb{R}^3}\int_{\mathbb{S}^{2}}B^{\imath\jmath}(\cos\theta,|\textbf{u}|)
+    f^\jmath(\textbf{v}_{\ast})d\Omega    d\textbf{v}_\ast
+\end{equation}
+are the collision frequencies, and the relation between the post- and pre-collision velocities becomes
+\begin{equation}\label{collision_velocity_binary}
+\begin{split}
+'\textbf{v}^{\imath\jmath}=\textbf{v} 
++\frac{m_\jmath}{m_\imath+m_\jmath}(|\textbf{u}|\Omega-\textbf{u}),\ \ \ \
+'\textbf{v}^{\imath\jmath}_\ast=\textbf{v}_\ast-\frac{m_\imath}{m_\imath+m_\jmath}(|\textbf{u}|\Omega-\textbf{u}).
+\end{split}
+\end{equation}
+
+
+The cross-collision operators conserve the mass $(\int Q^{\imath\jmath}{d\textbf{v}}=0)$, total momentum $(\int m_\imath{\textbf{v}}Q^{\imath\jmath}{d\textbf{v}} +\int m_\jmath{\textbf{v}}Q^{\jmath\imath}{d\textbf{v}}=0)$, and total energy $(\int m_\imath|\textbf{v}|^2Q^{\imath\jmath}{d\textbf{v}} +\int m_\jmath|\textbf{v}|^2Q^{\jmath\imath}{d\textbf{v}}=0)$, instead of the momentum and energy of each species. For Maxwell molecules, however, we have the following exact relations for each cross-collision operators:
+\begin{eqnarray}
+  \int m_\imath \textbf{v} Q^{\imath\jmath}d\textbf{v}&=& -\tilde{\nu}^{\imath\jmath}\frac{m_\imath{}m_\jmath}{m_\imath+m_\jmath}n^\imath{n^\jmath}(\textbf{V}^\imath-\textbf{V}^\jmath), \label{cross_relation_V} \\
+  \int \frac{m_\imath}{2} |\textbf{v}-\textbf{V}^\imath|^2 Q^{\imath\jmath}d\textbf{v} &=&
+  -\tilde{\nu}^{\imath\jmath}\frac{m_\imath{}m_\jmath}{(m_\imath+m_\jmath)^2}n^\imath{n^\jmath}[3k_B(T^\imath-T^\jmath)-m_\jmath|\textbf{V}^\imath-\textbf{V}^\jmath|^2], \ \ \ \ \ 
+  \label{cross_relation_T}
+\end{eqnarray}
+where $
+    \tilde{\nu}^{\imath\jmath}=2\pi\int_0^\pi    (1-\cos\theta)\sin\theta{}B(\cos\theta){d\theta}$.
+%\begin{equation}\label{collision_fre}
+%    \tilde{\nu}^{\imath\jmath}=2\pi\int_0^\pi    (1-\cos\theta)\sin\theta{}B(\cos\theta){d\theta}.
+%\end{equation}
+
+\section{Cross-collision kernels}
+
+Detailed forms of the self-collision kernels $B^{\imath\imath}(\cos\theta,|\textbf{u}|)$ suitable for the FSM have been discussed and given in $\S$\ref{collision_kernel_detailed}, where the use of simpler collision kernels is justified by the observation that solutions of the BE are determined by the coefficient of shear viscosity (not only its value, but also its temperature dependence), instead of the detailed $\theta$-dependence of the collision kernel, see $\S$\ref{theta_dependence}. 
+
+
+The situation becomes more complicated for gas mixtures. In addition to the shear viscosity and thermal conductivity, there are mass diffusion and thermal diffusion, and the inverse effect to thermal diffusion. Two kinds of cross-collision kernels will be considered separately. 
+
+
+\subsection{Collision kernels for power-law potentials}
+
+The simplest form of the cross-collision kernel is for a gas of hard sphere molecules, where  $B^{\imath\jmath}=(d^{c_1}+d^{c_2})^2|\textbf{u}|/4$, with $d^\imath$ being the molecular diameters. For other type of intermolecular interactions, it is a difficult task to recover all the transport coefficients by a simple collision kernel. In DSMC, it is usually assumed that solutions of the BE are determined by both of the coefficients of shear viscosity and mass diffusion. For instance, the VSS model which gives the correct coefficients of shear viscosity and mass diffusion is widely adopted by DSMC in the simulation of gas mixtures~\cite{Bird1994}. 
+
+Therefore, if we recover the coefficients of shear viscosity and mass diffusion, our deterministic solutions are compatible with those of DSMC. To do this, we choose the following cross-collision kernels [see also Eq.~\eqref{kernel_lei}]:
+\begin{equation}\label{kernel_double}
+    B^{\imath\jmath}(\cos\theta,|\textbf{u}|)=B_0^{\imath\jmath}\sin^{\alpha^{\imath\jmath}+\gamma^{\imath\jmath}-1}
+    \left(\frac{\theta}{2}\right)\cos^{-\gamma^{\imath\jmath}}\left(\frac{\theta}{2}\right)|\textbf{u}|^{\alpha^{\imath\jmath}},
+\end{equation}
+where the symmetry requires $B_0^{\imath\jmath}=B_0^{\jmath\imath}$, $\alpha^{\imath\jmath}=\alpha^{\jmath\imath}$, and $\gamma^{\imath\jmath}=\gamma^{\jmath\imath}$. 
+
+
+According to the Chapman-Enskog expansion~\cite{CE}, the coefficient of the mass diffusion is given by 
+\begin{equation}\label{dv}
+\begin{aligned}[b]
+    D^{\imath\jmath}_m&=\frac{3\sqrt{{2\pi}k_BT/{m_r^{\imath\jmath}}}}{16({m_r^{\imath\jmath}}/{2k_BT})^3n\int_0^\infty
+    u^5\sigma_M^{\imath\jmath}\exp\left(-{m_r^{\imath\jmath}{}u^2}/{2k_BT}\right)du}\\
+    &=\frac{3\sqrt{{(m_r^{\imath\jmath})^{\alpha^{\imath\jmath}}}2^{2-\alpha^{\imath\jmath}}/\pi }}
+    {64B_0^{\imath\jmath} \Gamma(\frac{\alpha^{\imath\jmath}
+    +\gamma^{\imath\jmath}+3}{2})\Gamma(1-\frac{\gamma^{\imath\jmath}}{2})}
+    \frac{(k_BT)^{\omega^{\imath\jmath}}}{nm_r^{\imath\jmath}},
+\end{aligned}
+\end{equation}
+where $\omega^{\imath\jmath}$ is given by  Eq.~\eqref{temperature_dependence}, $m_r^{\imath\jmath}={m_\imath{}m_\jmath}/(m_\imath+m_\jmath)$
+is the reduced mass, $n$ is the total mass density, i.e., $n=n^{c_1}+n^{c_2}$ when 
+$\imath\neq\jmath$, and $\sigma_M^{\imath\jmath}$ is the momentum transfer cross-section defined below.
+
+In the practical calculations, when the mass diffusion $D^{\imath\jmath}_m$ (not only its value, but its temperature dependence) is known, the value of $\alpha^{\imath\jmath}$ can be determined  from the value of $\omega^{\imath\jmath}$ according to Eq.~\eqref{temperature_dependence}, while the value of $\gamma^{\imath\jmath}$ is determined by the ratio of the viscosity
+cross-section $\sigma_\mu^{\imath\jmath}$
+\begin{equation}\label{cross_section_v}
+\begin{aligned}[b]
+   {\sigma}_\mu^{\imath\jmath}=&2\pi|\textbf{u}|^{\alpha^{\imath\jmath}-1}B_0^{\imath\jmath}\int_0^\pi {}\sin^{\alpha^{\imath\jmath}+\gamma^{\imath\jmath}-1}
+    \left(\frac{\theta}{2}\right)\cos^{-\gamma^{\imath\jmath}}\left(\frac{\theta}{2}\right)\sin^3\theta{d\theta}\\
+    =&16\pi|\textbf{u}|^{\alpha^{\imath\jmath}-1}B_0^{\imath\jmath}\Gamma\left(\frac{\alpha^{\imath\jmath}+\gamma^{\imath\jmath}+3}{2}\right)
+      \Gamma\left(2-\frac{\gamma^{\imath\jmath}}{2}\right)/\Gamma\left(\frac{\alpha^{\imath\jmath}+7}{2}\right),
+      \end{aligned}
+\end{equation}
+to the momentum transfer cross-section $\sigma_M^{\imath\jmath}$ 
+\begin{equation}\label{cross_section_d}
+\begin{aligned}[b]
+   {\sigma}_M^{\imath\jmath}=&2\pi|\textbf{u}|^{\alpha^{\imath\jmath}-1}B_0^{\imath\jmath}\int_0^\pi {}\sin^{\alpha^{\imath\jmath}+\gamma^{\imath\jmath}-1}
+    \left(\frac{\theta}{2}\right)\cos^{-\gamma^{\imath\jmath}}\left(\frac{\theta}{2}\right)(1-\cos\theta)\sin\theta{d\theta}\\
+    =&8\pi|\textbf{u}|^{\alpha^{\imath\jmath}-1}B_0^{\imath\jmath}\Gamma\left(\frac{\alpha^{\imath\jmath}+\gamma^{\imath\jmath}+3}{2}\right)
+\Gamma\left(1-\frac{\gamma^{\imath\jmath}}{2}\right)/\Gamma\left(\frac{\alpha^{\imath\jmath}+5}{2}\right).
+\end{aligned}
+\end{equation}
+That is, $\gamma^{\imath\jmath}$ is obtained from the following equation
+\begin{equation}
+\frac{\sigma_{\mu}^{\imath\jmath}}{\sigma_{M}^{\imath\jmath}}=\frac{4-2\gamma^{\imath\jmath}}{\alpha^{\imath\jmath}+5}.
+\end{equation}
+After $\alpha^{\imath\jmath}$ and $\gamma^{\imath\jmath}$ are determined, one can determine the vale of $B_0^{\imath\jmath}$ by Eq.~\eqref{dv}. 
+
+For example, for the He-Ar mixture~\cite{Bird1994}, since $\omega^{\imath\jmath}=0.725$, from Eq.~\eqref{temperature_dependence} we choose $\alpha^{\imath\jmath}=0.55$; since the ratio of the viscosity cross-section to the momentum transfer cross-section is about $0.9$, we choose $\gamma^{\imath\jmath}=-0.5$.
+
+
+
+
+
+\subsection{Collision kernel for the Lennard-Jones potential}
+
+To recover all the transport coefficients, it is better to take into account the realistic LJ potential and consider the original collision kernel given by Eqs.~\eqref{cross_section0}-\eqref{deflection}. For simplicity, we assume the collision kernel can be written as
+\begin{equation}\label{kernel_LJ}
+B^{\imath\jmath}=B_{LJ}^{\imath\jmath}(\theta,|\textbf{u}|)\textbf{u},
+\end{equation}
+where the function $B_{LJ}^{\imath\jmath}(\theta,|\textbf{u}|)$ can always be constructed from the relation between the aiming distance $b_a$, relative velocity $|\textbf{u}|$, and the deflection angle $\theta$, for instance, using the method and data in Refs.~\cite{Sharipov2009a,Venkattraman2012}.
+
+
+
+\section{Fast spectral method for cross-collision operators}
+
+As in the approximation of the self-collision operators presented in $\S$\ref{single_carleman}, we rewrite the cross-collision operator $Q^{\imath\jmath}(f^\imath,f^\jmath_*)$ using the Carleman-like representation. We  introduce $\Theta=B_0^{\imath\jmath}\sin^{\alpha^{\imath\jmath}+\gamma^{\imath\jmath}-1}({\theta}/{2})
+\cos^{-\gamma^{\imath\jmath}}({\theta}/{2})|\textbf{u}|^{\alpha^{\imath\jmath}-1}$ when the collision integral is given by Eq.~\eqref{kernel_double} and $\Theta=B_{LJ}^{\imath\jmath}(\theta,|\textbf{u}|)$ when the collision integral is given by Eq.~\eqref{kernel_LJ}. With the basic identity $2\int_{\mathbb{R}^{3}}\delta(2\textbf{y}\cdot{\textbf{u}}+|\textbf{y}|^2)f(\textbf{y})d\textbf{y} ={|\textbf{u}|}\int_{\mathbb{S}^{2}}f(|\textbf{u}|\Omega-\textbf{u})d\Omega$, the cross-collision operator can be rewritten as
+\begin{equation*}
+\begin{aligned}[b]
+{Q^{\imath\jmath}}=&\int_{\mathbb{R}^3}\int_{\mathbb{S}^2}\Theta|\textbf{u}|
+  [f^\jmath('\textbf{v}^{\imath\jmath}_{\ast})f^\imath('\textbf{v}^{\imath\jmath})-f^\jmath(\textbf{v}_\ast)f^\imath(\textbf{v})]d\Omega d{\textbf{v}}_\ast \\
+=&\int\int\Theta|\textbf{u}|
+  \left[f^\jmath\left(\textbf{v}_{\ast}-(1-b)\frac{|\textbf{u}|\Omega-\textbf{u}}{2}\right)f^\imath\left(\textbf{v}+a\frac{|\textbf{u}|\Omega-\textbf{u}}{2}\right)-{f^\jmath}({\textbf{v}}_\ast){f^\imath}({\textbf{v}})\right]d\Omega d{\textbf{v}}_\ast \\
+=&2\int_{\mathbb{R}^3}\int_{\mathbb{R}^3}\Theta\delta(2\textbf{y}\cdot{\textbf{u}}+|\textbf{y}|^2)
+  \left[f^\jmath\left(\textbf{v}_{\ast}-\frac{(1-b)\textbf{y}}{2}\right)f^\imath\left(\textbf{v}+\frac{a\textbf{y}}{2}\right)-{f^\jmath}({\textbf{v}}_\ast){f^\imath}({\textbf{v}})\right]d\textbf{y} d{\textbf{v}}_\ast \\
+=&4\int_{\mathbb{R}^3}\int_{\mathbb{R}^3}\Theta\delta(\textbf{y}\cdot{\textbf{u}}+|\textbf{y}|^2)
+  [f^\jmath(\textbf{v}_{\ast}-(1-b)\textbf{y})f^\imath(\textbf{v}+a\textbf{y})-{f^\jmath}({\textbf{v}}_\ast){f^\imath}({\textbf{v}})]d\textbf{y} d{\textbf{v}}_\ast \\
+=&4\int_{\mathbb{R}^3}\int_{\mathbb{R}^3}\Theta\delta(\textbf{y}\cdot{}\textbf{z})
+  [f^\jmath(\textbf{v}+\textbf{z}+b\textbf{y})f^\imath(\textbf{v}+a\textbf{y})
+  -f^\jmath(\textbf{v}+\textbf{y}+\textbf{z})f^\imath(\textbf{v})]d\textbf{y} d\textbf{z},
+\end{aligned}
+\end{equation*}
+where
+\begin{equation}\label{binary}
+\begin{aligned}
+    a=\frac{2m_\jmath}{m_\imath+m_\jmath}, \ \ \ \ \
+    b=\frac{m_\jmath-m_\imath}{m_\imath+m_\jmath}.
+\end{aligned}
+\end{equation}
+
+
+According to Eq.~\eqref{sincos}, the deflection angle $\theta$ and relative velocity $|\textbf{u}|$ can be expressed as functions of $|\textbf{y}|$ and $|\textbf{z}|$. We therefore denote $4\Theta$ by $B(|\textbf{y}|,|\textbf{z}|)$. For example, we have  $B(|\textbf{y}|,|\textbf{z}|)=4B_0^{\imath\jmath}|\textbf{y}|^{\alpha^{\imath\jmath}+\gamma^{\imath\jmath}-1}  |\textbf{z}|^{-\gamma^{\imath\jmath}}$ when the collision integral is given by Eq.~\eqref{kernel_double}. The cross-collision operator is simplified to
+\begin{equation}\label{ccc_binary}
+\begin{aligned}[b]
+ Q^{\imath\jmath}=\int_{\mathbb{R}^3}\int_{\mathbb{R}^3}\delta(\textbf{y}\cdot{}\textbf{z})B(|\textbf{y}|,|\textbf{z}|) 
+[f^\jmath(\textbf{v}+\textbf{z}+b\textbf{y})f^\imath(\textbf{v}+a\textbf{y})
+  -f^\jmath(\textbf{v}+\textbf{y}+\textbf{z})f^\imath(\textbf{v})]d\textbf{y} d\textbf{z}.
+\end{aligned}
+\end{equation}
+
+Suppose both VDFs have the support $S$, the relative velocity is then $|\textbf{u}|\le2S$, and the infinite integration region $\mathbb{R}^3$ in Eq.~\eqref{ccc_binary} can also be reduced to $\mathcal{B}_R$, i.e., $|\textbf{x}|,|\textbf{y}|\le{R}$ with $R=\sqrt{2}S$. Expanding the truncated collision operator in the truncated Fourier series, we find that the $\textbf{j}$-th mode of the truncated cross-collision operator is related to the Fourier coefficients $\hat{f}^\imath$ and $\hat{f}^\jmath$ as
+\begin{equation}\label{mode_binary}
+   \widehat{Q}_\textbf{j}^{\imath\jmath}= \sum_{\textbf{l}+\textbf{m}=\textbf{j} \atop
+    \textbf{l},\textbf{m}=-(N_1,N_2,N_3)/2}^{{(N_1,N_2,N_3)}/2-1}
+    \hat{f}^\imath_\textbf{l}\hat{f}^\jmath_\textbf{m}\beta(a\textbf{l}+b\textbf{m},\textbf{m})
+   -\hat{f}^\imath_\textbf{l}\hat{f}^\jmath_\textbf{m}\beta(\textbf{m},\textbf{m}),
+\end{equation}
+where the kernel mode $\beta(\textbf{l},\textbf{m})$ is
+\begin{equation}\label{kernel_mode0_binary}
+\beta(\textbf{l},\textbf{m})=\int_{\mathcal{B}_R}\int_{\mathcal{B}_R}{}B(|\textbf{x}|,|\textbf{y}|)
+\delta(\textbf{y}\cdot{\textbf{z}})
+\exp(i\xi_\textbf{l}\cdot{\textbf{y}}+i\xi_\textbf{m}\cdot{\textbf{z}})d\textbf{y}d\textbf{z}.
+\end{equation}
+
+
+Note that the second term in Eq.~\eqref{mode_binary} can be calculated by the FFT-based convolution with the computational cost $O(N^3\log{N})$. For the first term, however, the direct calculation requires the computational cost to be $O(N^6)$. The main goal here is to separate $\xi_\textbf{l}$ and $\xi_\textbf{m}$ in $\beta(a\textbf{l}+b\textbf{m},\textbf{m})$ so that Eq.~\eqref{mode_binary} can be calculated effectively by the FFT-based convolution, maintaining the computational cost at the order of $O(N^3\log{N})$. If $b\neq0$, the separation is different from that in $\S$\ref{fourier_galerkin_spectral}.
+
+Similar to Eq.~\eqref{kernel_mode0}, Eq.~\eqref{kernel_mode0_binary} can be transformed to
+$$
+\frac{1}{2}\int
+              \left[\int_{0}^R\rho{}B(\rho,|\rho'|)\cos(\rho\xi_\textbf{l}\cdot{\textbf{e}})d\rho\right]  \left\{\int\delta(\textbf{e}\cdot{\textbf{e}'})\left[\int_{-R}^R|\rho'|\exp(i\rho'\xi_\textbf{m}\cdot{\textbf{e}'})d\rho'\right]d\textbf{e}'\right\}d\textbf{e}, 
+$$
+where the integration with respect to $\rho$ can be approximated by Gauss-Legendre quadrature of order $M_2$ ($\rho_r$ and $\omega_r$ ($r=1,2,\cdots,M_2$) are the abscissas and weights of the Gauss-Legendre quadrature for $\rho\in[0,R]$), yielding 
+$$
+\frac{1}{2}\int
+          \sum_{r=1}^{M_2}\omega_r\rho_r\cos(\rho_r\xi_\textbf{l}\cdot{\textbf{e}}) \left\{\int \delta(\textbf{e}\cdot{\textbf{e}'})\left[\int_{-R}^R|\rho'|B(\rho_r,|\rho'|)\exp(i\rho'\xi_\textbf{m}\cdot{\textbf{e}'})d\rho'\right]d\textbf{e}'\right\}d\textbf{e}.
+$$
+
+According to the calculation adopted in Eq.~\eqref{kernel_mode2}, we have 
+\begin{equation}\label{integral_e}
+\beta(\textbf{l},\textbf{m})=\int
+        \sum_{r=1}^{M_2}\omega_r\rho_r\cos(\rho_r\xi_\textbf{l}\cdot{\textbf{e}}) \psi(\rho_r,|\xi_\textbf{m}|\cos\theta_1)d\textbf{e},
+\end{equation}
+where 
+\begin{equation}
+\psi(\rho_r,s)=2\pi\int_0^R|\rho'|B(\rho_r,|\rho'|)J_0(\rho's)d\rho'.
+\end{equation}
+
+The integration with respect to $\textbf{e}$ in Eq.~\eqref{integral_e} can be approximated either by the trapezoidal rule [see Eq.~\eqref{kernel_mode}] or by the Gauss-Legendre quadrature [see Eq.~\eqref{kernel_modee}]. For clarity, we only give the result when using the Gauss-Legendre quadrature, i.e., $\beta(\textbf{l},\textbf{m})\approx
+                        \sum_{p,q,r=1}^{M,M,M_2}\omega_p\omega_q\omega_r\rho_r
+                        \cos(\rho_r\xi_\textbf{l}\cdot{\textbf{e}_{\theta_p,\phi_q}}) \psi(\rho_r,|\xi_\textbf{m}|\cos\theta_1)\sin\theta_p
+$, 
+where $|\xi_\textbf{m}|\cos\theta_1=\sqrt{|\xi_\textbf{m}|^2-(\xi_\textbf{m}\cdot{\textbf{e}}_{\theta_p,\varphi_q})^2}$.
+
+Finally, we expand the kernel mode into the following form:
+\begin{equation}
+\begin{split}
+\beta(a\textbf{l}+b\textbf{m},\textbf{m})\approx
+      \sum_{p,q,r=1}^{M,M,M_2}&\omega_p\omega_q\omega_r\rho_r \psi(\rho_r,|\xi_\textbf{m}|\cos\theta_1)\cdot\sin\theta_p \\
+   &\times [\cos(\rho_r{}a\xi_\textbf{l}\cdot{\textbf{e}}_{\theta_p,\varphi_q})\cdot
+            \cos(\rho_r{}b\xi_\textbf{m}\cdot{\textbf{e}}_{\theta_p,\varphi_q})\\
+             &- \sin(\rho_r{}a\xi_\textbf{l}\cdot{\textbf{e}}_{\theta_p,\varphi_q})\cdot\sin(\rho_r{}b\xi_\textbf{m}\cdot{\textbf{e}}_{\theta_p,\varphi_q}) ].
+\end{split}
+\end{equation}
+
+Now we see $\xi_\textbf{l}$ and $\xi_\textbf{m}$ are completely separated, hence Eq.~\eqref{mode_binary} can be computed by the FFF-based convolution, with the computational cost at the order of $O(M_2M^2N^3\log_2N)$. 
+
+
+\subsubsection{Special forms of the kernel mode}
+
+When the cross-collision kernel is given by Eq.~\eqref{kernel_double}, we have 
+\begin{equation}\label{kernel_mode_binary}
+\begin{aligned}[b]
+\beta(a\textbf{l}+b\textbf{m},\textbf{m})
+    \approx&{4B_0^{\imath\jmath}}\sum_{p,q=1}^{M}\omega_p\omega_q
+I(\xi_\textbf{l},\xi_\textbf{m})\cdot
+    \psi_{\gamma^{\imath\jmath}}
+    \left\{\sqrt{|\xi_\textbf{m}|^2-(\xi_\textbf{m}\cdot{\textbf{e}}_{\theta_p,\varphi_q})^2}
+    \right \}\sin\theta_p,
+\end{aligned}
+\end{equation}
+where
+\begin{equation}\label{phi_expression_binary}
+ I(\xi_\textbf{l},\xi_\textbf{m})=2\int_{0}^R\rho^{\alpha^{\imath\jmath}+\gamma^{\imath\jmath}}\cos[\rho(a\xi_\textbf{l}+b\xi_\textbf{m})\cdot{\textbf{e}}]d\rho,
+\end{equation}
+and the function $\psi_{\gamma}(s)$ is defined in Eq.~\eqref{psi_expression}. 
+
+%
+%where $\textbf{e}$ in Eq.~\eqref{phi_expression_binary} should be replaced by ${\textbf{e}}_{\theta_p,\varphi_q}$.
+
+Due to the presence of $b$ in Eq.~\eqref{phi_expression_binary}, three different cases will be considered for the calculation of $I(\xi_\textbf{l},\xi_\textbf{m})$:
+\begin{itemize}
+    \item {When the two types of molecules have identical mass, we have
+        $a=1$ and $b=0$. Thus,
+        \begin{equation}
+             I(\xi_\textbf{l})=2\int_{0}^R\rho^{\alpha^{\imath\jmath}+\gamma^{\imath\jmath}}\cos(\rho{}a\xi_\textbf{l}\cdot{\textbf{e}}_{\theta_p,\varphi_q})d\rho,
+        \end{equation}
+        which can be calculated accurately by Gauss-Legendre quadrature. In this case, $\xi_\textbf{l}$ and $\xi_\textbf{m}$ appear in two different functions. Hence Eq.~\eqref{mode_binary} can be calculated effectively by the FFT-based convolution. The computational cost of the cross-collision operators is exactly the same as that of the self-collision operators, which is $O(M^2N^3\log_2N)$.}
+        
+   \item {For cross-collision operators when the two types of molecules have nearly identical mass, i.e., $|m_A-m_B|\ll{m_A+m_B}$, we have $|b|\ll1$. Then, according to the Taylor expansion, we have         $\cos[\rho(a\xi_\textbf{l}+b\xi_\textbf{m})\cdot{\textbf{e}}_{\theta_p,\varphi_q}]\approx\sum_{r=0}^{M_1-1}  \cos(\rho{}a\xi_\textbf{l}\cdot{\textbf{e}}_{\theta_p,\varphi_q}+r\pi/2)(b\rho\xi_\textbf{m}\cdot{\textbf{e}}_{\theta_p,\varphi_q})^r/r!$, where '!' stands for the factorial. Hence we have
+        \begin{equation}\label{phi_expression2}       I(\xi_\textbf{l},\xi_\textbf{m})\approx2\sum_{r=0}^{M_1-1}\frac{(b\xi_\textbf{m}\cdot{\textbf{e}}_{\theta_p,\varphi_q})^r}{r!}          \int_{0}^R\rho^{\alpha^{\imath\jmath}+\gamma^{\imath\jmath}+r}\cos\left(\rho{}a\xi_\textbf{l}\cdot{\textbf{e}}_{\theta_p,\varphi_q}+\frac{r\pi}{2}\right)d\rho,        
+        \end{equation}
+        where each term in the summation  can be calculated accurately by Gauss-Legendre quadrature. From Eqs.~\eqref{kernel_mode_binary} and~\eqref{phi_expression2} we find that $\xi_\textbf{l}$ and $\xi_\textbf{m}$ appear in two different functions. Hence Eq.~\eqref{mode_binary} can be calculated effectively by the FFT-based convolution, with the computational cost $O(M_1M^2N^3\log_2N)$, which is $M_1$ times larger than the self-collision operators. }
+        
+    \item {For general cases, Eq.~\eqref{kernel_mode_binary} can be approximated by the Gauss-Legendre quadrature so that $\xi_\textbf{l}$ and $\xi_\textbf{m}$ are separated by the property of the cosine function        \begin{equation}\label{phi_expression3}
+            \begin{aligned}[b]
+                        I(\xi_\textbf{l},\xi_\textbf{m})\approx2
+        \sum_{r=1}^{M_2}\omega_r\rho_r^{\alpha^{\imath\jmath}+\gamma^{\imath\jmath}}
+                \cdot[&\cos(\rho_r{}a\xi_\textbf{l}\cdot{\textbf{e}}_{\theta_p,\varphi_q})\cdot
+                       \cos(\rho_r{}b\xi_\textbf{m}\cdot{\textbf{e}}_{\theta_p,\varphi_q})\\
+                     &-\sin(\rho_r{}a\xi_\textbf{l}\cdot{\textbf{e}}_{\theta_p,\varphi_q})\cdot
+                       \sin(\rho_r{}b\xi_\textbf{m}\cdot{\textbf{e}}_{\theta_p,\varphi_q})].
+        \end{aligned}
+        \end{equation}
+         Then, Eq.~\eqref{mode_binary} can be calculated with the computation cost $O(M_2M^2N^3\log_2N)$, which is $2M_2$ times larger than the self-collision operators.}
+\end{itemize}
+
+
+\section{Conservation enforcement}
+
+
+The procedure in deriving the FSM for gas mixtures is essentially the same as that for single species~\cite{Mouhot2006}. Therefore, it can be proved that the present FSM conserves the mass and satisfies the H-theorem, while the approximation errors of momentum and energy are spectrally small. These errors, however, can be eliminated using the method of Lagrangian multiplier.
+
+
+For Maxwell molecules, the Lagrangian method is similar to that of self-collision operators (see $\S$\ref{conservation_single}). After $Q^{\imath\jmath}$ is obtained, we minimise $\sum_\textbf{j}(Q_\textbf{j}^{\imath\jmath}-\tilde{Q}_\textbf{j}^{\imath\jmath})^2$ under the constraints of mass conservation, Eqs.~\eqref{cross_relation_V} and~\eqref{cross_relation_T}, yielding
+\begin{equation}\label{Lagrangian_max}
+    \widetilde{Q}^{\imath\jmath}={Q}^{\imath\jmath}-(\lambda_n^{\imath\jmath}+\lambda_\text{v}^{\imath\jmath}\cdot{}\textbf{v}+\lambda_e^{\imath\jmath} |\textbf{v}|^2),
+\end{equation}
+where the Lagrangian multipliers satisfy
+\begin{equation}
+\begin{split}
+  \sum_\textbf{j} Q^{\imath\jmath}&=\sum_\textbf{j} (\lambda_n^{\imath\jmath}+\lambda_\text{v}^{\imath\jmath}\cdot{}\textbf{v}+\lambda_e^{\imath\jmath} |\textbf{v}|^2), \\
+    \sum_\textbf{j} m_{\imath}\textbf{v}Q^{\imath\jmath}&=\sum_\textbf{j} m_{\imath}\textbf{v}(\lambda_n^{\imath\jmath}+\lambda_\text{v}^{\imath\jmath}\cdot{}\textbf{v}+\lambda_e^{\imath\jmath} |\textbf{v}|^2)\\
+    &
+    -\sum_\textbf{j}\tilde{\nu}^{\imath\jmath}\frac{m_\imath{}m_\jmath}{m_\imath+m_\jmath}n^\imath{n^\jmath}(\textbf{V}^\imath-\textbf{V}^\jmath), \\
+    \sum_\textbf{j} \frac{m_{\imath}}{2}|\textbf{v}|^2 Q^{\imath\jmath}&=\sum_\textbf{j} \frac{m_{\imath}}{2}|\textbf{v}|^2(\lambda_n^{\imath\jmath}+\lambda_\text{v}^{\imath\jmath}\cdot{}\textbf{v}+\lambda_e^{\imath\jmath}
+    |\textbf{v}|^2) \\
+    & \ \ \ -\sum_\textbf{j} \tilde{\nu}^{\imath\jmath}\frac{m_\imath{}m_\jmath}{(m_\imath+m_\jmath)^2}n^\imath{n^\jmath}[3k_B(T^\imath-T^\jmath)-m_\jmath|\textbf{V}^\imath-\textbf{V}^\jmath|^2].
+\end{split}
+\end{equation}
+
+
+For other types of intermolecular interactions,  we minimise the function  $\sum_\textbf{j}(Q_\textbf{j}^{c_1c_2}-\tilde{Q}_\textbf{j}^{c_1c_2})^2+(Q_\textbf{j}^{c_2c_1}-\tilde{Q}_\textbf{j}^{c_2c_1})^2$ under the conservation of mass, total momentum, and total energy,  yielding
+%\begin{equation}\label{Lagrangian_gen}
+   $ \widetilde{Q}^{\imath\jmath}={Q}^{\imath\jmath}-(\lambda_n^{\imath\jmath}+m_\imath\lambda_\text{v}\cdot{}\textbf{v}+m_\imath\lambda_e|\textbf{v}|^2)$,
+%\end{equation}
+where the 6 Lagrangian multipliers satisfy
+\begin{equation}
+\begin{split}
+  \sum_\textbf{j} Q^{c_1c_2}&=\sum_\textbf{j} (\lambda_n^{c_1c_2}+m_1\lambda_\text{v}\cdot{}\textbf{v}+m_1\lambda_e |\textbf{v}|^2), \\
+    \sum_\textbf{j} Q^{c_2c_1}&=\sum_\textbf{j} (\lambda_n^{c_2c_1}+m_2\lambda_\text{v}\cdot{}\textbf{v}+m_2\lambda_e |\textbf{v}|^2), \\  
+    \sum_\textbf{j} (m_1Q^{c_1c_2}+m_2Q^{c_2c_1})\textbf{v}&=\sum_\textbf{j}m_1 (\lambda_n^{c_1c_2}+m_1\lambda_\text{v}\cdot{}\textbf{v}+m_1\lambda_e |\textbf{v}|^2)\textbf{v}\\
+    &
+    +\sum_\textbf{j}m_2 (\lambda_n^{c_2c_1}+m_1\lambda_\text{v}\cdot{}\textbf{v}+m_1\lambda_e |\textbf{v}|^2)\textbf{v}, \\
+       \sum_\textbf{j} (m_1Q^{c_1c_2}+m_2Q^{c_2c_1})|\textbf{v}|^2&=\sum_\textbf{j}m_1 (\lambda_n^{c_1c_2}+m_1\lambda_\text{v}\cdot{}\textbf{v}+m_1\lambda_e |\textbf{v}|^2)|\textbf{v}|^2\\
+           &
+           +\sum_\textbf{j}m_2 (\lambda_n^{c_2c_1}+m_1\lambda_\text{v}\cdot{}\textbf{v}+m_1\lambda_e |\textbf{v}|^2)|\textbf{v}|^2.
+\end{split}
+\end{equation}
+
+
+
+\section{Comparison with exact BKW solutions}
+
+
+We check accuracy of the FSM by comparing the numerical solutions with the analytical BKW solutions for Maxwell molecules ($\alpha^{\imath\jmath}=0$). Without loss of generality, we take $\gamma^{\imath\jmath}=0$ in Eq.~\eqref{kernel_double} and consider the spatial-homogeneous BE. The exact BKW solutions can be written as follows~\cite{BKW2}:
+\begin{equation}\label{bkw}
+\begin{split}
+  f_{BKW}^{\imath}(v,t)=n^{\imath}
+    \left(\frac{m_\imath}{2\pi{K}}\right)^{3/2}\exp\left(-\frac{m_\imath|v|^2}{2K}\right)\left(1-3rp_\imath+\frac{rp_\imath}{K}m_\imath|v|^2\right),
+\end{split}
+\end{equation}
+where
+\begin{equation}
+\begin{aligned}
+p_1&=\frac{4n^{c_2}}{5}[2B_0^{c_2c_2}-m_0{}B_0^{c_1c_2}(5-3m_0)],\\
+  p_2&=\frac{4n^{c_1}}{5}[2B_0^{c_1c_1}-m_0B_0^{c_1c_2}(5-3m_0)], \\
+    r&=\frac{\widetilde{A}}{\widetilde{A}\exp[4\pi{}\widetilde{A}(t+t_0)]-\widetilde{B}},\\
+    K&=\frac{n^{c_1}+n^{c_2}}{n^{c_1}+n^{c_2}+2(n^{c_1}p_1+n^{c_2}p_2)r},
+\end{aligned}
+\end{equation}
+with
+\begin{equation}
+\begin{aligned}
+  \widetilde{A}&=\frac{4n^{c_1}B_0^{c_1c_1}+2n^{c_2}m_0B_0^{c_1c_2}(5-3m_0{p_2}/p_1)}{15},\\
+\widetilde{B}&=\frac{8n^{c_1}B_0^{c_1c_1}p_1+4n^{c_2}m_0B_0^{c_1c_2}(5-3m_0)p_2}{15},
+\end{aligned}
+\end{equation}
+and $m_0={4m_1m_2}/{(m_1+m_2)^2}$. 
+
+The additional conditions below should be satisfied for the existence of exact solutions:
+\begin{itemize}
+    \item Exact solution of type I exists when $p_1$ is equal to $p_2$, i.e., this solution exists only for special values of relative density
+    \begin{equation}
+        \frac{n^{c_2}}{n^{c_1}}= \frac{2B_0^{c_1c_1}-m_0(5-3m_0)B_0^{c_1c_2}}        {2B_0^{c_2c_2}-m_0(5-3m_0)B_0^{c_1c_2}}.
+    \end{equation}
+    \item Exact solution of type II exists for arbitrary values of $n^{c_1}$ and $n^{c_2}$  when the following relation is satisfied
+    \begin{equation}
+        \frac{1}{2B_0^{c_1c_1}/B_0^{c_1c_2}-m_0(5-3m_0)}+\frac{1}{2B_0^{c_2c_2}/B_0^{c_1c_2}-m_0(5-3m_0)}=\frac{1}{3m_0^2}.
+    \end{equation}
+\end{itemize}
+
+
+We first consider the case where the two types of molecules have the mass ratio of $m_1/m_2=4$. In our numerical simulations, we use Eq.~\eqref{phi_expression3} with $M_2=7$ to approximate Eq.~\eqref{phi_expression_binary}. In the angular discretisation, we take $M=6$. Figure~\ref{mixture1} shows the relax-to-equilibrium process of the two types of solutions. One can see that the numerical obtained VDFs agree well with the BKW solutions, and the relative errors in the fourth-order moments are about $10^{-4}$. This demonstrates accuracy of the FSM. 
+
+\begin{figure}[tbp]
+  \centering
+  \includegraphics[width=7cm]{type1_f.pdf}  \hskip 0.2cm
+  \includegraphics[width=7cm]{type1_g.pdf}\\
+  \vskip 0.2cm
+  \includegraphics[width=7cm]{type2_f.pdf}  \hskip 0.2cm
+  \includegraphics[width=7cm]{type2_g.pdf}\\
+  \vskip 0.2cm
+  \includegraphics[width=7cm]{error_type1_fourth.pdf}
+  \includegraphics[width=7cm]{error_type2_fourth.pdf}
+  \caption[Evolution of VDFs in the spatial-homogeneous Maxwell molecules when  $m_1=4m_2=4$.]{(a-d) Evolution of VDFs in the spatial-homogeneous Maxwell molecules. The solid lines are the BKW solutions of type I (a,b) and type II (c,d), while the dots are the numerical ones. (a,c): $f^{c_1}(v_1,0,0)$ and (b,d): $f^{c_2}(v_1,0,0)$. In each figure, from bottom to top (near $v_1=0$), the time in (a,c) is $(0,1,2,\cdots,24)\times0.25$, while in (b,d) is $(0,1,2,\cdots,20)\times0.1$. (e) The relative errors of the fourth-order moments vs time for type I solutions. Solid line: $\int{}(f^{c_1}-f_{BKW}^{c_1})v_1^4dv/\int{}f_{BKW}^{c_1}v_1^4dv$, dashed line: $\int{}(f^{c_2}-f_{BKW}^{c_2})v_1^4dv/\int{}f_{BKW}^{c_2}v_1^4dv$. (f) The relative errors of the fourth-order moments vs time for type II solutions. The parameters are $m_1=4m_2=4$. (a,b,e): $B_0^{c_2c_2}=B_0^{c_1c_1}=4B_0^{c_1c_2}=1/4\pi$, $n^{c_1}=n^{c_2}=1$, and $t_0=\log[(B+3Ap_1)/A]/4A\pi$ so that at the initial time $t=0$,   $1-3rp_1=1-3rp_2=0$. (c,d,f): $B_0^{c_1c_2}=1/16\pi$, $B_0^{c_2c_2}=B_0^{c_1c_1}=B_0^{c_1c_2}(3m_0^2+5m_0)/2$, $n^{c_1}=0.95$, $n^{c_2}=1$, and $t_0=\max\{\log[(\widetilde{B}+3\widetilde{A}p_1)/\widetilde{A}],\log[(\widetilde{B}+3\widetilde{A}p_2)/\widetilde{A}]\}/4\widetilde{A}\pi$.  The velocity bound $L$ is 8 for the distribution function $f^{c_1}$ and 16 for the distribution function $f^{c_2}$. The other parameters are $N=64$, $M=6$, and $M_2=7$. }
+    \label{mixture1}  
+\end{figure}
+
+
+We then consider the case that the two types of molecules have nearly identical mass, i.e., $m_1/m_2=1.25$. We use Eq.~\eqref{phi_expression2} with $M_1=7$ to approximate Eq.~\eqref{phi_expression_binary}, while in the angular discretisation we take $M=6$. Figure~\ref{mixture12} compares the evolution of the VDFs and the fourth-order moments. Again, they agree with the BKW solutions very well.
+
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=7cm]{taylor_type1_f.pdf}  \hskip 0.2cm
+  \includegraphics[width=7cm]{taylor_type1_g.pdf}\\
+  \vskip 0.2cm
+  \includegraphics[width=7cm]{taylor_type2_f.pdf}  \hskip 0.2cm
+  \includegraphics[width=7cm]{taylor_type2_g.pdf}\\
+  \vskip 0.2cm
+  \includegraphics[width=5.8cm]{taylor_error_type1.pdf}   \hskip 1.4cm
+   \includegraphics[width=5.8cm]{taylor_error_type2.pdf}
+  \caption[Evolution of VDFs in the spatial-homogeneous Maxwell molecules when  $m_1=1,m_2=0.8$.]{(a-d) Evolution of VDFs in the spatial-homogeneous Maxwell molecules. The solid lines in (a,b) and (c,d) are respectively the BKW solutions of type I and II,  while the dots are the numerical ones. (a,c): $f^{c_1}(v_1,0,0)$ and (b,d): $f^{c_2}(v_1,0,0)$. In each figure, from bottom to top (near $v_1=0$), the time is $(0,1,2,\cdots,19)\times0.1$. (e) and (f) The relative errors of the   fourth-order moments in the simulation of exact solutions of types I and II, respectively. The parameters are $m_1=1,m_2=0.8$, (a,b,e) $B_0^{c_2c_2}=B_0^{c_1c_1}=4B_0^{c_1c_2}=1/4\pi$, $n^{c_1}=n^{c_2}=1$, and   $t_0=\log[(\widetilde{B}+3\widetilde{A}p_1)/\widetilde{A}]/4\widetilde{A}\pi$, (c,d,f) $B_0^{c_1c_2}=1/16\pi$, $B_0^{c_2c_2}=B_0^{c_1c_1}=B_0^{c_1c_2}(3m_0^2+5m_0)/2$, $n^{c_1}=0.9, n^{c_2}=1$, and  $t_0=\max\{\log[(\widetilde{B}+3\widetilde{A}p_1)/\widetilde{A}],\log[(\widetilde{B}+3\widetilde{A}p_2)/\widetilde{A}]\}/4\widetilde{A}\pi$. We choose $N=32$, $M=6$, and $M_1=7$. }   
+  \label{mixture12}
+\end{figure}
+
+
+
+\section{Space-inhomogeneous problems}
+
+
+We employ the iteration method to get the stationary solutions of the BE for space-inhomogeneous problems. Given the VDFs $f_k^{c_1}$ and $f_k^{c_2}$ at
+the $k$-th iteration step, their values at the next iteration step
+is calculated by the following equations
+\begin{equation*} %\label{iteration2}
+\begin{split}
+    [\nu^{c_1c_1}(f^{c_1}_k)+\nu^{c_1c_2}(f^{c_2}_k)]{f}^{C_1}_{k+1}+\textbf{v}\cdot\frac{\partial {f}^{c_1}_{k+1}}{\partial{\textbf{x}}}=
+    Q^{c_1c_1+}_k+Q^{c_1c_2+}_k,\\
+	[\nu^{c_2c_2}(f^{c_2}_k)+\nu^{c_2c_1}(f^{c_1}_k)]{f}^{c_2}_{k+1}+\textbf{v}\cdot\frac{\partial{f}^{c_2}_{k+1}}{\partial{\textbf{x}}}=
+	Q^{c_2c_2+}_k+Q^{c_2c_1+}_k.
+\end{split}
+\end{equation*}
+
+\subsection{Normal shock waves}
+
+
+\begin{figure}[tb]
+  \centering
+  \includegraphics[width=6.5cm,height=5.5cm]{shocka.pdf}
+  \hskip 0.8cm
+  \includegraphics[width=6.5cm,height=5.5cm]{shockb.pdf} \\
+  \vskip 0.1cm
+  \includegraphics[width=6.5cm,height=5.5cm]{shockc.pdf}\\
+  \caption[Profiles of molecular number densities (dots), flow velocities (circles), and temperature (triangles) for upstream Mach number 3, $m^{c_2}/m^{c_1}=0.5$, and $d^{c_2}/d^{c_1}=1$: (a) $\chi_{c_2}=0.1$, (b) $\chi_{c_2}=0.5$, and (c) $\chi_{c_2}=0.9$.]{Profiles of molecular number densities (dots), flow velocities (circles), and temperature (triangles) for upstream Mach number 3, $m^{c_2}/m^{c_1}=0.5$, and $d^{c_2}/d^{c_1}=1$: (a) $\chi_{c_2}=0.1$, (b) $\chi_{c_2}=0.5$, and (c) $\chi_{c_2}=0.9$. Here $\chi_{c_2}$ is the concentration of the $c_2$-component at the upstream infinity and $l_1$ is the mean free path of the molecules of the $c_1$-component at the upstream infinity. The markers are our numerical results, while the lines (solid: $c_1$-component, dashed: $c_2$-component) are the results of the finite-difference method (note that components $c_1$ and $c_2$ are correspondingly the $A$ and $B$ components in Ref.~\cite{Kosuge2001}). }
+  \label{shock2}
+\end{figure}
+
+We compare our numerical solutions for normal shock waves with those obtained from a finite-difference method~\cite{Kosuge2001}. The mixture is composed of hard sphere molecules with the diameters of the molecular $c_1$ and $c_2$ being $d^{c_1}$ and $d^{c_2}$, respectively. For comparison, we set $B^{c_1c_1}=(d^{c_1})^2/4$, $B^{c_2c_2}=(d^{c_2})^2/4$, and $B^{c_1c_2}=(d^{c_1}+d^{c_2})^2/16$. Figures~\ref{shock2} and~\ref{shock4} show the shock wave structures with different concentrations. It is seen that our numerical results compare well with those of a finite-difference method.
+
+
+\begin{figure}[th]
+  \centering
+  \subfloat[]{
+  \includegraphics[width=6.5cm]{shock4a.pdf}}
+  \hskip 0.8cm
+  \subfloat[]{
+  \includegraphics[width=6.5cm]{shock4b.pdf} }\\
+  \vskip 0.4cm
+  \subfloat[]{
+  \includegraphics[width=6.5cm]{shock4c.pdf}}
+  \caption[Profiles of molecular number densities (dots), flow velocities (circles), and temperature (triangles) for upstream Mach number 2, $m^{c_2}/m^{c_1}=0.25$, and $d^{c_2}/d^{c_1}=1$: (a) $\chi_{c_2}=0.1$, (b) $\chi_{c_2}=0.5$, and (c) $\chi_{c_2}=0.9$.]{Same as Figure~\ref{shock2}, expect here $m^{c_2}/m^{c_1}=0.25$ and the Mach number is 2. }
+  \label{shock4}
+\end{figure}
+
+\subsection{Heat transfer between two parallel plates}
+
+We further compare our numerical results for the Fourier heat transfer problem between two parallel plates with that of a finite-difference method~\cite{Kosuge2000}. The mixture is again composed of hard sphere molecules, confined in the domain $0\le{}x_1\le{\ell}$. The diffuse boundary condition is adopted, where the wall temperature at $x_1=0$ is $T_I$ and that at $x_1=d$ is $2T_{I}$. The Knudsen number is defined as $Kn=l_0/\ell$, where the mean-free path $l_0=[\sqrt{2}\pi(d^{c_1})^2(n_{av}^{c_1}+n_{av}^{c_2})]^{-1}$. 
+
+Figure~\ref{fourier_mixture} shows the temperature profiles with $Kn=1$, $m_{2}/m_{1}=0.25$, $d^{c_2}/d^{c_1}=0.5$, and $n_{av}^{c_2}/n_{av}^{c_1}=0.1,1$, and $10$. In our numerical simulations, we have used $128\times48\times48$ velocity grids. The agreements with those from a finite-difference method are quite satisfactory. Note that the smaller molecules ($c_2$ component) have a larger mean free path. Therefore, the density profile of the component $c_2$ is flatter than that of the component $c_1$. Also note that the effective Knudsen number at the same $Kn$ increases with the value of $n_{av}^{c_2}/n_{av}^{c_1}$, since $Kn$ is based on the average number density of the total mixture and on the diameter of the larger molecules. Therefore, the temperature profiles become flatter as $n_{av}^{c_2}/n_{av}^{c_1}$ increases. 
+
+\begin{figure}[tbp]
+  \centering
+  \includegraphics[width=6.7cm]{fourier_rho.pdf}
+  \hskip 0.1cm
+  \includegraphics[width=7cm]{fourier_t.pdf}
+  \caption[Normalized molecular number densities (at $n^{c_2}_{av}/n^{c_1}_{av}=10$) and temperature profiles of Fourier heat flow between two parallel plates.]{Normalized molecular number densities (at $n^{c_2}_{av}/n^{c_1}_{av}=10$) and temperature profiles of Fourier heat flow between two parallel plates. Solid lines: our numerical results; Markers: results from the finite-difference method (components $c_1$ and $c_2$ are correspondingly the components $A$ and $B$ in  Ref.~\cite{Kosuge2000}).  }
+  \label{fourier_mixture}
+\end{figure}
+
+
+\subsection{Thermal creep flow in closed channel}
+
+Finally we consider the thermal creep flow of binary gas mixture in a 2D closed channel  with the length-to-width ratio being 5. The temperature in the right end of the channel is 1.5 times higher than that in the left end. The temperature in the top and bottom walls varies linearly. We consider the hard sphere molecules with $m_1=m_2$, $d^{c_2}/d^{c_1}=0.25$, and $n_{av}^{c_2}/n_{av}^{c_1}=0.1$. The mean free path is defined as that in the Fourier flow and the channel width is chosen as the character length. Figures~\ref{binary_thermal1} and~\ref{binary_thermal2} show the temperature and streamline profiles. The flows gradually reverse their directions, as happened in a single species (see $\S$\ref{thermal_creep_single}). Since the component $c_2$ has a larger $Kn$, its flow pattern changes earlier than that of the component $c_1$. 
+
+
+\begin{figure}[tbp]
+  \centering
+  \subfloat[$Kn=0.1$]{
+  \includegraphics[width=10cm]{B01.pdf}} \\
+      \subfloat[$Kn=0.15$]{
+      \includegraphics[width=10cm]{B015.pdf}} \\
+    \subfloat[$Kn=0.2$]{
+    \includegraphics[width=10cm]{B02.pdf}} \\
+    \subfloat[$Kn=0.25$]{
+    \includegraphics[width=10cm]{B025.pdf} }
+     \caption[The temperature and streamline profiles in the thermal creep flow of a binary gas mixture.]{The temperature and streamline profiles in the thermal creep flow of a binary gas mixture. Near the bottom wall, from $x_2=0.5$ to $x_2=4.5$, the isothermal lines have the temperature ranging from $1.05$ to $1.45$. In each sub figure, the first one is the results of the component $c_1$, while the second one is that of the component $c_2$.}
+     \label{binary_thermal1}
+\end{figure}
+
+
+\begin{figure}[tbp]
+  \centering
+  \subfloat[$Kn=0.3$]{
+    \includegraphics[width=10cm]{B03.pdf}} \\
+  \subfloat[$Kn=0.5$]{
+    \includegraphics[width=10cm]{B22.pdf} }\\
+\subfloat[$Kn=0.7$]{
+    \includegraphics[width=10cm]{B07.pdf} }\\
+    \subfloat[$Kn=1$]{
+        \includegraphics[width=10cm]{B1.pdf} }
+     \caption[The temperature and streamline profiles in the thermal creep flow of a binary gas mixture (continued).]{Same as Figure~\ref{binary_thermal1} but for different $Kn$.}
+     \label{binary_thermal2}
+\end{figure}
+
+
+
+\section{Summary}
+
+
+We have extended the FSM to the binary gas mixture of monoatomic gases. The accuracy of the FSM has been checked by comparing the numerical solutions with the analytical BKW solutions as well as the numerical results of the finite-difference method from the Kyoto kinetic theory group. The present method can be straightforwardly applied to multiple gas mixtures. 
+
+
+The mass difference between the two kinds of molecules makes the FSM less efficient as that for the single component gas, however, it is still faster than the conventional spectral methods where the computational complexity is at the order of $O(N^6)$, especially when a large number of velocity grids are needed. 
+
+
+In the current implementation, we have used the same number of grids for the velocity discretisation, and $L$ is chosen as the support of the VDF of the lighter molecules. As a consequence, the velocity grid number are 8 and 27 times larger than that for single component gas when the mass ratio are 4 and 9, respectively. This wastes not only the computer memory, but also the computational time. Further efforts will be needed to optimise the algorithm, for example, to use a non-uniform velocity grids. 
+
+

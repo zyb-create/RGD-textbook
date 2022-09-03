@@ -1,0 +1,184 @@
+% !TeX root = ../sustechthesis-example.tex
+
+\chapter{单原子气体的简化动理论模型}
+
+
+\section{模型方程}
+
+玻尔兹曼方程碰撞项的复杂性给数值求解带来极大挑战\cite{Wu2017Physica}，因此，学者建议使用简化的碰撞模型来代替. 在简化玻尔兹曼方程的碰撞项时，一般认为需要满足以下几点：
+\begin{enumerate}
+	\item 动理学模型必须保证质量、动量、能量守恒；
+	\item 理想气体的局部平衡态速度分布函数为麦克斯韦分布；
+	\item 从模型方程导出的粘性系数与热导率应与玻尔兹曼方程导出的结果保持一致；
+	\item 满足熵增定理，当且仅当孤立系统处于平衡态时熵增为零，并达到其最大值. 
+\end{enumerate}
+其中，前两项是基本要求，第三项要求在连续流区域通过Chapman-Enskog展开恢复出 纳维-斯托克斯方程，而第四项仅为从物理角度出发的考量，并不能保证模型方程的精度：如果一个动理学模型方程与玻尔兹曼方程完全一致，那么熵增速率也应该相同，然而这通常是不可能做到的. 实际上，大多数时候，仅在线性化情况下满足 熵增定理的 Shakhov 模型的精度优于完全满足熵增定理的ES-BGK模型. 
+
+
+由于玻尔兹曼碰撞项在形式上可记为 $Q=Q^+ -f/\tau$，因此，动理学模型方程的碰撞项一般采取如下形式
+\begin{equation}\label{overall_kinetic_model}
+Q=\frac{f_{r}-f}{\tau},
+\end{equation}
+其中， $f_{r}$ 为参考速度分布函数, $\tau$ 为特征碰撞弛豫时间，表征速度分布函数趋向参考分布函数的快慢. 为简单计，通常假设与分子速度无关. 
+
+%对于公式~\eqref{overall_kinetic_model}，根据碰撞频率与分子速度是否相关，可分为两类气体动理学模型.在本文中，若无特殊说明，将重点关注碰撞频率与速度无关的分子动理学模型~\cite{Bhatnagar1954,GrossJackson1959,holway1966new,shakhov1968approximate,Shakhov_S}
+
+%相较于碰撞频率依赖于分子速度的第一类模型方程~\cite{Cercignani1966,Loyalka1967,Loyalka1968,Struchtrup_velocity,mieussens2004numerical,Zheng2005}，第二类模型方程因其简单而在稀薄气体动理学领域被广泛使用.通常来说，玻尔兹曼方程的碰撞频率依赖于分子速度，但是在麦克斯韦分子的特例中，玻尔兹曼方程的碰撞频率不依赖与分子速度.
+
+
+\subsection{BGK 模型}
+BGK模型是最著名的气体动理学简化模型，由 Bhatnagar, Gross 和 Krook提出~\cite{Bhatnagar1954}， 其参考速度分布函数是局部麦克斯韦分布： 
+\begin{equation}
+f^{BGK}_r=F_{eq}. 
+\end{equation}
+
+易见此模型满足三大守恒律，且给出了在平衡态下的正确解 $f=F_{eq}$. 在空间均匀系统中，由于 $\ln{F_{eq}}$ 是碰撞不变量的线性组合，有 $\int(F_{eq}-f)\ln{F_{eq}}d\bm{v}=0$， 所以可以证明BGK模型满足熵增原理：
+\begin{equation}\label{H_BGK}
+\begin{aligned}[b]
+\frac{\partial H}{\partial t}=&	-\int \frac{F_{eq}-f}{\tau}\ln{f} d\bm{v}\\
+=&-\int 
+\frac{F_{eq}-f}{\tau}(\ln{}F_{eq}-\ln{f}) d\bm{v}\ge0
+.
+\end{aligned}
+\end{equation}
+
+
+空间均匀系统中应力偏量和热流的弛豫时间均为$\tau$, 因此根据公式~\eqref{universal_relation}随后段落的描述，可知剪切粘性为$\mu=p\tau$, 而普朗特数为1. 然而，通过玻尔兹曼方程推导得到的普朗特数正确值为 $2/3$. 这说明BGK模型不可能同时得到正确的剪切粘性和热导率. 对于粘性主导的流动，一般选取$\tau$以恢复剪切粘性； 对于热传导主导的流动，则以恢复热导率为目标来选取$\tau$. 
+
+
+
+\subsection{ES-BGK 模型}
+
+Holway~\cite{holway1966new}提出了ES-BGK模型以修正BGK模型中错误的普朗特数，其中参考速度分布函数是在给定质量、动量、能量和应力张量信息下，通过最大化熵函数~\eqref{entropy_function}而来：
+\begin{equation}\label{ellipsoidal_model}
+f_r^{ES}=\frac{n}{\sqrt{\operatorname{det}
+		[2\pi\lambda_{ij}]}}\exp\left(-\frac{1}{2}\lambda_{ij}^{-1}c_i{c_j}\right), 
+\end{equation}
+其中
+\begin{equation}
+\lambda_{ij}=(1-b)\frac{k_BT}{m}\delta_{ij}+b\frac{p_{ij}}{nm}=\frac{p\delta_{ij}+b\sigma_{ij}}{nm}.
+\end{equation}
+若 $b=0$，二阶张量 $\lambda_{ij}$ 中仅有主对角元素非零，模型恢复为BGK模型. 
+
+容易证明，应力偏量的弛豫时间为$\tau/(1-b)$, 而热流的弛豫时间为$\tau$. 
+因此，剪切粘性和普朗特数分别为
+\begin{equation}
+\begin{aligned}[b]
+\mu=&\frac{1}{1-b}{p\tau},\\
+{\Pr}=&\frac{1}{1-b}.
+\end{aligned}
+\end{equation}
+为确保弛豫时间为正， 则有$b<1$. 另外，$f_r^{ES}$ 有界的充要条件是$b\ge-1/2$. 因此，ES-BGK模型的普朗特数范围为 $[2/3,+ \infty)$. 为了恢复单原子气体的普朗特数$2/3$，取
+\begin{equation}
+b=-\frac{1}{2}.
+\end{equation} 
+
+可以看出，当碰撞项为零时，ES-BGK方程给出$f=f_{r}^{ES}$，当且仅当 $\sigma_{ij}=0$ 时，速度分布函数退化为麦克斯韦平衡态分布. 而这并不违背动理学建模的第二个要求，因为当局部平衡态为 $f=f_{r}^{ES}$时，应力偏量的演化满足如下形式
+$\partial \sigma_{ij}/{\partial t}=-{p}\sigma_{ij}/\mu$, 即应力偏量将随时间推进逐渐衰减至零. 因此，ES-BGK模型中趋于平衡态的过程可以解释为：当速度分布函数朝着椭球分布~\eqref{ellipsoidal_model}松弛，椭球分布也朝着麦克斯韦分布演化， 最终实现 $f=F_{eq}$. 
+
+
+Andries等人~\cite{andries2000gaussian}证明了ES-BGK模型满足熵增定理，使之成为唯一满足熵增定理且能正确恢复各输运系数的动理学模型，因此，ES-BGK模型受到广泛关注. 
+
+
+
+
+\subsection{Shakhov 模型}\label{shakhov_model_chapter}
+\index{Shakhov model}
+
+不同于ES-BGK模型在参考速度分布函数中引入应力修正项，Shakhov模型通过在参考速度分布函数中引入热流修正项来恢复正确的输运系数：
+\begin{equation}\label{smodel}
+f_r^S=F_{eq}\left[1+(1-\operatorname{Pr})\frac{2m\bm{q}\cdot
+	\bm{c}}{5n(k_BT)^2}\left(\frac{mc^2}{2k_BT}-\frac{5}{2}\right)\right].
+\end{equation}
+此模型同样满足三大守恒律. 从偏应力和热流的弛豫时间可以看出，该模型的粘性为$\mu=p\tau$, 且能实现正确的普朗特数. 
+此外，由于热流弛豫过程满足 $\partial \bm{q}/\partial t=-(2p/3\mu)\bm{q}$，在速度分布函数向 $f_r^S$ 靠近的过程中，参考速度分布函数也将逐渐演化为麦克斯韦分布，从而使Shakhov模型在平衡态时满足 $f=F_{eq}$. 
+
+线性化的Shakhov模型满足熵增定理. 而对于非线性流动，熵增定理未被证明但也无从证伪；另外，速度分布函数可能出现非物理的负值. 尽管如此，Shakhov模型仍能在许多问题中给出准确结果，得到了广泛应用. 
+
+
+
+\subsection{Gross-Jackson 模型及其非线性化}\label{gross-jackson-model}
+
+针对麦克斯韦分子，根据线化玻尔兹曼碰撞项的本征值与本征函数，Gross和Jackson提出的以下形式的动理学模型去逼近线性化玻尔兹曼碰撞项$J(\phi)$:
+\begin{equation}\label{Gross_Jackson_original_0}
+\begin{aligned}[b]
+{L}_{GJ}=&\lambda_{st}\phi+\sum_{nl}(\lambda_{nl}-\lambda_{st})\frac{2l+1}{4\pi}\\
+&\times\int{}P_l(\cos\theta')g_{nl}(\xi)g_{nl}(\xi_1)\phi(\bm{\xi}_1) d\bm{\xi}_1,
+\end{aligned}
+\end{equation}
+式中， $\lambda_{st}$ 是一个任意负数， $\lambda_{nl}$ 是线性化玻尔兹曼项的本征值~\eqref{Wang_Chang}，$\theta'$为$\bm{v}$和$\bm{v}'$的夹角. 该模型的物理意义在于保证模型方程和线性化玻尔兹曼方程各阶矩的弛豫率相同. 
+
+
+Gross和Jackson将${L}(h)$ 的 $N$ 阶近似表示为
+\begin{equation}\label{Gross_Jackson_original}
+\begin{aligned}[b]
+{L}_{GJ}^{(N)}=&\lambda_{0N}\phi -\lambda_{0N}\sum_{2n+l\le{N}} \left(1-\frac{\lambda_{nl}}{\lambda_{0N}}\right)g_{nl}(\xi)\\
+&\times\frac{2l+1}{4\pi} \int{}P_l(\cos\phi')g_{nl}(\xi_1)\phi(\bm{\xi}_1) d\bm{\xi}_1,
+\end{aligned}
+\end{equation}
+即保留了所有阶数小于或等于 $N$ 的多项式，并且取 $\lambda_{st}=\lambda_{0N}$， 因此该截断模型的最大弛豫率为 $\lambda_{0N}$.  %由此来保证 $(1-{\lambda_{nl}}/{\lambda_{0N}})\ge0$，
+
+
+在线性化情况下，即把速度分布函数在全局平衡态下根据公式\eqref{chapter_vdf_lin_origin}展开，BGK、ES-BGK和Shakhov模型有如下形式：
+%\begin{widetext}
+\begin{equation}
+\begin{aligned}[b]
+&\frac{\partial \phi}{\partial{}t}
++{\bm{\xi}}\cdot\frac{\partial
+	\phi}{\partial \bm{x}}
+=\frac{\ell}{v_m}{L},\\
+&{L}_{BGK}=\frac{p}{\mu}\left[{n}+2\bm{u}\cdot\bm{\xi}+T\left(\xi^2-\frac{3}{2}\right)-\phi\right],\\
+&{L}_{ES}=\frac{2}{3}{L}_{BGK}-\frac{2p}{3\mu}
+\frac{\sigma_{ij}}{2}\xi_{\langle i}\xi_{j\rangle},\\
+&{L}_{S}={L}_{BGK} +\frac{p}{\mu}\frac{4(1-\text{Pr})}{5}\bm{q}\cdot\bm{\xi}\left(\xi^2-\frac{5}{2}\right),
+\end{aligned}
+\end{equation}
+%\end{widetext}
+其中扰动宏观物理量的定义请参考公式\eqref{MP_KineticModel}. 
+它们都可以看作是Gross-Jackson模型的特例. 
+当 $N=2$ 时，从公式~\eqref{Gross_Jackson_original} 可以得到 ${L}_{GJ}^{(2)}={L}_{BGK}$；令 $N=3$，根据公式\eqref{Wang_Chang}有
+\begin{equation}
+\lambda_{03}=\frac{3}{2}\lambda_{02}=\frac{3p}{2\mu},
+\end{equation}
+从而公式~\eqref{Gross_Jackson_original} 给出
+\begin{equation*}\label{Gross_Jackson_N3}
+\begin{aligned}[b]
+{L}_{GJ}^{(3)}=&\frac{3}{2}L_{BGK}+\frac{p}{\mu}\left[\frac{\sigma_{ij}}{2}\xi_{\langle i}\xi_{j\rangle}
++\frac{2}{3}\bm{q}\cdot\bm{v}\left(
+\xi^2-\frac{5}{2}\right)\right]f_{eq}\\
+=&-\frac{3}{2}{L}_{ES}+\frac{5}{2}{L}_{S}.
+\end{aligned}
+\end{equation*}
+虽然，这既不符合线性化ES-BGK模型，也不符合线性化Shakhov模型，但是可将其视为这两个模型的线性组合. 
+另一方面，若给定约束 $2n+l\le3$，当$\lambda_{st}=-2p/3\mu$ 时，式~\eqref{Gross_Jackson_original_0}恰好展开为线性化ES-BGK模型；而当 $\lambda_{st}=-p/\mu$ 时，式~\eqref{Gross_Jackson_original_0}展开为线性化Shakhov模型. 
+
+
+因此，通过Gross-Jackson模型和线性化BGK、ES-BGK、Shakhov模型的关系，可以反推出各种形式的非线性动理学模型. 例如, 陈松泽等人将ES-BGK模型与Shakhov模型线性组合为一个复合模型，通过改变两模型所占的比例和普朗特数，复合模型能够分别恢复到BGK、ES-BGK和Shakhov模型式~\cite{Chen2015ACA}. 类似地，吴雷在博士论文也提出一个带有自由参数$b$复合模型\cite{Wu2013PhDthesis}:
+\begin{equation}\label{fnew}
+\begin{aligned}
+f_r=&F_{eq}
+\left[1+
+\frac{\sigma_{ij}}{p}
+\frac{c_{\langle i}c_{j\rangle}}{2k_BT/m}\right.\\
+&\left.+[1-\text{Pr}(1-b)]\frac{2m\bm{q}\cdot
+	\bm{c}}{5n(k_BT)^2}\left(\frac{mc^2}{2k_BT}-\frac{5}{2}\right) \right].\\
+\tau=&(1-b)\frac{\mu}{p}.
+\end{aligned}
+\end{equation}
+该模型实际上是在Gross-Jackson模型\eqref{Gross_Jackson_original_0}中取$2n+l\leq{N}=3$和  $\lambda_{st}=1/\tau$， 并通过将如下的线性化碰撞项变为非线性碰撞项得来：
+\begin{equation}\label{nonlinearization}
+\begin{aligned}[b]
+&{n}+2\bm{u}\cdot\bm{\xi}+T\left(\xi^2-\frac{3}{2}\right)-\phi
+\rightarrow {F_{eq}}-f,\\
+&\frac{\sigma_{ij}}{2}\xi_{\langle i}\xi_{j\rangle}
+\rightarrow
+\frac{\sigma_{ij}}{p}\frac{c_{\langle i}c_{j\rangle}}{2k_BT} F_{eq} \\
+& \bm{q}\cdot\bm{\xi}\left(\xi^2-\frac{5}{2}\right) 
+\rightarrow \frac{m\bm{q}\cdot
+	\bm{c}}{2n(k_BT)^2}\left(\frac{mc^2}{2k_BT}-\frac{5}{2}\right)F_{eq}.
+\end{aligned}
+\end{equation}
+需要注意到，含有应力偏量的项既可以被吸收到指数函数里使参考分布函数变成类似公式\eqref{ellipsoidal_model}的形式，也可以放在外面~ (此时对$b$的限制仅为$b<1$)，对数值计算的结果并无多少影响\cite{Wu2013PhDthesis}.   通过将Gross-Jackson模型中的其它高阶本征函数非线性化为相应的形式, 可以构造更加准确的动理学模型. 
+
+
+

@@ -1,0 +1,67 @@
+This is BibTeX, Version 0.99d (TeX Live 2018)
+Capacity: max_strings=100000, hash_size=100000, hash_prime=85009
+The top-level auxiliary file: RGD.aux
+Case mismatch error between cite keys Enskog1917 and enskog1917
+---line 172 of file RGD.aux
+ : \citation{Chapman1916,Enskog1917
+ :                                 }
+I'm skipping whatever remains of this command
+A level-1 auxiliary file: bu.aux
+The style file: plain.bst
+Database file #1: thesisBib.bib
+Warning--I didn't find a database entry for "Gu2020AIA"
+Warning--I didn't find a database entry for "Wu2017Physica"
+Warning--I didn't find a database entry for "holway1966new"
+Warning--I didn't find a database entry for "andries2000gaussian"
+Warning--I didn't find a database entry for "Chen2015ACA"
+Warning--I didn't find a database entry for "jiangzongling2016"
+Warning--I didn't find a database entry for "mason1962heat"
+Warning--I didn't find a database entry for "Li2021Uncertainty"
+Warning--I didn't find a database entry for "rykov1978macroscopic"
+Warning--I didn't find a database entry for "wu2015kinetic"
+Warning--I didn't find a database entry for "wang2017unified"
+Warning--I didn't find a database entry for "Lizhihui2017"
+Warning--I didn't find a database entry for "Mathiaud2020"
+Warning--empty chapter and pages in sharipov2015rarefied
+You've used 152 entries,
+            2118 wiz_defined-function locations,
+            1484 strings with 28352 characters,
+and the built_in function-call counts, 48416 in all, are:
+= -- 4736
+> -- 2189
+< -- 1
++ -- 883
+- -- 712
+* -- 3472
+:= -- 8327
+add.period$ -- 456
+call.type$ -- 152
+change.case$ -- 797
+chr.to.int$ -- 0
+cite$ -- 153
+duplicate$ -- 1704
+empty$ -- 3846
+format.name$ -- 712
+if$ -- 9973
+int.to.chr$ -- 0
+int.to.str$ -- 152
+missing$ -- 165
+newline$ -- 763
+num.names$ -- 304
+pop$ -- 614
+preamble$ -- 1
+purify$ -- 660
+quote$ -- 0
+skip$ -- 1114
+stack$ -- 0
+substring$ -- 3508
+swap$ -- 172
+text.length$ -- 1
+text.prefix$ -- 0
+top$ -- 0
+type$ -- 576
+warning$ -- 1
+while$ -- 456
+width$ -- 155
+write$ -- 1661
+(There was 1 error message)

@@ -1,0 +1,844 @@
+% !TeX spellcheck = en_US
+\chapter{Upscaling}
+\label{chap:upscaling}
+\index{upscaling}
+
+% see the folder /ScottLIndsay/LaTexSliderBearing/20170810
+
+Since rarefied gas flow manifests at small length scales, the results in previous chapters work in small scales. In real engineering applications, however, we need to upscale the results to macroscopic scales. For instances, the mass and heat flow rates in Poiseuille flow and thermal transpiration through long rectangular and circular cross sections in Chapter~\ref{chap:linearized} is upscaled to predict the thermalmolecular pressure difference in long channel in Chapter~\ref{chap:BoundaryCondition}, and the apparent permeability of represent elementary volume scale in Chapter~\ref{chap:porousmedia} should be upscaled to reservoir scale to predict shale gas production. This Chapter is dedicated to the details of these upscaling methods.   
+
+
+\section{Reynolds lubrication equation}
+\index{Generalized Reynolds equation}
+
+
+The fluid film bearing employs a thin layer of moving pressurized liquid or gas between two solid surfaces to reduce friction and wear, which has found applications in almost every industrial fields~\cite{Szeri2011}. Traditionally, the lubrication problem is studied based on the Reynolds equation~\cite{Reynolds1886}, which is initially derived from the incompressible Navier-Stokes equations. 
+
+
+
+\begin{figure}[t]
+	\centering
+	\includegraphics[scale=0.5,clip=true]{Roughness}
+	\caption{Schematic of a two-dimensional slider geometry (not to scale). The shaded regions are solid plates, while the gas flows between the two plates. The Poiseuille flow is driven by the pressure gradient $dp/dx$ when the two plates are stationary, while the Couette flow is driven by the moving bottom plate with the horizontal velocity $u_w$. }
+	\label{Geom}
+\end{figure}
+
+Take the geometry in Figure~\ref{Geom} for an example. Averaging the continuity equation in Eq.~\eqref{macro} along the film thickness, we have
+\begin{equation} 
+ \int_{0}^{d} \frac{\partial \rho}{\partial t}dy
++\int_{0}^{d} \frac{\partial (\rho{}u)}{\partial x}dy 
++\int_{0}^{d} \frac{\partial (\rho{}v)}{\partial z}dy
++\int_{0}^{d} \frac{\partial (\rho{}w)}{\partial y}dy=0.
+\end{equation} 
+Since $\int_{0}^{d} \frac{\partial g}{\partial \xi} dy=\frac{\partial }{\partial \xi} \int_{0}^{d} g dy-g  \frac{\partial d}{\partial \xi}$, and the normal velocity of the top surface (i.e. $v=\partial d/\partial t+u_{w2}\partial d/\partial t$) equals to the temporal change in film thickness plus the spatial change of film thickness due to the lateral motion of the surface, the following Reynolds' equation can be derived
+\begin{eqnarray}\label{lubrication} 
+\frac{\partial (\rho{}d)}{\partial t}
++\frac{\partial \dot{M}_x}{\partial x}
++\frac{\partial \dot{M}_z}{\partial z}  
+=0,
+\end{eqnarray} 
+where $\dot{M}_x=\int_0^d\rho{}udy$ and $\dot{M}_z=\int_0^d\rho{}wdy$ are respectively the MFRs in the $x$ and $z$-directions, along the thickness of film.
+
+In Reynolds' original derivation, the continuum flow is considered.
+Ignoring the inertial effect, the momentum equation in Eq.~\eqref{macro} with Newton's viscosity law~\eqref{shear_Chapter1_stress} is
+\begin{equation} \label{momentum_linear}
+\begin{aligned}[b]
+\frac{\partial p}{\partial x} = \mu\frac{\partial^{2} u}{\partial y^{2}}, \\
+\frac{\partial p}{\partial z} = \mu\frac{\partial^{2} w}{\partial y^{2}}.
+\end{aligned}
+\end{equation} 
+With the thin-film assumption, the partial derivatives of pressure $p$ does not vary across $y$. Integrating Eq.~\eqref{momentum_linear} twice with respect to $y$ yields:
+\begin{eqnarray} u = \frac{1}{2\mu}\frac{\partial p}{\partial x}(y^2 - yd) + \left(1 - \frac{y}{d}\right)u_{w1}+\frac{y}{d}u_{w2}, \\
+w = \frac{1}{2\mu}\frac{\partial p}{\partial z}(y^2 - yd),
+\end{eqnarray} 
+where the non-slip boundary conditions $u = u_{w1}, w = 0$ and $y = 0$ and  $u =u_{w2}, w = 0$ at $y = d$ have been applied. Therefore, Eq.~\eqref{lubrication} becomes 
+\begin{eqnarray} 
+\frac{\partial (\rho{}d)}{\partial t}
++\frac{\partial}{\partial x}
+\left(
+\underbrace{-\frac{d^3\rho}{12\mu}\frac{\partial p}{\partial x}}_{\text{Poiseuille}}
++\underbrace{\frac{u_{w1}+u_{w2}}{2}\rho{}d}_{\text{Couette}}
+\right) 
++ \frac{\partial}{\partial z}\left(\underbrace{-\frac{d^3\rho}{12\mu}\frac{\partial p}{\partial z}}_{\text{Poiseuille}}\right)
+=0.
+\end{eqnarray} 
+
+
+\begin{eqnarray} 
+\frac{\partial}{\partial x}
+\left(
+\underbrace{-\frac{h^3(x)\rho}{12\mu}\frac{\partial p}{\partial x}}_{\text{Poiseuille}}
++\underbrace{\frac{U}{2}\rho{}h(x)}_{\text{Couette}}
+\right) 
+=0.
+\end{eqnarray} 
+
+
+If the rarefied gas effects are to be considered, the MFRs should be modified accordingly from gas kinetic equations at arbitrary Knudsen number; also, the effect of thermal transpiration can be incorporated~\cite{Fukui1988,Cercignani2007}.
+
+
+
+
+
+\subsection{Rarefaction cloaking in gas slider bearing}
+\index{gas slider bearing}
+
+Due to the efficiency and environmental considerations, as well as the rapid development of microelectromechanical systems, modern gas bearings operate at extremely small gaps~\cite{bailey2017}. For example, in a hydrodynamic seal used in aero-engine applications, gap sizes of $3\sim12$ microns must be maintained over typical diameter sizes of $0.3\sim1.0$~m~\cite{Sayma2002}, while in  hard disk storage devices the thickness of clearance is reduced to several nanometers~\cite{Marchon2013}. The accurate prediction of the bearing load capacity on the supporting element is crucial to improve the performance and increase the life span of bearing systems. This requires a quantitative understanding of the film lubrication dynamics. At the micro/nano-meter scale, the surface roughness, albeit small, may be comparable to the channel height and play an important role in gas hydrodynamic bearings.
+
+
+\subsubsection{Influence of fractal surface on MFR}\label{sec:FR}
+\index{fractal surface}
+
+The fractal theory is used to model the microscale structure of the rough surface. The self-affine and multiscale properties of the rough surface profile are described by the Weierstrass-Mandelbrot fractal function~\cite{Warren1996}:
+\begin{equation}
+r\left(\frac{x}{d}\right)=G\sum_{n=n_1}^{\infty}\frac{\cos[2\pi\gamma^n(x/d+\pi)]}{\gamma^{(2-D_\text{a})n}},
+\label{WM}
+\end{equation}
+where $r$ is the value of surface deviation from to top plate at $y/d=1.0$, which defines the region belongs to the solid surface when $\min(r)\le 1-y/d\le\max(r)$. $D_\text{a}$ is the self-affine fractal dimension, $\gamma$ determines the frequency spectrum of the roughness, and $n_1$ is used to specify the low cutoff frequency of the Weierstrass-Mandelbrot function. The scaling parameter $G$ is used to adjust the surface roughness $\epsilon$, such that the root mean square $\sigma$ of $r(x)$ is given by $\sigma = \epsilon {}d$. An example of a rough surface of 2\% roughness is shown in Figure~\ref{Geom}.
+
+
+
+
+\begin{figure}[t]
+	\centering
+	\includegraphics[scale=0.4,clip=true]{Ux}
+	\caption{The average horizontal velocities for Poiseuille (top row) and Couette (bottom row) flows in the channel with 2\% roughness as compared to those in the smooth channel. }
+	\label{Ux}
+\end{figure}
+
+MFRs for Poiseuille and Couette flows in rough microchannels for Knudsen numbers ranging from 0.01 to 100 are sought by numerically solving the linearized BGK equation. For smooth channel with the diffuse boundary condition, $\bar{Q}_\text{c}$ is always 0.5 in the whole flow regime, while $\bar{Q}_\text{p}$ of the Poiseuille flow can be fitted by~\cite{Fukui1990}:
+	\begin{equation}
+	2Q'_\text{p}=\begin{cases}
+	-2.22919\delta_{rp}+2.10673+0.01653/\delta_{rp}-0.0000694/\delta_{rp}^2, & \delta_{rp}<0.15,\\
+	0.13852\delta_{rp}+1.25087+0.15653/\delta_{rp}-0.00969/\delta_{rp}^2, & 0.15\le\delta_{rp}<5,\\
+	\delta_{rp}/6+1.0162+1.0653/\delta_{rp}-2.1354/\delta_{rp}^2, & \delta_{rp}\ge5.
+	\end{cases}
+	\label{FK}
+	\end{equation}
+
+When the roughness emerges on the top plate, both $\bar{Q}_\text{p}$ and $\bar{Q}_\text{c}$ drop as compared to those of the smooth channel. The difference in MFRs between the rough and smooth channels become significant as the Knudsen number increases. For example, for the Poiseuille flow, a 2\% roughness introduces about 9.77\% and 20.48\% drops in $\bar{Q}_\text{p}$ for flow at $\text{Kn}=0.1$ and 10, respectively. When $\epsilon$ is increased from 2\% to 6\%, the MFRs further decrease compared to those of the smooth channel by magnitudes of 31.87\% and 36.44\% for the Poiseuille and Couette flows at $\text{Kn}=10$, respectively.
+
+In order to understand what happens in the detailed flow field, we plot the average horizontal velocity $u_x$ at selected Knudsen numbers in Figure~\ref{Ux}. It is noticed that the roughness slows down the velocity mostly in the vicinity of top rough plate when the Knudsen number is small. When $\text{Kn}$ increases, this imperative effect from rough surface gradually expands to the whole channel, e.g., at $\text{Kn}=1$ and 10, noticeable discrepancies in $u_x$ between the smooth and rough channels appear even near the bottom plate. 
+
+
+\begin{figure}[t]
+	\centering
+	\includegraphics[scale=0.33,clip=true]{FRratio}
+	\includegraphics[scale=0.4,clip=true]{FRratio2}
+	\caption{The variation of the MFR ratio between the ones for Couette flow $\bar{Q}_\text{c}$ and Poiseuille flows $\bar{Q}_\text{p}$ as a function of the Knudsen number.}
+	\label{FRratio}
+\end{figure}
+
+
+As shown in the Reynolds equation~\eqref{Reynolds}, when the bearing number and gap height are fixed, the gas pressure gradient within a bearing is roughly proportional to the MFR ratio $\bar{Q}_\text{c}/\bar{Q}_\text{p}$. Therefore, it is of practical interest to show the variation of
+\begin{equation}\label{MFR_ratio}
+R=\frac{\bar{Q}_\text{c}}{\bar{Q}_\text{p}},
+\end{equation}
+as a function of the Knudsen number in Figure~\ref{FRratio}. It is found that $R$ decreases as $\text{Kn}$ increases, because for smooth channel $\bar{Q}_\text{c}$ is always one half but $\bar{Q}_\text{p}$ is a monotonically increasing function of $\text{Kn}$. At small Knudsen numbers, the MFR ratio in the rough channels is higher than the one in the smooth channel. As shown in Figure~\ref{FRratio}(b), the MFR ratio in the rough channel is larger than that in the smooth channel by a maximum magnitude of 7.17\% and 18.30\% for the 2\% and 6\% rough surface, respectively. This is due to the fact that the drop in $\bar{Q}_\text{p}$ induced by roughness is larger than that in $\bar{Q}_\text{c}$. However, this tendency changes in the transition flow regime after $\text{Kn}\sim2$: at large Knudsen numbers, the MFR ratio in the rough channel is lower than that in the smooth channel, since the drop speed of $\bar{Q}_\text{c}$ in rough channel exceeds the one in $\bar{Q}_\text{p}$. At $\text{Kn}=100$, The MFR ratio in the 2\% and 6\% rough channel is 81.57\% and 85.73\% of that in the smooth channel, respectively. The reverse of the drop behavior in MFRs could be explained as: the rarefaction reduces the interaction between the gas molecules and the channel~\cite{Sun2003rough}. At large Kn number, the effect of gas-surface interaction dominates and results in a large slip velocity in the Poiseuille flow. As a consequence, the average horizontal velocity for Poiseuille flow increases after $1.0\lesssim\text{Kn}$ (see Figure~\ref{Ux}(a)-(c)), which compensates the drop in $Q_\text{p}$. 
+
+
+When the surface roughness increases, the deviation of $R$ from that of the smooth channel increases in  slip and early transition flow regimes. However, when the Knudsen number is large, the MFR ratio with roughness $\epsilon=6\%$ is slightly higher than that in 2\% channel. This is due in large part to the fact that the MFR of the Poiseuille flow reduces faster in 6\% rough channel than that in 2\% rough channel  at large Kn, which compensates the drop in MFR ratio. As when $\epsilon\rightarrow0$, $R_{\text{rough}}/R_{\text{smooth}}$ should approach one, the results in Figure~\ref{FRratio}(b) indicate that there exists a certain degree of roughness which minimizes the MFR ratio in late transition and free molecule flow regimes.
+
+
+
+\subsubsection{Influence of fractal surface on gas slider bearing}\label{sec:bearing}
+
+Now we investigate the influence of roughness on the pressure distribution and load capacity of gas slider bearing. The working gas is argon with viscosity $\mu=2.117\times10^{-5}$ Pa$\cdot$s and the ambient conditions set to be $T_0=273$ K and $p_0=1$ atm. The roughness parameters are $\epsilon=6\%,\ D_\text{a}=1.5$. The Reynolds equation can be written in the following dimensionless form:
+\begin{equation}\label{Reynolds}
+\frac{\mathrm{d}}{\mathrm{d}X}\left(\bar{Q}_\mathrm{p}PD^3\frac{\mathrm{d}P}{\mathrm{d}X}-\bar{Q}_\text{c}\Lambda PD\right)=0,
+\end{equation}
+where the non-dimensional variables are defined as
+\begin{equation}
+X=\frac{x}{l},\quad P=\frac{p}{p_0}, \quad D=\frac{d}{d_0},
+\end{equation}
+and the bearing number $\Lambda$ is
+\begin{equation}
+\Lambda=\frac{6\mu u_\mathrm{w}l}{p_0d^2_0}.
+\label{BearingNum}
+\end{equation}
+
+In the above equations, $\bar{Q}_\text{p}$ and $\bar{Q}_\text{c}$ are respectively the reduced local MFRs of the Poiseuille and Couette flows, which are normalized by the corresponding flow rates at continuum-flow limit:
+\begin{equation}\label{NormQp}
+\begin{aligned}[b]
+\bar{Q}_\text{p}(p,d)&=-\frac{Q_\text{p}(p,d)}{\rho(\mathrm{d}p/\mathrm{d}x)d^3/12\mu},\\
+\bar{Q}_\text{c}(p,d)&=\frac{Q_\text{c}(p,d)}{\rho u_\text{w}d/2},
+\end{aligned}
+\end{equation}
+where $Q_\text{p}$ and $Q_\text{c}$ are the MFRs of the Poiseuille and Couette flows in the unit microchannel, respectively. 
+
+Equation~\eqref{Reynolds} is discretized by a second-order finite difference scheme, with 100 equally spaced discrete points being employed. The obtained nonlinear system is solved iteratively by the Newton method. To avoid solving the BGK equation at each intermediate iteration step, the MFRs $\bar{Q}_\text{p}$ and $\bar{Q}_\text{c}$ are pre-calculated. Then, MFRs of the Poiseuille and Couette flows in the rough channel with $\epsilon=6\%,\ D_\text{a}=1.5$ are fitted approximately by the following piece-wise analytical equations:
+	\begin{equation}
+	\begin{split}
+	\bar{Q}_\text{p}=\begin{cases}
+	0.05664/\text{Kn}+0.4206-0.05332\text{Kn}+0.3058\text{Kn}^2, & 0.01\le\text{Kn}<0.4,\\
+	0.0470/\text{Kn}+0.4480+0.04846\text{Kn}-0.003060\text{Kn}^2, & 0.4\le\text{Kn}<5,\\
+	-0.6072/\text{Kn}+0.7083+0.006338\text{Kn}-0.00002747\text{Kn}^2, & 5\le\text{Kn}\le100,
+	\end{cases}
+	\label{MFRFittingPois}\\
+	\bar{Q}_\text{c}=\begin{cases}
+	-0.00001918/\text{Kn}+0.4651-0.1660\text{Kn}+0.1220\text{Kn}^2, & 0.01\le\text{Kn}<0.4,\\
+	0.01460/\text{Kn}+0.3922-0.02336\text{Kn}+0.002225\text{Kn}^2, & 0.4\le\text{Kn}<5,\\
+	0.1529/\text{Kn}+0.3037-0.0001817\text{Kn}+0.000001047\text{Kn}^2, & 5\le\text{Kn}\le100.
+	\end{cases}
+	%\label{MFRFittingCoue}
+	\end{split}
+	\end{equation}
+The approximation could significantly accelerate the solution of the Reynolds equation. In the following sections, the results labeled `smooth' for the slider bearing with smooth surface are obtained based on Eq.~(\ref{FK}), while the ones labeled `rough' for the slider bearing with $\epsilon=6\%,\ D_\text{a}=1.5$ rough surface are based on Eq.~(\ref{MFRFittingPois}).
+
+
+
+For the gas slider bearing, the normalized pressure $P$ always increases from one at the inlet $X=0$, reaches a maximum value at $X=X_\text{m}<1$, and then decreases to one at the outlet $X=1$. Based on this observation, Eq.~\eqref{Reynolds} can be rewritten as:
+\begin{equation}\label{Reynolds2}
+\frac{\mathrm{d}P}{\mathrm{d}X}=R\frac{\Lambda}{D^2}
+-C,
+\end{equation}
+where the constant $C$ is equal to $R{\Lambda}/{D^2}$ at the position $X=X_\text{m}$ where the reduced pressure $P$ is maximum. Generally speaking, the magnitude of the pressure rise is proportional to the MFR ratio $R$ in Eq.~\eqref{MFR_ratio} when the bearing number, pitch angle, and minimum distance $d_0$ are fixed. This point will be useful in the subsequent analysis.
+
+
+\begin{figure}[t]
+	\centering
+	\includegraphics[scale=0.35,clip=true]{PCapTheta1}
+	\hskip 0.5cm
+	\includegraphics[scale=0.35,clip=true]{PCapTheta2}
+	\caption{ (a) The pressure distribution and (b) the bearing load capacity $W$ and load center $X_\text{c}$ in the gas slider bearing, at different values of the pitch angle $\theta$, when $A=100$ and the surface roughness $\epsilon=6\%$. (Left column) $\text{Kn}=1.25$, $\Lambda=62.68$.  (Right column) $\text{Kn}=49.95$, $\Lambda=2507.18$.}
+	\label{pTheta1}
+\end{figure}
+
+In addition to the pressure distribution, the other two system parameters will also be investigated: the bearing load capacity $W$ which indicates the load force of the bearing:
+\begin{equation}
+W=\int_0^1(P-1)\mathrm{d}X,
+\end{equation}
+and the load center $X_\text{c}$ which determines the focal point of the resultant pressure on the slider surface:
+\begin{equation}
+X_\text{c}=\frac{\int_0^1(P-1)X\mathrm{d}X}{\int_0^1(P-1)\mathrm{d}X}.
+\end{equation}
+
+
+%\subsubsection{Roughness effect under variety of pitch angles}
+
+
+%\begin{figure}[t]
+%	\centering
+%	\includegraphics[scale=0.45,clip=true]{PCapTheta2}
+%	\caption{(a) The pressure distribution and (b) the bearing load capacity $W$ and load center $X_\text{c}$ in the gas slider bearing, at different values of the pitch angle $\theta$, when $\text{Kn}=49.95$, $\Lambda=2507.18$, $A=100$, and the  surface roughness $\epsilon= 6\%$.}
+%	\label{pTheta2}
+%\end{figure}
+
+
+We first fix the bearing length $l=5\ \mu$m and the minimum channel height $d_0=50$~nm, which results in an aspect ratio $A=l/d_0=100$. The speed of bottom plate is $u_\text{w}=25$~m/s. This gives a Knudsen number of $\text{Kn}=1.25$ based on the minimum height $d_0$ and a bearing number of $\Lambda=62.68$. The pitch angle $\theta$ varies from 0.002 to 0.018 rad, so that the entrance channel height $d_1$ ranges from 60 to 140~nm. Profiles of the gas pressure in bearing with smooth and rough sliders are plotted in Figure~\ref{pTheta1}. We also include the solutions from a DSMC calculation~\cite{Liu2001} for reference. The comparison shows that, although the surface roughness reduces the local flow rates, the pressure in rough slider bearing is higher than that in smooth bearing. This can be explained by the fact that the pressure gradient is roughly proportional to $\bar{Q}_c/\bar{Q}_p$ when values of bearing number and gap height are fixed.
+Therefore, when $\bar{Q}_p$ drops faster than $\bar{Q}_c$ at low Knudsen numbers, i.e. the MFR ratio in rough channel is larger than that in smooth channel (see Figure~\ref{FRratio}), the pressure gradient will be larger and hence the pressure curve of the rough bearing is above that of smooth bearing.
+
+
+The bearing load capacity and center with different pitch angles are also plotted in Figure~\ref{pTheta1}. Comparing to smooth bearing, the load capacity becomes larger in rough bearing and the load center moves towards the channel end at $\text{Kn=1.25}$. The increment of bearing load capacity induced by roughness is magnified as the pitch angle increases. For example, when $\theta=0.018$~rad, a 6\% surface roughness could lead to an increase of 20\% more bearing load capacity.
+
+
+Then we reduce the bearing length and the minimum channel height to $l=0.125\ \mu$m and $d_0=1.25$~nm, and now $\text{Kn}=49.95$, and $\Lambda=2507.18$. From Figure~\ref{pTheta1} we see that,  at large Knudsen numbers, $\bar{Q}_\text{c}$ drops faster than $\bar{Q}_p$ in rough channel, and the MFR ratio in rough channel becomes smaller than that in smooth channel. Then, according to the analysis in Eq.~\eqref{Reynolds2}, the pressure rise in rough bearing is smaller than that in smooth bearing. Meanwhile, the bearing load capacity becomes smaller in rough bearing and the load center moves to the entrance of channel. The drop of bearing load capacity induced by roughness is also magnified as the pitch angle increases. At this time, when $\theta=0.018$~rad, a 6\% surface roughness could lead to an reduction of 7\% bearing load capacity. These tendencies are in agreement with those of the pressure distribution in Figure~\ref{pTheta1}.
+
+
+
+\subsubsection{Rarefaction cloaking}
+It can be inferred from Figure~\ref{FRratio} that the bearing load capacity of rough bearing can be equal to that of smooth bearing at a certain range of Knudsen number. This is interesting in the sense that the presence of surface roughness has no effect on the load force, as if the rough surface is shielded. This is quite interesting in the sense that rarefaction effects beyond the Navier-Stokes level make the gas slider bearing can not feel the presence of surface roughness.  We call this effect the ``rarefaction cloaking'' effect.
+
+%This issue will be further explored in Sec.~\ref{third} below.
+
+
+
+
+\begin{figure}[t]
+	\centering
+	\subfloat[$\text{Kn}=1.25$]{\includegraphics[scale=0.35,clip=true]{PLambda1}}
+	\hskip 0.5cm
+	\subfloat[$\text{Kn}=49.95$]{\includegraphics[scale=0.35,clip=true]{PLambda2}	}
+	\caption{The pressure distribution in the gas slider bearing when $\theta=0.01$ rad, $A=100$, and $\epsilon=6\%$.}
+	\label{pLamdba1}
+\end{figure}
+
+
+
+
+
+%\subsubsection{Roughness effect under variety of bearing numbers}\label{third}
+
+In the Reynolds equation~\eqref{Reynolds}, the bearing number $\Lambda$ is an important parameters which significantly affects the pressure distribution. According to Eq.~(\ref{BearingNum}), $\Lambda$ depends either on the bottom plate velocity $u_\text{w}$ or on the aspect ratio $A$. To determine the influence of the surface roughness under different values of $\Lambda$, we fix $\theta=0.01$ rad, $A=100$, and change the value of $u_\text{w}$ to reach different bearing numbers. The pressure distribution within the bearings operating at $\text{Kn}=1.25$ and 49.95 is plotted in Figure~\ref{pLamdba1}, in which the DSMC result for $\Lambda=771.75$ is presented~\cite{Alexander1994}. It is worth mentioning that the load capacity computed from the average pressure distribution in gas slider bearing is only correct so long as the gas remains in local equilibrium~\cite{Alexander1994}, while when $\Lambda$ is large, i.e. $u_\text{w}$ is comparable or even higher than $v_\text{m}$, the local equilibrium assumption breaks down and the rise of gas temperature due to viscous heating cannot be negligible. But the comparison with DSMC result in smooth channel indicates that results from the linearized BGK equation still has good accuracy.
+
+
+
+It is seen from Figure~\ref{pLamdba1} that the influence of the roughness in Figure~\ref{pTheta1} is still present when the bearing number changes, and the deviation of pressure distribution to that of the smooth channel is still opposite when gas flows are in slip/early transition and free-molecular regimes, respectively. Therefore, there exists a certain range of $\text{Kn}$, under which the rough bearing possesses the same value of load capacity as that of smooth bearing. %This is actually confirmed in Figure~\ref{CapLambda}, which shows the bearing load capacity $W$ in the slider bearing operating under five selected Kn numbers and a wide range of $\Lambda$ from 10 to $10^4$. Clearly, for a rough bearing with  6\% roughness, the load capacity of rough bearing is nearly the same as that in smooth bearing, when  $\text{Kn}=12\sim15$. 
+
+
+
+ \index{rarefaction cloaking} 
+\index{rarefaction effect}
+
+
+%\begin{figure}[t]
+%	\centering
+%	\includegraphics[scale=0.45,clip=true]{CapLambda}
+%	\caption{  The bearing load capacity $W$  operating under  five selected Kn numbers and a wide range of $\Lambda$ from 10 to $10^4$. The surface roughness is 6\%, $\theta=0.01$ rad and $A=100$. }
+%	\label{CapLambda}
+%\end{figure}
+
+
+
+%
+%\subsubsection{Roughness effect across different flow regimes}
+%
+%Finally, to show the roughness effect across different flow regimes, we plot the bearing load capacity $W$ in a slider bearing of pitch angle $\theta=0.01$ rad and aspect ratio $A=100$, which is operated under four selected bearing numbers and various Knudsen numbers ranging from 0.01 to 100 in Figure~\ref{CapLambda}. Due to the variation of the MFR ratio $\bar{Q}_\text{c}/\bar{Q}_\text{p}$, for each $\Lambda$, comparing to the smooth bearing, the rough bearing firstly generates larger bearing load capacity from the slip to early transition flow regimes, then as the Knudsen number increases the ``rarefaction cloaking'' effect dominates so that the rough and smooth surfaces have nearly the same value of load capacity, and finally the rough bearing produces lower load capacity in the free-molecular flow regime.
+
+
+
+
+
+
+%\subsection{The flow problem and upscaling method}
+%
+%
+%The problem of momentum transport along the boundary between a fluid layer and a porous medium has been extensively studied over the past decades. The motivation behind this lies in the variety of applications where this configuration can be found, such as ground water pollution, catalytic and nuclear reactors, oil and gas recovery among many others. %to name a few
+%
+%\begin{figure}[t]
+%	\centering
+%	\includegraphics[scale=0.6,clip=true]{Lefki_Pof_demo}
+%	\caption{
+%		Schematic of the accuracy assessment of the Brinkman model for permeability upscaling. First, the permeability tensor $\boldsymbol{\mathrm{k}}$ of the porous medium is calculated in (a). Then, the fine-scale model  is simulated to find the effective permeability $k^F_{{eff}}$ of the system consisting of the porous medium (porous region) of size $L$ and a straight channel (free region) of thickness $H$. The porous structure and the channel share a common interface indicated by a dashed line at $y=0$ in (b). Finally, in (c), the coarse-scale model, where the porous medium is treated as free region but with a permeability tensor $\boldsymbol{\mathrm{k}}$, is simulated using the Brinkman equation. The obtained effective permeability is denoted as $k^C_{{eff}}$. 
+%		%Each region is meshed using individual blocks as explained in detail in \ref{tab:mesh}.
+%		}
+%	\label{fig:computational domain}
+%\end{figure}
+%
+%
+%
+%
+%
+%\cite{Beavers1967} conducted experiments of a two-dimensional Poiseuille flow (effectively one-dimensional) through a rectangular channel bounded by an impermeable upper wall and a permeable lower wall, see Fig.~\ref{fig:computational domain}(c). The Stokes equation, which is satisfied in the so-called free region, and the Darcy's law, which is satisfied in the bulk of the porous region, are coupled using the following well-known semi-empirical slip boundary condition:
+%\begin{equation}\label{eq:Beavers slip}
+%\frac{\mathrm{d}\bar{u}}{\mathrm{d}y}\biggr\rvert_{y=0^-} = \frac{\alpha}{\sqrt{k}}\left(\bar{u}\rvert_{y=0} -\bar{u}_D \right),
+%\end{equation}
+%where $\alpha$ is the slip coefficient, $\bar{u}$ is the volume averaged velocity, $\bar{u}_D$ is the Darcy velocity (i.e. the volume averaged velocity in the bulk of the porous medium) and $k$ is the isotropic permeability of the porous medium. The relationship between $\bar{u}_D$ and $k$ is determined by the Darcy law, i.e.
+%\begin{equation}\label{eq:Darcy law}
+%\bar{u}_D = -\frac{k}{\mu}\frac{\mathrm{d}p}{\mathrm{d}x},
+%\end{equation}
+%where $\mathrm{d}p/\mathrm{d}x$ is the imposed pressure gradient, and $\mu$ is the fluid viscosity. The validity of this \lei{Darcy???} equation is extensively proven for low-Reynolds number porous media flows.
+%
+%%where a is an adjustable jump coefficient that depends of the local geometry of the interfacial region.
+%
+%%This well-known relation is valid in the low-Reynolds-number conditions characteristic of many porous media flows.
+%
+%The Beavers and Joseph boundary condition~\eqref{eq:Beavers slip} was derived to account for the fact that, according to the experimental results, the interfacial velocity $\bar{u}\rvert_{y=0}$ is significantly greater than the Darcy velocity $\bar{u}_D$. This indicates the presence of a thin transition zone formed at the porous region near the interface, where a gradual enhancement of the viscous shear is taking place. The slip coefficient $\alpha$ is an adjustable parameter that depends on the local structure of the transition zone and the flow properties. It should be distinguished from the one in rarefied gas dynamics, which is due to the rarefaction effect (i.e. infrequent collisions between gas molecules to fully thermodynamically equilibrate the gas )~\citep{Karniadakis2005a}. 
+%
+%%α is a dimensionless parameter which “depends only on the properties of the fluid and the permeable material”.
+%
+%%The results of this experiment indicate that the effects of viscous shear appear to penetrate into the permeable material in a boundary layer region, producing a velocity distribution similar to that depicted in figure 1. The tangential component of velocity of the free fluid at the porous boundary can be considerably greater than the mean filter velocity within the body of the porous material.
+%
+%%Here we must remark that, while inertial effects may be negligible in the homogeneous co-region and in the homogeneous ~-region, it is possible that inertial effects will not be negligible in the boundary region. In that region the curvature of the streamlines will be of the order of the pore or particle diameter and this may lead to non-zero values of the inertial terms, pv- Vv.
+%
+%%where Ui is the ‘slip velocity’ at the interface y =0, UD is the Darcy velocity and κ is the permeability of the porous medium. The last two quantities are related by the Darcy law!!!!!!!!!
+%
+%%Brinkman’s filtration equation is usually used to describe the low-Reynolds-number flow in porous media in situations where velocity gradients are non-negligible.
+%
+%The use of Eq.~\eqref{eq:Beavers slip} that leads to a discontinuity of the velocity at the interface can be circumvented by the implementation of other formulations such as the widely spread model of \cite{Brinkman1949}. In this approach, the continuity of both velocity and stress is ensured, coupling the momentum equations that govern the free fluid and porous regions (Stokes and Darcy respectively). This hybrid model can be regarded as an extension to Darcy's law, as it includes a macroscopic shear term that accounts for the velocity gradient present at the transition zone and the free region. The Brinkman momentum equation which holds for the whole domain reads
+%\begin{equation}\label{eq: Brinkman equation} %meff in or our of the first nabla?
+%0 = -\nabla p + \mu_{eff} \nabla^2 \boldsymbol{\bar{\mathrm{u}}} - \frac{\mu}{\boldsymbol{\mathrm{k}}} \boldsymbol{\bar{\mathrm{u}}},
+%\end{equation}
+%where $\boldsymbol{\bar{\mathrm{u}}}=(\bar{u}_x,\bar{u}_y,\bar{u}_z)$ is the vector of the volume averaged velocity, $\boldsymbol{\mathrm{k}}$ is the permeability tensor, and $\mu_{eff}$ is the so-called effective viscosity that is presumed constant in Brinkman's original model. The last term in the right-hand side of Eq.~\eqref{eq: Brinkman equation} is a drag term which is meaningful and dominant only if the control volume is a porous medium; otherwise, this term \lei{vanishes??}. In the former case, the momentum equation can be approximated by the Darcy law (with the exception of  transition zone), while in the latter it reduces to the Stokes equation. Here we must remark that the assumption of $\mu_{eff}=\mu$ is retained in this study, as in the original paper~\citep{Brinkman1949}. 
+%
+%The Brinkman formulation is used herein to simulate the flow in fractured porous media. The matrix is described by free region with effective properties (permeability tensor), therefore the explicit representation of its structure is avoided and the flow is governed by Darcy's law. Conversely, the fractures are considered `open' channels (having infinite permeability) and thus the gas dynamics are governed by the Stokes equation. The flow is assumed to be isothermal and incompressible and the Reynolds number is less than one.
+%
+%%the matrix, on the other hand, is modeled as a porous mediumwhere the flow is governed by Darcy’s law. Thus, the exact topology of the matrix is not described explicitly.
+%
+%%$\boldsymbol{\mathrm{u}}=(u,v,w)$
+%
+%\section{Results and discussion: upscaling continuum flows}\label{sec:continuum flow results}
+%
+%%\section{Validation of the Brinkman model for QSGS structures}
+%
+%Even though the widely known Brinkman equation has been the focus of many researchers over the last decades, general agreement has not been reached yet regarding the definition of effective viscosity. Effective viscosity was arbitrarily found, to be either smaller, equal or greater than the fluid viscosity, often following heuristic approaches \citep{Auriault2009,Nield2013}. \lei{Same as my comments in line 106, why the effective viscosity is the fluid velocity is not justified...} The validity and applicability of the model for our cases of interest require further study, which is the focus of the present work. 
+%
+%%The conditions of applicability of the model are also questioned in the literature, thus its validation for our cases of interest is essential.
+%
+%%\begin{figure}[t!]
+%%	\centering
+%%%	\subfloat[]{\label{}\includegraphics[width=0.4\textwidth]{P_k.eps}}
+%%%%	\hskip 1cm
+%%%	\subfloat[]{\label{}\includegraphics[width=0.4\textwidth]{cd_k.eps}}\\
+%%%	\subfloat[]{\label{}\includegraphics[width=0.5\textwidth]{P_dev.eps}}
+%%%%	\hskip 1cm
+%%%	\subfloat[]{\label{}\includegraphics[width=0.5\textwidth]{cd_dev.eps}}\\
+%%	\subfloat[]{\label{}\includegraphics[width=0.5\textwidth]{P_dev_HmeanD_two_axis.eps}}
+%%%	\hskip 1cm
+%%	\subfloat[]{\label{}\includegraphics[width=0.5\textwidth]{cd_dev_HmeanD_two_axis.eps}}\\
+%%	\subfloat[]{\label{}\includegraphics[width=0.5\textwidth]{k_QSGS_k_eff.eps}}
+%%	\caption{Isotropic QSGS structures with $H=50$, First column: variation of $\epsilon$ while $c_d=0.001$. Second column: variation of $c_d$ while $\epsilon=0.7$.}
+%%	\label{fig:isotropic fixed channel}  
+%%\end{figure}
+%
+%%The Darcy–Brinkman equation has been widely used to study flows in porous media in various contexts. However, a careful look at the publications over the past twenty years shows no general agreement regarding its conditions of applicability and the definition of its variables, especially the ‘effective’ viscosity and the relevant pressure. Hence, we present here a concise derivation of the Darcy–Brinkman equation based on the volume-averaging method, focusing on the underlying assumptions and on its relationships with the Navier–Stokes and Darcy equations. We focus our attention on cases in which all variables are continuous at the mesoscopic scale (for instance in 
+%
+%%We must however keep in mind that the derivation of the mesoscopic volume- average Darcy–Brinkman equation necessitates many approximations. validate the Darcy–Brinkman equation
+%
+%In our numerical computations, we mimic the experimental setup of Beavers and Joseph \citep{Beavers1967} using random 2D and 3D porous media generated with the QSGS algorithm. The domain consists of a rectangular channel of variable width $H$ which is placed over a porous block of fixed size $L$, as demonstrated in \ref{fig:computational domain}$\mathrm{(b)}$. In our study, several random porous media are utilised in order to showcase the level of accuracy of the Brinkman approach depending on the properties of permeable materials. 
+%
+%%In each figure, one parameter varies and the rest two are kept fixed. 
+%
+%%elaborate on the BCs for the permeability tensor calculation (deviation of k for different setups)
+%
+%In particular, we carry out independent calculations to obtain the permeability tensor $\boldsymbol{\mathrm{k}}$ of selected porous medium as explained in detail in \ref{sec:permeability tensor}. We then use this $\boldsymbol{\mathrm{k}}$ as input for the Brinkman model where we carry a series of simulations varying the width of the channel, the boundary conditions, and the orientation of the porous medium. The obtained permeability is $k^C_{{eff}}$. In parallel, we perform simulations of the same configuration using the exact geometry of the matrix. In this way, the fine-scale model, i.e. pore-scale permeabilities $k^F_{{eff}}$ are obtained through direct simulations and the accuracy of the Brinkman model is then evaluated. The permeabilities ($k$ and $k_{eff}$) mentioned in the rest of this paper are normalised by $L^2$ and refer to the diagonal permeability element of the streamwise direction, unless otherwise stated. The relative error of the effective permeability estimation is defined as
+%\begin{equation}
+%\eta=\frac{|k^F_{{eff}}-k^C_{{eff}}|}{|k^F_{{eff}}|}100\%.
+%\end{equation}
+%
+%
+%
+%\subsection{Two-dimensional QSGS}\label{sec:2D QSGS}
+%
+%\begin{table}[t!]
+%	\caption {Accuracy assessment of the Brinkman model in isotropic QSGS structures with $H=0.05L$. First three columns: variation of porosity $\epsilon$ while $c_d=0.001$. Last three columns: variation of $c_d$ while $\epsilon=0.7$. Note that $c_d$ controls the size of solid islands, where the larger value corresponds to smaller island.}
+%	\centering
+%	\begin{tabular}{ c c c| c c c} 
+%		\hline
+%		\multicolumn{3}{c|}{$c_d=0.001$} & \multicolumn{3}{c}{$\epsilon=0.7$}\\
+%		\hline
+%		$\epsilon$ & $H/d_{mean}$ & $\eta$ & $c_d$ & $H/d_{mean}$ & $\eta$\\
+%		$0.6$ & $0.94$ & $23.08\%$ & $0.001$ & $1.39$ & $14.16\%$ \\
+%		$0.7$ & $1.39$ & $14.16\%$ & $0.005$ & $2.68$ & $9.92\%$ \\
+%		$0.8$ & $2.13$ & $9.12\%$ & $0.01$ & $3.44$ & $7.46\%$ \\
+%		\hline
+%	\end{tabular}
+%	\label{tab:isotropic fixed channel}
+%\end{table}
+%
+%\begin{figure}[t!]
+%	\centering
+%	\subfloat[]{\label{}\includegraphics[width=0.5\textwidth]{H_dev.eps}}
+%	%	\subfloat[]{\label{}\includegraphics[width=0.5\textwidth]{H_dev_scatter.eps}}\\
+%	\subfloat[]{\label{}\includegraphics[width=0.5\textwidth]{H_k.eps}}
+%	\caption{Accuracy assessment of the Brinkman model in isotropic QSGS structures when the channel height $H$ varies. The porosity is $\epsilon=0.7$, and $c_d=0.001$ and 0.01.}
+%	\label{fig:isotropic variable channel}  
+%\end{figure}
+%
+%%\begin{figure}[t!]
+%%	\centering
+%%	\subfloat[]{\label{}\includegraphics[width=0.5\textwidth]{Ux_y_QSGS1_25_vertical.eps}}
+%%	\subfloat[]{\label{}\includegraphics[width=0.5\textwidth]{Ux_y_QSGS4_25_vertical.eps}}\\
+%%	\caption{Integrals of $u$ over each iso-$y$ line for isotropic QSGS structures with $H=50$. Both porous media have the same porosity $\epsilon=0.7$ while $c_d=0.001$ for the left and $c_d=0.01$  for the right. The transition zone (interface is at $y=0$) is smaller for porous media with smaller $c_d$ since its size is related to the effective pore size.}
+%%	\label{fig:Ux_y_integrals}  
+%%\end{figure}
+%
+%
+%
+%\begin{figure}[t]
+%	\centering
+%	\includegraphics[width={0.4\textwidth},trim={20cm 2cm 20cm 24cm},clip]{legend5.png}\\
+%	\subfloat[]{\label{}\includegraphics[width={0.4\textwidth},trim={17cm 3cm 17cm 3cm},clip]{QSGS1_25_u_simpleFoam_new_scale.png}}
+%	\hskip 0.3cm
+%	\subfloat[]{\label{}\includegraphics[width={0.4\textwidth},trim={17cm 3cm 17cm 3cm},clip]{QSGS4_25_u_simpleFoam.png}}\\
+%	\subfloat[]{\label{}\includegraphics[width=0.45\textwidth]{Ux_y_QSGS1_25_vertical.eps}}
+%	\hskip 0.3cm
+%	\subfloat[]{\label{}\includegraphics[width=0.45\textwidth]{Ux_y_QSGS4_25_vertical.eps}}\\
+%	\caption{Contour plots of the velocity magnitude for the isotropic cases of the same porosity $\epsilon=0.7$ with $c_d=0.001$ (a) and $0.01$ (b), when $H=0.025L$. (c) and (d) Profiles of the normalised streamwise-averaged velocity  for the porous structures in (a) and (b), respectively. The transition zone (interface is at $y=0$) is smaller for porous media with smaller $c_d$ since its size is related to the effective pore size.}
+%	\label{fig:2D isotropic velocity contours and graphs}  
+%\end{figure}
+%
+%
+%\subsubsection{Isotropic porous media}
+%
+%To begin with, we investigate the statistically isotropic QSGS geometries ($AR=1$). Several typical 2D QSGS structures are shown in our previous work \citep{Germanou2018}. In this context, we maintain the same channel width in all simulations ($H=0.05L$). The impact of porosity $\epsilon$, with $c_d=0.001$, and effective particle size $c_d$, with $\epsilon=0.7$, on the accuracy of the Brinkman equation is shown in \ref{tab:isotropic fixed channel}. We observe that the relative error monotonically decreases while $\epsilon$ and $c_d$ increase, even though these two parameters have an opposite effect on the permeability as analysed in \citep{Germanou2018}. Nevertheless, the common attribute for both the aforementioned parameters is that their enhancement leads to smaller values of the $d_{mean}$, i.e. the mean diameter of the particles if those are considered to be circular discs. 
+%
+%%\reminder{The last graph indicates that for a fixed channel width, the permeability of the porous medium severely affects the effective permeability of the setup which, as anticipated, is monotonically increasing with $k$.}  
+%
+%%the thickness of the clear-fluid region was only a few times the cylinder radius, which caused their channel height to be comparable to the roughness of the effective porous medium interface thus somewhat obscuring the physical picture.
+%
+%Recently, \cite{Zhang2009} remarked that a small ratio of the free region width to the radius of the solids could conceal some important physical phenomena. \lei{For example, what physical phenomena???} Therefore, noticing the importance of the $H$ to $d_{mean}$ ratio we further examine its influence on our cases of interest. We test the isotropic porous structures of $\epsilon=0.7$ and $c_d=0.001,0.01$, but vary the channel thickness. Here we must remark that the permeability of these two random porous media used in this comparison differs by $30$ times. In agreement with the previous results, \ref{fig:isotropic variable channel} shows that the deviation between the permeability calculated from the solution of Stokes and the Brinkman equations drops when $H/d_{mean}$ increases. The relative error decays to zero in a monotonic fashion and is mostly depending on the value of $H/d_{mean}$, irrespective of the properties of porous media. 
+%
+%%Exceptions for this trend can be observed for very small $H/d_{mean}$ where the channel height can be comparable to the roughness of the interface of the QSGS structure.
+%
+%%{\color{blue} Additionally, as $H$ increases, the influence of the porous medium decreases. Thus, for the same $H$, the effective permeabilities $k_{eff}$ computed using the two porous structures differ less and less as the channel width grows and tend to approach the analytical value of permeability for a channel, i.e. $H^2/12\mu$.}
+%
+%Increasing the channel thickness for the same porous medium, practically decreases the amount (proportion) of fluid passing through the pores of the porous block. In other words, only the channel flow is significant and thus the drag term becomes negligible. Therefore, the Brinkman formulation approaches the Stokes equation, which justifies the small relative error in \ref{fig:isotropic variable channel}. Moreover, as $H$ grows, the effective permeabilities computed using the two porous structures differ less and less and approach the permeability of the flow in the channel only.
+%
+%%analytical value of permeability for Poiseuille flow in a channel, i.e. $H^2/12$. 
+%
+%%However, for small $H$, $k_{eff}$ is larger than the analytical $k$ up to a certain channel width that differs for each porous medium, where the inequality is reversed.
+%
+%In the case that $H/d_{mean}$ increases due to the decrease of the $d_{mean}$, this leads to a more homogeneous porous medium as stated in our previous paper \citep{Germanou2018}. \lei{the first sentence needs to be rewritten.} It appears that the homogeneity favours the Brinkman equation which gives more accurate results. As $H/d_{mean}$ approaches zero the relative error reaches its maximum value, which is up to $\sim 23\%$ for the isotropic cases considered. \lei{Theoretically, when $H$ approaches zero, the Brinkman and Stokes equations have the same results!}
+%
+%%The simulation results for the two aforementioned isotropic porous media with $H=25$ are shown in \ref{fig:Ux_y_integrals,fig:2D isotropic velocity contours}. 
+%
+%%\reminder{(non-homogeneous porous media result in non-zero off-diagonal elements/ non-homogeneous porous media are used)}
+%
+%Even though the full tensor is used for the description of permeability, the flow simulations in this paper where a straight fracture runs through the whole domain in the streamwise direction can be considered quasi-one-dimensional due to the dominance of  fractures. This can be observed in the streamwise-averaged velocity profiles in \ref{fig:2D isotropic velocity contours and graphs} for the case of $H=0.025L$ for the two aforementioned isotropic porous media with different particle sizes ($c_d$). The inset figures which zoom into the transition zone reveal the sudden increase in velocity in this region (interface is at $y=0$). As expected, the zone is larger for the porous medium with greater permeability (larger particles). \lei{This paragraph appears abruptly, it is not very clear to see the connections to previous and subsequent paragraphs.  }
+%
+%
+%The velocity contours for the same runs indicate a potential source of error of the Brinkman estimation. We observe from \ref{fig:2D isotropic velocity contours and graphs} that in the fine-scale models the shape of the channel is not in fact straight, but due to the existence of some pores adjacent to it, its local thickness is often larger. An additional source of uncertainty is the input permeability tensor, whose value is slightly depending on the flow configuration setup \citep{Guibert2016}. \lei{the discussion needs to be expanded}
+%
+%
+%\subsubsection{Anisotropic porous media}
+%Moreover, flow simulations using anisotropic QSGS structures are conducted to examine the divergence of permeability from the direct computation. \lei{For people do not know your previous work, it is better to describe more about the ``bedding plane'', and refer to some figures in your previous paper.} The porous media used herein are generated using the following fixed parameters $\epsilon=0.7, c_d=0.001, H=0.05L$, and for varying values of $AR= 100, 500, 1000$. The deviation shown in \ref{fig:2D anisotropic fixed channel} from the Stokes solution ranges from approximately $0$ to $24\%$ for all the tested anisotropic structures. 
+%
+%
+%\begin{figure}[t!]
+%	\centering
+%	\subfloat[]{\label{}\includegraphics[width=0.5\textwidth]{AR_error_scatter.eps}}
+%	\subfloat[]{\label{}\includegraphics[width=0.5\textwidth]{L_star_error_scatter.eps}}\\
+%	\subfloat[]{\label{}\includegraphics[width=0.5\textwidth]{k_QSGS_k_anisotropic_scatter.eps}}
+%	\caption{(a) and (b) Accuracy assessment of the Brinkman model in anisotropic QSGS structures with $\epsilon=0.7,c_d=0.001,H=0.05L$. (c) The effective permeability of the porous media with one open channel on the top vs. the permeability of the porous media only. Note that $k=k_{xx}$ if the flow is parallel to the bed and $k=k_{yy}$ if otherwise.}
+%	\label{fig:2D anisotropic fixed channel}  
+%\end{figure}
+%
+%%\begin{figure}[t!]
+%%	\centering
+%%	\subfloat[]{\label{}\includegraphics[width={0.4\textwidth},trim={16cm 3cm 16cm 3cm},clip]{QSGS4_split_p_simpleFoam_streamlines_black.png}}
+%%	\subfloat[]{\label{}\includegraphics[width={0.4\textwidth},trim={16cm 3cm 16cm 3cm},clip]{QSGS4_split_p_porousSimpleFoam_streamlines_black.png}}\\
+%%	\caption{Fine and coarse-scale results of the isotropic case generated using $c_d=0.01, \epsilon=0.7$, coupled with a horizontal fragmented fracture ($H=200$) along the $x$-axis. Pressure contour plots with velocity streamlines are illustrated for the Stokes (left) and Brinkman solution (right). The Brinkman model underestimates the effective permeability by $34\%$.}
+%%	\label{fig:2D QSGS split fracture}  
+%%\end{figure}
+%
+%%It is most probable that the average simulation results of several porous media with the same characteristics would lead to a more clear trend.
+%
+%%A clear trend for the error of permeability with respect to the $AR$ cannot be observed for the geometries considered. 
+%
+%%where $k_{main}$ is the diagonal permeability element aligned with the direction of the flow. 
+%
+%
+%To reduce the error caused by the randomness of the generation algorithm described in Section~\ref{geo_qsgs}, $5$ anisotropic porous structures are created for the same set of generating parameters. Despite the fact that the results are quite scattered, the tendency for the relative error of the Brinkman solution is to increase with anisotropy when the flow is parallel to the bedding plane ($k=k_{xx}$) and decrease if otherwise ($k=k_{yy}$). In the former case, tortuosity $T$ is close to unity while in the latter, where the same porous medium is rotated by $90^\circ$, $T>>1$. At this point we should mention that we calculate tortuosity using the same formulation as in our previous publication \citep{Germanou2018}, i.e. $T_i=\bar{\mathrm{u}}/\bar{u_i}$, where $i$ is the direction parallel to the macroscopic flow \citep{Duda2011}. If not otherwise stated, $T$ herein refers to the tortuosity in the streamwise direction.
+%
+%%At this point it is important to introduce the parameter of tortuosity which describes the elongation of the streamlines compared to free flow.
+%
+%%\begin{subequations}
+%%	\begin{eqnarray}
+%%	L^*=\sqrt{\frac{12Τk_{main}}{\epsilon}} \\
+%%	L^*=\sqrt{\frac{8Τk_{main}}{\epsilon}}.
+%%	\end{eqnarray}
+%%\end{subequations}
+%
+%%\reminder{add tortuosity in 2D and change values}.
+%
+%Since the shape of the particles is ellipsoidal in these anisotropic structures, we use the ratio $H/L^*$ in the rest of this study. This is calculated utilising the characteristic flow length expression which reads
+%\begin{equation}\label{L_star}
+%L^*=L\sqrt{\frac{12k}{\epsilon}} \\~\\ \textrm{for 2D,} \\~~\\ 
+%L^*=L\sqrt{\frac{8k}{\epsilon}} \\~\\ \textrm{for 3D.}
+%\end{equation}
+%Generally speaking, as $AR$ increases, $H/L^*$ is almost fixed when the flow is simulated parallel to bed, in the direction of the elongation of the solid particles ($T\approx 1$), since $k_{xx}$ remains in the same order of magnitude \citep{Germanou2018}. However, when the flow is in the perpendicular direction ($T>>1$), $H/L^*$ increases with $AR$ as $k_{yy}$ drops significantly. A clear correlation for the relative error of permeability with respect to the $H/L^*$ cannot be observed for the geometries considered, although it is obvious that it tends to drop for increasing $H/L^*$. Consequently, both \ref{fig:2D anisotropic fixed channel}$(\mathrm{a})$ and $(\mathrm{b})$ yield the conclusion that when the flow is perpendicular to bed, the error associated with the Brinkman model is reduced with increasing anisotropy. Lastly, the plot of the fine-scale effective permeability is an increasing function of the permeability of the porous medium for both isotropic and anisotropic geometries, see \ref{fig:2D anisotropic fixed channel}$(\mathrm{c})$.
+%
+%\begin{figure}[t!]
+%	\centering
+%	\includegraphics[width={0.4\textwidth},trim={20cm 2cm 20cm 24cm},clip]{legend2.png}\\
+%	\subfloat[]{\label{}\includegraphics[width={0.4\textwidth},trim={17cm 3cm 17cm 3cm},clip]{Stokes_fracture_2_p_streamlines_full.png}}
+%	\subfloat[]{\label{}\includegraphics[width={0.4\textwidth},trim={17cm 3cm 17cm 3cm},clip]{Brinkman_fracture_2_p_streamlines.png}}\\
+%	\caption{Fine and coarse-scale results of the isotropic case generated using $\epsilon=0.7,c_d=0.001$, coupled with a fragmented fracture ($H=0.4L, H=173L^*$) along the $x$-axis. Pressure contour plots with velocity streamlines are illustrated for the Stokes (left) and Brinkman solution (right). The Brinkman model underestimates the effective permeability by $1\%$.}
+%	\label{fig:2D QSGS split fracture}  
+%\end{figure}
+%
+%
+%%The plot of the effective permeability vs. the permeability of the porous medium (major axis) is a convex function for QSGS structures with $T\approx 1$ and a concave function for those with $T>>1$; both monotonically increasing. The convex function stagnates before its minimum value, while the concave stagnates after the maximum $k_{eff}$ is reached. It should be noted that based on our previous paper \citep{Germanou2018}, both diagonal permeability elements decrease with $AR$.
+%
+%%The plot of the effective permeability vs the permeability of the porous medium (major axis) is an exponential function 
+%
+%%In all the runs, the Brinkman solution underestimates permeability. A possible explanation for this is that the shape of the channel is not in fact straight, but due to the existence of some pores adjacent to it, its local diameter is often larger, see \ref{fig:2D isotropic velocity contours}. An additional source of error is the input permeability tensor, whose value is slightly depending on the flow configuration setup \citep{Guibert2016}.
+%
+%The use of an alternative boundary condition at the upper wall is also investigated. Symmetry boundary condition is applied on the reference configuration of $H=0.05L$ to simulate the case where the fracture is embedded in the middle of the isotropic porous medium ($\epsilon=0.7, c_d=0.001$). The relative error is then $17\%$ which is slightly higher than the $14\%$ error, for the corresponding solid wall boundary condition.
+%
+%
+%\subsubsection{Fragmented fractures in isotropic porous media}
+%
+%Finally, a fragmented fracture is placed in the isotropic structure illustrated in \ref{fig:2D QSGS split fracture}. This simulation is performed applying symmetry boundary condition on lateral walls. For this porous medium of resolution $3000\times3000$, $\epsilon=0.7, c_d=0.001$ and fracture size $H=0.4L$, we have  $H/L^*=173$, which is a value often found in shale samples as explained in \ref{sec:introduction}. The relative error of the effective permeability computed with the Brinkman model is $1\%$. The significance of this configuration is that the channel does not go through the whole computational domain, thus the porous medium inevitably determines the effective permeability. On the other hand, in the previous examples the preferential path is clearly the channel, therefore, for large fractures the porous medium contribution to the flow and overall permeability of the porous media becomes negligible.
+%
+%% A porous block of length L and height H is placed in a rectangular channel, with a gap of thickness h which enables the free fluid to flow over the porous medium. A good estimate of the characteristic size of the pores is given by
+%
+%%experiments in an effectively two-dimensional channel bounded by a porous medium at y =0 and an impermeable wall at y =H and introduced the notion of slip coefficient α defined by
+%
+%
+%\begin{table}[t!]
+%	\caption {Generation parameters of 3D QSGS structures and simulation results where $\mathrm{d}p/\mathrm{d}x$ is applied and fracture with $H=0.02L$ is in $y$ axis. $T$ here refers to the highest component of tortuosity which in the case of anisotropic structures is $T_z$.}
+%	\centering
+%	\begin{tabular}{ c c c c c c c c c c c c} 
+%		\hline
+%		case & $c_d^R$ & $c_d^C$  & $\epsilon^R$ & $\epsilon$ & $\epsilon_{final}$ & $AR$ & $H/L^*$ & $k$ & $r$ & $T$ & $\eta$ \\
+%		$1$ & $0.01$ & - & - & $0.3$ & $0.26$ & $1$ & $5.59$ & $4.16\times10^{-7}$ & $0.98$ & $1.71$ & $21\%$\\	
+%		$2$ & $0.01$ & - & - & $0.3$ & $0.26$ & $100$ & $5.53$ & $4.25\times10^{-7}$ & $0.73$ & $1.68$ & $14\%$\\
+%		$3$ & $0.01$ & $0.0001$ & $0.2$ & $0.3$ & $0.14$ & $1$ & $14.73$ & $3.27\times10^{-8}$ & $0.94$ & $2.52$ & $21\%$ \\	
+%		$4$ & $0.01$ & $0.0001$ & $0.2$ & $0.3$ & $0.13$ & $100$ & $16.18$ & $2.50\times10^{-8}$ & $0.74$ & $2.45$  & $21\%$\\	
+%		$5$ & $0.01$ & $0.00002$ & $0.2$ & $0.3$ & $0.13$ & $1$ & $14.44$ & $3.18\times10^{-8}$ & $0.77$ & $2.36$ & $21\%$\\	
+%		$6$ & $0.01$ & $0.00002$ & $0.2$ & $0.3$ & $0.13$ & $100$ & $14.30$ & $3.22\times10^{-8}$ & $0.66$ & $2.38$ & $21\%$\\	
+%		$7$ & $0.01$ & $0.0001$ & $0.2$ & $0.25$ & $0.2$ & $1$ & $9.36$ & $1.12\times10^{-7}$  & $0.85$& $2.00$ & $27\%$\\	
+%		$8$ & $0.01$ & $0.0001$ & $0.15$ & $0.22$ & $0.12$ & $1$ & $15.83$ & $2.50\times10^{-8}$  & $0.17$ & $2.09$ & $32\%$\\	
+%		\hline
+%	\end{tabular}
+%	\label{tab:3D QSGS results}
+%\end{table}
+%
+%
+%\subsection{Three-dimensional QSGS}\label{sec:3D QSGS}
+%\lei{Please  use sub-sub-sections to increase the readability in this subsection}
+%%Now attention is turned to three-dimensional QSGS porous structures where we assign appropriate generation parameters to make them resemble real shale samples. This would lead to more comprehensive conclusions regarding the accuracy of the Brinkman model for upscaling from the pore scale.
+%
+%Recently, \cite{Wang2016} quantified the pore-scale heterogeneity and anisotropy of several shale samples using a geometry-based method, where $3D$ QSGS structures were generated to have statistical and morphological characteristics close to real samples. The advantage of using this type of reconstruction instead of high-resolution images lies in the fact that we can individually study the impact of the factor of interest, by keeping the rest constant. In this paper, we use similar generating parameters in order to construct random porous media to be realistic representations of the shale matrix, and thus acquire more comprehensive conclusions regarding the accuracy of the Brinkman model for upscaling from the pore-scale. The full list of parameters of the 3D geometries considered and the corresponding simulation results are summarised in \ref{tab:3D QSGS results}. 
+%
+%%For real shale samples, the properties such as porosity, anisotropy and heterogeneity are all varied. But to study the influence from a specific factor, all other parameters must be kept constant. Thus, direct simulation in real structure is not appropriate when we want to reveal the geometry effect on permeability. In contrast,
+%
+%%Because of the compaction in vertical direction, most shale has a transversely isotropic structure (Wang, 2002). This means that shale is isotropic in any direction parallel to the bed and the anisotropy only appears in the plane perpendicular to bed. As the formation process of shale is various, the anisotropy of pore structure is also different. 
+%
+%%To start with, we investigate the impact of anisotropy on the permeability of the sample, on the effective permeability of the sample with a micro-fracture on top of it and finally on the accuracy of the Brinkman model. To this end, we reconstruct two $3D$ QSGS structures where the anisotropy takes the minimum and maximum values observed on the shale samples of \cite{Wang2016}. The first structure tested is statistically isotropic, while the second is isotropic in the directions parallel to the bed ($x,y$) and anisotropy appears in the perpendicular direction ($z$). This type of anisotropy is common in shale, due to the compaction of the rock in the vertical direction.
+%
+%To start with, we investigate the accuracy of the Brinkman formulation using artificial anisotropic samples with a fracture on top. To this end, we reconstruct two $3D$ QSGS structures; the first structure is statistically isotropic, while the second is isotropic in the directions parallel to the bed ($x,y$) and anisotropy appears in the perpendicular direction ($z$). This type of anisotropy is common in shale, due to the compaction of the rock in the vertical direction \citep{Wang2016,Mokhtari2015}.
+%
+%\begin{figure}[t!]
+%	\centering
+%	\subfloat[]{\label{}\includegraphics[width={0.4\textwidth},trim={17cm 3cm 17cm 3cm},clip, angle=-90, origin=c]{QSGS_3D_8_z_plane.png}}
+%	%	\hskip 0.4cm
+%	\subfloat[]{\label{}\includegraphics[width={0.4\textwidth},trim={17cm 3cm 17cm 3cm},clip, angle=-90, origin=c]{QSGS_3D_8_x_plane.png}}\\
+%	\caption{Anisotropic 3D QSGS structure (Case $2$) where the bedding plane ($z$) is shown on the left and a perpendicular plane ($x$) is on the right. The structure is isotropic in plane $z$ and anisotropic in the other two planes where the pores (shown in black) are elongated.}
+%	\label{fig:transverse isotropy}  
+%\end{figure}
+
+
+%\begin{figure}[p]
+%	\centering
+%	%	\subfloat[]{\label{}\includegraphics[width={0.4\textwidth},trim={14cm 1cm 14cm 1cm},clip]{QSGS_3D_1_transparent_isometric_view.png}}
+%	\includegraphics[width={0.4\textwidth},trim={20cm 2cm 20cm 24cm},clip]{legend4.png}\\
+%	\subfloat[]{\label{}\includegraphics[width={0.4\textwidth},trim={14cm 0cm 14cm 0cm},clip]{QSGS_3D_1_streamlines_tube_rescale_box.png}}
+%	{\includegraphics[width={0.08\textwidth},trim={1cm 1cm 1cm 1cm},clip]{isometric_view_axis.png}}
+%	\subfloat[]{\label{}\includegraphics[width={0.4\textwidth},trim={14cm 0cm 14cm 0cm},clip]{QSGS_3D_5_streamlines_tube_rescale_box.png}}\\
+%	\subfloat[]{\label{}\includegraphics[width={0.4\textwidth},trim={14cm 0cm 14cm 0cm},clip]{QSGS_3D_6_streamlines_tube_rescale_box.png}}
+%	\caption{The mesh (pore space) of 3D Case $1$ (isotropic), Case $7$ and Case $8$ (heterogeneous) along with velocity streamlines for $\mathrm{d}p/\mathrm{d}x$ shown in $\mathrm{(a)}, \mathrm{(b)}$ and $\mathrm{(c)}$ respectively. In the last two subfigures, there are many large pores illustrated with blue colour (due to smaller velocity of the flow there). This is due to the generation process allowing a small portion of the pores to be of greater size ($c_d^C=0.0001$). The grey areas indicate dead end pores, or pore areas with very small velocities.}
+%	\label{fig:3D QSGS strealmines}  
+%\end{figure}
+%
+%%Structure (a) is isotropic with final $\epsilon=0.26$ and $c_d=0.01$ while the other two are heterogeneous and anisotropic with $c_d^R=0.01$ and $c_d^C=0.0001$. Structures (b) and (c) have final $\epsilon=0.2,0.12$ respectively.
+%
+%\begin{figure}[t!]
+%	\centering
+%	\includegraphics[width={0.4\textwidth},trim={20cm 2cm 20cm 24cm},clip]{legend3.png}\\
+%	\subfloat[]{\label{}\includegraphics[width={0.4\textwidth},trim={17cm 3cm 17cm 3cm},clip, angle=-90, origin=c]{QSGS_3D_1_dpx_2y_U_new_scale_outline.png}}
+%	%	\hskip 0.4cm
+%	\subfloat[]{\label{}\includegraphics[width={0.4\textwidth},trim={17cm 3cm 17cm 3cm},clip, angle=-90, origin=c]{QSGS_3D_5_dpx_2y_U_new_scale_outline.png}}\\
+%	\subfloat[]{\label{}\includegraphics[width={0.4\textwidth},trim={17cm 3cm 17cm 3cm},clip, angle=-90, origin=c]{QSGS_3D_6_dpx_2y_U_new_scale_outline.png}}
+%	\caption{Velocity contour plots ($x$ plane) for the isotropic Case $1$ and the heterogeneous Cases $7$ and $8$ illustrated in $\mathrm{(a)},\mathrm{(b)}$ and $\mathrm{(c)}$ respectively. The fracture size is $H=0.02L$. The flow is driven by a pressure gradient in the $x$ direction. Blue colour denotes low velocity while red denotes high velocity.}
+%	\label{fig:3D QSGS velocity contours}  
+%	
+%	%	Velocity contour plots for the cases of $AR=1$ with $c_d=0.01, \epsilon=0.26$ for (a),  $\mathrm{d}p/\mathrm{d}x$ is applied and the fracture height is placed along the $y$ axis. The slices shown are on the $x$ plane.
+%	
+%\end{figure}
+%
+%\begin{figure}[h]
+%	\centering
+%	\includegraphics[width={0.4\textwidth},trim={20cm 2cm 20cm 24cm},clip]{legend4.png}\\
+%	\subfloat[]{\label{}\includegraphics[width={0.4\textwidth},trim={17cm 3cm 17cm 3cm},clip]{QSGS_3D_1_dpx_40y_split_streamlines_tube.png}}
+%	\subfloat[]{\label{}\includegraphics[width={0.4\textwidth},trim={17cm 3cm 17cm 3cm},clip]{QSGS_3D_12_dpx_40y_split_streamlines_tube.png}}\\
+%	\caption{Velocity streamlines of the 3D Case $1$ (left) and $6$ (right), with a fragmented fracture ($H=0.4L$) added along the $x$-axis, where $H=91L^*$ for Case $1$ and $H=233L^*$ for Case $6$. The Brinkman model underestimates the effective permeability by $2\%$ and $21\%$ respectively.}
+%	\label{fig:3D QSGS split fracture}  
+%\end{figure}
+%
+%%In particular, the exact values used are $D_x=D_y=D_z=0.008$ for the isotropic structure whereas for the anisotropic $AR=D_x/D_z=100$ and $D_x=D_y=0.008$ (latter shown in \ref{fig:transverse isotropy}). \reminder{mention D for 2D structures or delete here}
+%
+%% In order to generate transversely isotropic structures two of the main directional growth parameters $D_x$ and $D_y$ have to be equal, while the third one $D_z$ has to be smaller. 
+%
+%These random porous media are generated using $AR=1$ and $100$ (see Cases $1$ and $2$ respectively in \ref{tab:3D QSGS results} and \ref{fig:transverse isotropy} for views of Case $2$ geometry). The aspect ratio ($AR$) herein signifies the ratio of the main directional growth parameters where in the case of transversely isotropic structures this yields $(D_x=D_y)/D_z$. The flow configuration for the $3D$ random porous media is identical to the one described in \ref{sec:Stokes equations}. Fixed pressure is applied on the inlet and outlet boundaries, while the rest are treated as stationary walls. The straight fracture ($H=0.02L$) is located on top of the porous domain with its height placed on either of the two transverse directions with respect to the pressure gradient.
+%
+%As previously mentioned, the structures under consideration are either isotropic, or transversely isotropic. Thus, we expect that for the former case the effective permeability results will be practically identical for pressure gradient applied in any of the three directions. Thereby, the same applies for the placement of the fracture. Indeed, our numerical solutions of the Stokes equation show that for $AR=1$ the difference between various pressure gradients and fracture positions is below $0.7\%$. For the latter case, $\mathrm{d}p/\mathrm{d}x$ and $\mathrm{d}p/\mathrm{d}y$ should give similar $k_{eff}$ while $\mathrm{d}p/\mathrm{d}z$ is expected to result in inferior values since $k_{zz}<k_{xx}\approx k_{yy}$ for these type of porous media. The fracture position could herein influence the effective permeability. In our simulations, the transversely anisotropic structure $AR=100$ exhibits a difference in effective permeability in the order of $1\%$ for the two different fracture positions while $\mathrm{d}p/\mathrm{d}x$ is imposed. When the flow direction is driven by pressure gradient in the $z$ direction ($\mathrm{d}p/\mathrm{d}z$), the resulting $k_{eff}$ differs by $2\%$, even though $k_{zz} \approx 0.7 k_{xx}$. This confirms the importance of the fracture flow contribution to the effective permeability. Comparing the two structures, having the same flow configurations, the maximum difference observed in $k_{eff}$ is in the order of $5\%$ for $\mathrm{d}p/\mathrm{d}z$, which is expected since the anisotropic structure results in smaller permeability $k_{zz}$. It is worth mentioning that all the aforementioned percentages tend to decrease with increasing $H$.
+%
+%
+%%Consequently, we investigate the above structures applying  $\mathrm{d}p/\mathrm{d}x$ (parallel to bed) and $\mathrm{d}p/\mathrm{d}z$ (perpendicular to bed) to validate our assertion.
+%
+%In the rest of this paper, it may be more meaningful to consider only the setup where a $\mathrm{d}p/\mathrm{d}x$ is applied and the fracture is in the $y$ axis (choosing $\mathrm{d}p/\mathrm{d}y$ and fracture in the $x$ axis would have the same effect). This is due to the fact that is it desirable to choose the fracturing direction parallel to the bedding plane, where the flow is facilitated \citep{Ma2016} and it is the most common flow direction in shale \citep{Wang2016}. The relative error of the Brinkman model for the aforementioned structures is $22\%$ and $16\%$ for the isotropic and the transversely isotropic cases respectively (see Case $1$ and $2$ in \ref{tab:3D QSGS results}).
+%
+%%The deviation was more pronounced for the case of $AR=9$ where the choice of the axis of elongation of the fracture resulted in a difference in $k_{eff}$ in the order of $1\%$ for the smaller fracture tested ($H=2$). 
+%
+%%$\num{5e+5}$ $5\mathrm{e}{+5}$ $5\dot10^5$ $5e+5$ 
+%
+%%In general, this error tends to decrease for large ratios, as the ones found in real shale samples.
+%
+%%Generally, it can be observed that as the fracture size increases, for the same porous medium, the relative error of the Brinkman solution drops along with the deviation of the effective permeability between the isotropic and the anisotropic geometries. This can be justified by the fact that the proportion of the flow going through the fracture increases, thus the Brinkman formulation practically solves the Stokes equation, as analysed previously based on the two-dimensional simulations of \ref{sec:2D QSGS}.
+%
+%
+%%\reminder{place this at the end of the section as in 2D?} 
+%
+%%The average pore size for three-dimensional porous media is calculated using $L^*=\sqrt{8k_{main}T/\epsilon}$.
+%
+%%For the different fracture heights simulated, $H/L^*$ was $4,11,22$ and $112$ respectively for both porous media.  For the case of the largest microfracture, {\color{gray} which is still far smaller than the smallest microfracture found in the literature,} the error of the Brinkman solution is approximately {\color{red}$2\%$}, as shown in \ref{tab:3D QSGS anisotropic results}. Therefore, we conclude that the Brinkman model can give accurate estimation of the effective permeability in shale, while upscaling from the pore scale including microfractures. {\color{red} Should also consider heterogeneity before saying that!} 
+%
+%%{\color{blue} It should be noted that the Brinkman solution is approximately between $62$ to $766$ times faster than the direct simulation of the porous structure using the Stokes equation, for the fracture sizes considered (indicative time gain for isotropic case).}
+%
+%%Additionally, the influence of the position of the fracture was investigated by placing its height either along the $y$ or the $z$ direction. The deviation was more pronounced for the case of $AR=9$ where the choice of the axis of elongation of the fracture resulted in a difference in $k_{eff}$ in the order of $1\%$ for the smaller fracture tested ($H=2$).
+%
+%% It is expected that when the fracture height is placed on the $y$ direction where the medium is transversely isotropic and the tortuosity is (anticipated to be) close to unity that $k_{eff}$ will be higher.
+%
+%%It is expected that when the fracture height is placed on the $y$ direction where the medium is transversely isotropic and the tortuosity is (anticipated to be) close to unity that $k_{eff}$ will be higher. {\color{red} TO EDIT}
+%
+%% IMPOSE DP/DZ with fracture on x and y for AR=9 and H=2 and H=10 (not necessary)
+%
+%%(EDIT) The heterogeneity at pore scale refers to the non-uniform distribution of pores, which is clearly presented in many observations (Tang et al., 2015; Lin et al., 2015).
+%
+%To study the effect of heterogeneity, several QSGS structures are created with $c_d^R/c_d^C=100$ and  $c_d^R/c_d^C=500$, introducing non-uniformity in the pore distribution. It is found that heterogeneity tends to increase with $c_d^R/c_d^C$ \citep{Wang2016}. At the same time, transverse isotropy is superimposed to imitate the real porous structure.
+%
+%%The structural parameters of the first geometry were chosen to be $AR=1$, $c_d^R=0.01$, $c_d^C=0.0001$, $\epsilon^R=0.2$ and $\epsilon=0.25$. For $H=2$, the Brinkman effective permeability deviates from the Stokes by $27\%$. The second geometry which differs in porosity, having $\epsilon^R=0.15$ and $\epsilon=0.22$, leads to the Brinkman model estimating $k_{eff}$ with $32\%$ error.
+%
+%%The anisotropy factor $r$ used in \ref{tab:3D QSGS results} is described as the ratio between the minimum and the maximum diagonal permeability element $r={k_{min}}/{k_{max}}$;
+%
+%The anisotropy factor $r$ used in \ref{tab:3D QSGS results} is defined as
+%\begin{equation}
+%r=\frac{{k_{min}}}{\sqrt{k_{int}k_{max}}}
+%\end{equation}
+%where $k_{min},k_{int}$ and $k_{max}$ correspond to the minimal, intermediate and maximal component of the diagonal permeability tensor respectively. Values close to unity indicate a statistically isotropic medium, while values close to zero refer to high anisotropy. Particular attention must be paid to the heterogeneous cases, where the matrix proves to be anisotropic even though this is not explicitly determined in the generation process ($AR=1$). This can be (partly) attributed to the low porosity of the medium in combination with the fact that only a few flow paths are available due to the dominance of the larger pores. When anisotropy is induced by heterogeneity it is not necessary that $k_{zz}$ has the lowest value compared to the rest diagonal terms. On the contrary, this is assured for the anisotropic structures where $AR>1$. 
+%
+%
+%Moreover, it is confirmed that for the same porosity (Cases $4-6$), the intrinsic permeability is higher for more heterogeneous structures (Cases $5,6$) as the pores have better connectivity \citep{Wang2016}. This can also be justified by the corresponding reduction of tortuosity for the more heterogeneous structures. The porous media of Cases $4$ and $8$ have the same intrinsic permeability and similar porosities, however they exhibit different relative error of $k_{eff}$ ($21\%$ and $32\%$ respectively). Although they are both constructed based on $c_d^R/c_d^C=100$, the proportion of the porosity assigned to each pore size is different ($2/1$ versus $1/1$), resulting in Case $8$ being more heterogeneous than Case $4$. Additionally, Case $8$ is more anisotropic as reflected from the decreased anisotropy factor $r$. In agreement with our conclusions for the 2D porous media presented in \ref{sec:2D QSGS}, the Brinkman estimation for the more heterogeneous and anisotropic structure leads to larger error when the flow is parallel to the bedding plane. On the other hand, comparing Cases $3$ and $7$ we observe that the significant decrease of $H/L^*$ and $r$ for the porous medium flow of Case $7$ leads to increase of the Brinkman error as previously detected for $2D$ structures. Despite the fact that the porous medium of Case $7$ is less heterogeneous the impact of the other two factors here prevails.
+
+%Finally, although a full parametric study must be performed in order to draw more clear conclusions, we can observe that for the highly heterogeneous structures with very small porosities (cases $7$ and $8$) the error is increased, which comes in agreement with the observation based on the 2D results.
+
+%
+%
+%
+%The mesh along with velocity streamlines of a few of the aforementioned porous structures (Cases $1,7$ and $8$) is depicted in \ref{fig:3D QSGS strealmines}. The focus is on the porous blocks only, thus $H=0$. The heterogeneous cases compared to the isotropic ones have a big proportion of significantly large pores where the flow has low velocity. This can be further observed in \ref{fig:3D QSGS velocity contours} where the velocity contours of same geometries are shown ($x$ plane). Herein, the porous block is connected to a straight fracture of thickness $H=0.02L$. 
+%
+%{As seen in \ref{fig:3D QSGS split fracture}, a fragmented fracture ($H=0.2L$) is placed in the QSGS structures of Case $1$ and Case $6$, similarly to the 2D configuration illustrated in \ref{fig:2D QSGS split fracture}. The fracture aperture to pore size ratio is about $H/L^*=91$ and $H/L^*=233$ for the respective geometries, while the corresponding relative error of the Brinkman estimation of effective permeability is $2\%$ and $21\%$. Even though the straight fracture configuration gives same error for both structures (see \ref{tab:3D QSGS results}), in this configuration the error differs significantly. This is due to the fact that the permeability tensor is obtained using the initial porous medium, which is now partly covered by the fracture. Since the geometry of Case $1$ is more homogeneous, its $\boldsymbol{\mathrm{k}}$ is still representative when we introduce the fracture. However, in the more heterogeneous and less permeable geometry of Case $6$, the addition of the fracture has a more pronounced impact on the connectivity of the pores, altering the permeability tensor.}
+%
+%
+%%For the highly heterogeneous structure depicted in \ref{fig:3D QSGS strealmines} and for fracture thickness $H=2$, the error of the Brinkman model is $+32\%$. The solution was acquired in $76$ times faster than the Stokes solution. The corresponding $H/L^*$ ratio is around $12$ for $\mathrm{d}p/\mathrm{d}x$. The measured error is significantly reduced since most of the channel is unaffected by the presence of the porous medium ({\color{red} add figure}) and therefore, its shape is the same for almost all of the computational domain for both cases. This drop of error with porosity contrasts with the two-dimensional results.
+%
+%
+%%the effective pore size based on $k_{xx}$ is calculated to be $L^*=6.19nm$
+%
+%If we consider the structures of \ref{tab:3D QSGS results} to have a cell size of $20nm$, then the whole sample size is $L=2\mu m$. Thus, the dimensional intrinsic permeabilities of the simulated 3D porous media are in the range of $9.98\times10^{-20}$ to $1.70\times10^{-18}m^2$, i.e. approximately $101$ to $1722nD$. This permeability range, between nano and micro-Darcies, is typical for shale rock \citep{Chakraborty2017}. Additionally, the relevant effective pore size is only a few nanometres ($3$ - $9nm$) and their porosities are low enough for the above structures to be regarded, to some extend, as representative of real shale samples. Consequently, we anticipate that the relative error of the Brinkman model using shale images will be close to the values reported in \ref{tab:3D QSGS results}, i.e. around $20\%-30\%$.
+%
+%%Consequently, this sample could be, to some extend, considered to be representative of a real shale sample since its generation parameters are similar to the ones suggested by \citep{Wang2016} and its average pore size is in agreement with most of the shale samples found in the literature. \reminder{what about porosity?}
+%
+%
+%%The anisotropy factor for the intrinsic permeability $r={k_{min}}/{k_{max}}$ is reported~\citep{Guibert2015} to have a large range of possible values in various sandstones and thus it is also studied in the present work.
+%
+%
+%
+%%\begin{table}[ht]
+%%	\caption {Structural parameters of simulated 3D QSGS porous media.}
+%%	\centering
+%%	\begin{tabular}{ c c c c c| c c c c c c c} 
+%%%		\vspace {0.1cm}
+%%		\hline
+%%		\multicolumn{5}{c|}{Anisotropic study} & \multicolumn{7}{c}{Heterogeneous study}\\
+%%		\hline
+%%		case & $c_d$ & $\epsilon$ & $\epsilon_{final}$ & $AR$ & case & $c_d^R$ & $c_d^C$  & $\epsilon^R$ & $\epsilon$ & $\epsilon_{final}$ & $AR$\\
+%%		\hline
+%%		1 & $0.01$ & $0.3$ & 0.26 & $1$ & $3$ & 0.01 & 0.0001 & 0.2 & 0.25 & 0.2 & 1 \\
+%%		\hline
+%%		2 & $0.01$ & $0.3$ & 0.26 & $100$ & $4$ & 0.01 & 0.0001 & 0.15 & 0.22 & 0.12 & 1 \\
+%%		\hline
+%%	\end{tabular}
+%%	\label{tab:3D QSGS parameters}
+%%\end{table}
+%
+%%\begin{table}[ht]
+%%	\caption {Structural parameters of simulated anisotropic 3D QSGS porous media.}
+%%	\centering
+%%	\begin{tabular}{ c c c c c} 
+%%		%		\vspace {0.1cm}
+%%		\hline
+%%		\multicolumn{5}{c}{Anisotropic study}\\
+%%		\hline
+%%		case & $c_d$ & $\epsilon$ & $\epsilon_{final}$ & $AR$\\
+%%		\hline
+%%		1 & $0.01$ & $0.3$ & $0.26$ & $1$\\
+%%		2 & $0.01$ & $0.3$ & $0.26$ & $100$\\
+%%		\hline
+%%	\end{tabular}
+%%	\label{tab:3D QSGS anisotropic parameters}
+%%\end{table}
+%%
+%%\begin{table}[ht]
+%%	\caption {Structural parameters of simulated heterogeneous 3D QSGS porous media.}
+%%	\centering
+%%	\begin{tabular}{ c c c c c c c} 
+%%		\hline
+%%		\multicolumn{7}{c}{Heterogeneous study}\\
+%%		\hline
+%%		case & $c_d^R$ & $c_d^C$  & $\epsilon^R$ & $\epsilon$ & $\epsilon_{final}$ & $AR$\\
+%%		\hline
+%%		$3$ & 0.01 & 0.0001 & 0.2 & 0.3 & $0.14$ & 1 \\
+%%		$4$ & 0.01 & 0.0001 & 0.2 & 0.3 & $0.13$ & 100 \\
+%%		$5$ & 0.01 & 0.00002 & 0.2 & 0.3 & $0.13$ & 1 \\
+%%		$6$ & 0.01 & 0.00002 & 0.2 & 0.3 & $0.13$ & 100 \\
+%%		$7$ & 0.01 & 0.0001 & 0.2 & 0.25 & $0.2$ & 1 \\
+%%		$8$ & 0.01 & 0.0001 & 0.15 & 0.22 & $0.12$ & 1 \\
+%%		\hline
+%%	\end{tabular}
+%%	\label{tab:3D QSGS heterogeneous parameters}
+%%\end{table}
+%
+%%\begin{table}[ht]
+%%	\caption {Results of 3D QSGS study where $\mathrm{d}p/\mathrm{d}x$ is applied and fracture with $H=2$ is in $y$ axis.}
+%%	\centering
+%%	\begin{tabular}{ c c c c c c c} 
+%%		\hline
+%%		case & $H/L^*$ & $\epsilon_{final}$ & r & T & error & time gain \\
+%%		\hline
+%%		$1$ & $4.57$ & $0.26$ & $0.97$ & $1.71$ & $21\%$ & $$  \\	
+%%		$2$ & $4.52$ & $0.26$ & $0.73$ & $1.68$ & $14\%$ & $$ \\
+%%		$3$ & $12.03$ & $0.14$ & $0.92$ & $2.52$ & $21\%$ & $$  \\	
+%%		$4$ & $13.21$ & $0.13$ & $0.71$ & $2.45$  & $21\%$ & $$ \\	
+%%		$5$ & $11.79$ & $0.13$ & $0.69$ & $2.36$ & $21\%$ & $$  \\	
+%%		$6$ & $11.68$ & $0.13$& $0.63$ & $2.38$ & $21\%$ & $$ \\	
+%%		$7$ & $7.64$ & $0.2$ & $0.82$ & $2.00$ & $27\%$ & $$  \\	
+%%		$8$ & $12.93$ & $0.12$& $0.14$ & $2.09$ & $32\%$ & $$ \\	
+%%		\hline
+%%	\end{tabular}
+%%	\label{tab:3D QSGS results}
+%%\end{table}
+%
+%
+%
+%\section{Results and discussion: Upscaling rarefied flows} \label{sec: rarefied flow results}
+%
+%\begin{figure}[t!]
+%	\centering
+%	\includegraphics[width={0.4\textwidth},trim={20cm 2cm 20cm 24cm},clip]{legend1.png}\\
+%	\subfloat[$Kn=0.0001$]{\label{}\includegraphics[width={0.4\textwidth},trim={16cm 3cm 16cm 3cm},clip,angle=180, origin=c]{DVM_straight_fracture_Kn0_0001_KnmagU.png}}
+%	\subfloat[$Kn=0.001$]{\label{}\includegraphics[width={0.4\textwidth},trim={16cm 3cm 16cm 3cm},clip,angle=180, origin=c]{DVM_straight_fracture_Kn0_001_KnmagU.png}}\\
+%	\subfloat[$Kn=0.01$]{\label{}\includegraphics[width={0.4\textwidth},trim={16cm 3cm 16cm 3cm},clip,angle=180, origin=c]{DVM_straight_fracture_Kn0_01_KnmagU.png}}
+%	\caption{
+%		Contour plots of $v$ for three BGK solutions calculated at $Kn=0.0001,0.001$ and $0.01$. The streamwise flow velocity $u$ is normalised by $u_{ref}=2\bar{p}L/\mu \sqrt{\pi}$ resulting to $v$. The isotropic porous medium used has $\epsilon=0.7$ and $c_d=0.001$ and the straight fracture has an aperture $H=0.02L$ and $H=3.5L^*$. The flow rate for the largest $Kn$ is dramatically increased, indicating significant rarefaction effects.}
+%	\label{fig:rarefied flow contours}  
+%\end{figure}
+%
+%\begin{figure}[t!]
+%	\centering
+%	\subfloat[]{\label{}\includegraphics[width=0.5\textwidth]{DVM_comparison.eps}}
+%	\subfloat[]{\label{}\includegraphics[width=0.5\textwidth]{DVM_Brinkamn_Kn0_0001.eps}}\\
+%	\subfloat[]{\label{}\includegraphics[width=0.5\textwidth]{DVM_Brinkamn_Kn0_001.eps}}
+%	\subfloat[]{\label{}\includegraphics[width=0.5\textwidth]{DVM_Brinkamn_Kn0_01.eps}}\\
+%	\caption{Streamwise-averaged profiles of $v$, which equals $u$ normalised by $u_{ref}=2\bar{p}L/\mu \sqrt{\pi}$. The interface is at $y=0$. The relative error of the Brinkman estimation is $4\%$ for $Kn=0.0001$, $5\%$ for $Kn=0.001$ and $7\%$ for $Kn=0.01$. Based on the average pore size, $Kn^*=209 \times Kn$ while the effective $Kn$ at the fracture is $Kn^f=60 \times Kn$. \lei{This value seems not right}}
+%	\label{fig:rarefied flow graphs}  
+%\end{figure}
+%
+%
+%
+%Shale gas flow is mostly in the slip and transition regimes, therefore, we examine the performance of Brinkman model, where the intrinsic permeability of porous media is replaced by the apparent permeability due to gas rarefaction effects, on the basic configuration illustrated in \ref{fig:computational domain}, for increasing $Kn$. When $Kn>0$, the fine-scale results are obtained by solving the linearised BGK equation using the discrete velocity method~\citep{Wu2017JFM2,Germanou2018,Ho2019CPC,Ho2019a}.
+%
+%
+%The 2D porous medium used herein is isotropic with $\epsilon=0.7$ and $c_d=0.001$. Both QSGS grid and mesh have the same resolution $(3000\times3000)$. The height of the fracture on top is $H=0.02L$ and $H=3.5L^*$, where $L^*$ is defined in Eq.~\eqref{L_star}. The fracture size is chosen to be small in order to facilitate the visualization in \ref{fig:rarefied flow graphs}, since increasing the fracture size the contribution of the porous medium to effective permeability becomes negligible. Additionally, an important factor for this choice is the computational cost of DVM which is already demanding for this domain size. Simulations are performed for global $Kn=0,\ 0.0001,\ 0.001$ and $0.01$, and the  velocity contours are shown in \ref{fig:rarefied flow contours}. In order to appropriately understand the rarefied flow behaviour we however use the effective Knudsen number of the average pore and the Knudsen number of the fracture, i.e. $Kn^*=\lambda/L^*$ and $Kn^f=\lambda/H$ respectively. 
+%
+%
+%It is worthwhile to note that for $Kn=0$ the Stokes equation is solved and the respective relative error and graphs are very similar to the ones resulting for $Kn=0.0001$; hence they are omitted in \ref{fig:rarefied flow contours,fig:rarefied flow graphs}. The full list of results can be found in \ref{tab:rarefied flow results}. Visually inspecting \ref{fig:rarefied flow contours} and the comparative \ref{fig:rarefied flow graphs}a we can observe a dramatic increase in velocity for the case of $Kn=0.01$ compared to $Kn=0.001$ and $Kn=0.0001$. This indicates that the computed effective $Kn$ of the flow ($Kn^*=2$) truly lies in the transition regime.
+%
+%The coarse-scale results in \ref{fig:rarefied flow graphs}(b-d) indicate that the flow in the porous medium is adequately represented for all three Knudsen numbers tested. We should emphasise here that the permeability tensor used as input for each Brinkman simulation is derived using the BGK results for each corresponding $Kn$ number, following the methodology described in \ref{sec:permeability tensor}.
+%
+%
+%As far as the area of the straight fracture is concerned, increasing $Kn$ the deviation between the BGK and Brinkman results increases. This is due to the fact that in the Brinkman model, practically the Stokes equation is solved at the fracture, which are proven to break down in the transition and free flow regimes as mentioned in \ref{sec:numerical methods}. Namely, for $Kn=0.01$ the flow in the fracture is significantly underestimated, therefore, the relative error of effective permeability increases to $7\%$. Nevertheless, this error is still small thanks to the precise $\boldsymbol{\mathrm{k}}$ used, which lays a firm foundation for upscaling. This is of central importance, since using $\boldsymbol{\mathrm{k}}$ obtained from the Stokes equation instead of the BGK model has a notable effect on the coarse-scale effective permeability. For example, it results in underestimation of permeability up to $90\%$ at $Kn=0.01$.
+%
+%
+%Due to the small fracture size, its contribution to the total mass flow is limited hence the error involved in the value of $k^C_{{eff}}$ is not so significant. On the other hand, in the case of a larger fracture for the same global $Kn$, $Kn^f$ decreases, resulting to the Brinkman model being accurate for a larger range of global $Kn$. Consequently, the relative error is expected to be even smaller.
+%
+%%Especially considering the enormous gain in computational time when using the coarse-scale model.
+%
+%
+%\begin{table}[t]
+%	\caption {The apparent permeability and error of the Brinkman model for rarefied gas flows in 2D QSGS porous medium with a fracture on top with $H=0.01L$. \lei{In the text you said $H=0.02L$.} The column titled $\eta_{Kn=0}$ refers to the relative error of the Brinkman estimation when $k^C_{{eff}}$ is calculated based on the intrinsic permeability of the porous media.}
+%	\centering
+%	\begin{tabular}{ c c c c c c} 
+%		\hline
+%		$Kn$ & $Kn^*$ & $Kn^f$ & $k$ & $\eta$ & $\eta_{Kn=0}$\\
+%		$0$ & $0$ & $0$ & $1.35\times10^{-6}$ & $4\%$ & $4\%$\\
+%		$0.0001$ & $0.02$ & $0.006$ &  $1.45\times10^{-6}$ & $4\%$ & $9\%$\\
+%		$0.001$ & $0.2$ & $0.06$ &  $2.84\times10^{-6}$ & $5\%$ & $50\%$\\
+%		$0.01$ & $2$ & $0.6$ &  $1.52\times10^{-5}$ & $7\%$ & $90\%$\\
+%		\hline
+%	\end{tabular}
+%	\label{tab:rarefied flow results}
+%\end{table}

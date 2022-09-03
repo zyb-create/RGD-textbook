@@ -1,0 +1,42 @@
+% !TeX spellcheck = en_US
+\chapter{Conclusions and Outlooks}
+\label{chap:conclusion}
+
+
+
+\section{Summary}
+
+%We have presented an accurate and efficient deterministic numerical method to solve the BE for monoatomic gases. Specifically, we focused on the numerical approximation of the Boltzmann collision operator by the FSM. Instead of the velocity space, the FSM handles the complicated collision in a corresponding frequency space. If the direct sum is applied to calculate the spectrum of the Boltzmann collision operator, the computational cost is at the order of $O(N_{\xi}^6)$, where $N_{\xi}$ is the number of frequency components which is not necessary equal to the number of velocity grids $N$. The main idea of the FSM is to approximate the kernel mode Eq.~\eqref{kernel_mode2} by the numerical quadrature to separate the frequency components $\xi_\textbf{l}$ and $\xi_\textbf{m}$, so that the spectrum of the Boltzmann collision operator Eq.~\eqref{mode} can be calculated by the FFT-based convolution, resulting in the computational cost at the order of $O(M^2N_{\xi}^3\log{N_{\xi}})$. The separation of the frequency components in the kernel mode needs special forms of the collision kernel. One of the main contribution of this thesis is that we constructed special forms of the collision kernel, making the FSM applicable to all inverse-power law potentials (except for the Coulomb potential) and the realistic LJ potential. The original FSM conserves the mass, while the error in the conservation of momentum and energy is spectrally small. By use of the Lagrangian multiplier method, momentum and energy conservation can be easily satisfied while the spectral accuracy is retained. Thus, in terms of accuracy and efficiency, the FSM is the best method for deterministic approximation of Boltzmann collision operator. The accuracy of the FSM has been evaluated by comparing the numerical solutions with the analytical BKW solutions. The factors affecting the accuracy of FSM have been analysed in depth. With the accurate numerical results provided by FSM, we have also justified the use of special collision kernels. 
+
+%The FSM has been successfully applied to the linearised BE, where the symmetry can reduce the computational cost by half. Also, the FSM has been extended to the BE for monoatomic gas mixtures, both in the classical and quantum mechanics regimes.
+
+
+%The velocity distribution functions have discontinuities when the Knudsen number is large. To capture these discontinuities one needs relatively large number of velocity grids. Since the FSM works in the frequency space, however, the number of frequency components do not have to be very large.  The reason is that, in the calculation of Eq.~\eqref{mode}, the spectrum of the VDF is multiplied by a weight function (kernel mode) which is very small when the frequency is large. Therefore, very high frequency components can be safely ignored. In real calculations, $32\sim64$ frequency components in each direction are enough, for examples see Chapter~\ref{chap:linearized}.  This is one of the main advantage of the spectral method over other deterministic methods like DVM.  
+
+%The number of the discrete angles $M$ in the approximation of kernel model by the quadrature also affects accuracy. In the most cases, the kernel mode can be approximated by the trapezoidal rule with $M=5$. In some extreme (highly rarefied) cases where $N_{\xi}\sim64$, the kernel mode can be approximated by the Gauss-Legendre quadrature with $M\sim8$, in order to obtain highly accurate results. 
+ 
+%An implicit iteration scheme has been adopted to find the stationary solutions in the space-inhomogeneous problems, where the convergence to the steady state has been found to be exponential, with the typical number of iterations being inversely proportional to the Knudsen number. In the transition and free molecular regimes, the iteration scheme is very efficient. The accuracy of the numerical method (FSM+iteration scheme) has been benchmarked through the comparison with the numerical kernel method from the Kyoto Kinetic Group, the experimental data, DSMC, and the MD. Very good agreements are observed in all tested cases. The computational time of our method has also been compared to the low-noise DSMC.  Comparisons demonstrate the merit of our method as a computationally accurate and efficient (for lid-driven flow, our method is at least 10 times faster than the low-noise DSMC) method for rarefied gas dynamics. The only drawback of the FSM, like all other deterministic numerical methods, is that a large amount of compute memory is required (relative to that of the DSMC method). 
+
+
+%The complicated nature of the Boltzmann collision operator has stimulated the search of kinetic models. We have proposed a kinetic model which can be viewed as a linear combination of the ES and S models. By adjusting the free parameter in the combined ES and S model, we can minimize the difference between its collision operator to that of the BE. With the accurate numerical solution provided by the fast spectral method, we have checked accuracy of kinetic model equations and found out the flow regimes where the complicated Boltzmann collision kernel can be replaced by the simple kinetic models. We have also solved the collective oscillation of quantum gas confined in external trap and compare the numerical solutions with the experimental data, indicating applicability of the quantum kinetic model.
+
+
+
+\section{Future works}
+
+%\subsubsection{NiST: Non-localized spatial-temporal constitutive law}
+
+%\subsubsection{diffusion slip, slip coefficients of mixture}
+
+\subsubsection{Chemical reactions}
+
+\subsubsection{DSMC-GSIS}
+
+%\subsubsection{Boundary condition at liquid-vapor interface}
+
+%\subsubsection{Moving contact lines}
+
+
+
+
+

@@ -1,0 +1,149 @@
+\contentsline {chapter}{\numberline {第1章}绪论}{1}{chapter.1}
+\contentsline {section}{\numberline {1.1}气体的性质}{1}{section.1.1}
+\contentsline {subsection}{\numberline {1.1.1}气体分子间的相互作用}{1}{subsection.1.1.1}
+\contentsline {subsection}{\numberline {1.1.2}理想气体}{1}{subsection.1.1.2}
+\contentsline {subsection}{\numberline {1.1.3}压强、温度、内能}{1}{subsection.1.1.3}
+\contentsline {subsection}{\numberline {1.1.4}平均自由程}{1}{subsection.1.1.4}
+\contentsline {subsection}{\numberline {1.1.5}简单输运现象}{1}{subsection.1.1.5}
+\contentsline {section}{\numberline {1.2}Navier-Stokes-Fourier equations}{2}{section.1.2}
+\contentsline {section}{\numberline {1.3}Continuum breakdown}{2}{section.1.3}
+\contentsline {subsection}{\numberline {1.3.1}Reentry of space vehicle}{3}{subsection.1.3.1}
+\contentsline {subsection}{\numberline {1.3.2}Microelectromechanical systems}{4}{subsection.1.3.2}
+\contentsline {subsection}{\numberline {1.3.3}Shale gas extraction}{5}{subsection.1.3.3}
+\contentsline {subsection}{\numberline {1.3.4}Global wind profiling}{6}{subsection.1.3.4}
+\contentsline {section}{\numberline {1.4}Simple gas kinetic theory}{7}{section.1.4}
+\contentsline {section}{\numberline {1.5}Knudsen number}{8}{section.1.5}
+\contentsline {subsection}{\numberline {1.5.1}Spatial Knudsen number}{9}{subsection.1.5.1}
+\contentsline {subsection}{\numberline {1.5.2}Temporal Knudsen number}{12}{subsection.1.5.2}
+\contentsline {section}{\numberline {1.6}Molecular dynamics simulations}{13}{section.1.6}
+\contentsline {chapter}{\numberline {第2章}气体动理论}{15}{chapter.2}
+\contentsline {section}{\numberline {2.1}理想气体}{15}{section.2.1}
+\contentsline {section}{\numberline {2.2}速度分布函数与宏观量}{15}{section.2.2}
+\contentsline {section}{\numberline {2.3}Boltzmann方程}{15}{section.2.3}
+\contentsline {subsection}{\numberline {2.3.1}偏转角和微分散射截面}{17}{subsection.2.3.1}
+\contentsline {subsection}{\numberline {2.3.2}熵增原理}{19}{subsection.2.3.2}
+\contentsline {subsection}{\numberline {2.3.3}线性化玻尔兹曼方程}{20}{subsection.2.3.3}
+\contentsline {subsection}{\numberline {2.3.4}输运系数和弛豫率：表象与本质}{22}{subsection.2.3.4}
+\contentsline {chapter}{\numberline {第3章}Fluid-dynamic Equations}{26}{chapter.3}
+\contentsline {section}{\numberline {3.1}Hilbert expansion}{26}{section.3.1}
+\contentsline {section}{\numberline {3.2}Chapman-Enskog expansion}{27}{section.3.2}
+\contentsline {subsubsection}{\numberline {3.2.0.1}Expansion in Sonine polynomials}{29}{subsubsection.3.2.0.1}
+\contentsline {subsubsection}{\numberline {3.2.0.2}Expansion to the first-order}{30}{subsubsection.3.2.0.2}
+\contentsline {subsubsection}{\numberline {3.2.0.3}Expansion to higher-orders}{32}{subsubsection.3.2.0.3}
+\contentsline {subsubsection}{\numberline {3.2.0.4}Problems of Chapman-Enskog expansion}{32}{subsubsection.3.2.0.4}
+\contentsline {section}{\numberline {3.3}Moment methods}{32}{section.3.3}
+\contentsline {section}{\numberline {3.4}Accuracy of macroscopic equations}{34}{section.3.4}
+\contentsline {subsubsection}{\numberline {3.4.0.1}Equations from Chapman-Enskog expansion}{35}{subsubsection.3.4.0.1}
+\contentsline {subsubsection}{\numberline {3.4.0.2}Moment equations}{36}{subsubsection.3.4.0.2}
+\contentsline {subsubsection}{\numberline {3.4.0.3}Discussions}{38}{subsubsection.3.4.0.3}
+\contentsline {section}{\numberline {3.5}Convergence speed of moment equations}{40}{section.3.5}
+\contentsline {chapter}{\numberline {第4章}快速谱方法}{44}{chapter.4}
+\contentsline {section}{\numberline {4.1}Inverse design of collision kernel}{44}{section.4.1}
+\contentsline {subsection}{\numberline {4.1.1}Power-law potential}{44}{subsection.4.1.1}
+\contentsline {subsection}{\numberline {4.1.2}Lennard-Jones potential}{46}{subsection.4.1.2}
+\contentsline {section}{\numberline {4.2}Normalization}{47}{section.4.2}
+\contentsline {section}{\numberline {4.3}Fast spectral method}{48}{section.4.3}
+\contentsline {subsection}{\numberline {4.3.1}Carleman representation}{49}{subsection.4.3.1}
+\contentsline {subsection}{\numberline {4.3.2}Fourier-Galerkin spectral method}{50}{subsection.4.3.2}
+\contentsline {subsection}{\numberline {4.3.3}Detailed implementation}{54}{subsection.4.3.3}
+\contentsline {subsubsection}{\numberline {4.3.3.1}Conservation enforcement}{56}{subsubsection.4.3.3.1}
+\contentsline {subsection}{\numberline {4.3.4}Non-uniform discretization of velocity space}{56}{subsection.4.3.4}
+\contentsline {section}{\numberline {4.4}Accuracy in homogeneous relaxation}{57}{section.4.4}
+\contentsline {subsection}{\numberline {4.4.1}Bobylev-Krook-Wu solution}{57}{subsection.4.4.1}
+\contentsline {subsection}{\numberline {4.4.2}Discontinuous velocity distribution function}{60}{subsection.4.4.2}
+\contentsline {section}{\numberline {4.5}Accuracy in inhomogeneous problems}{62}{section.4.5}
+\contentsline {subsection}{\numberline {4.5.1}Normal shock waves}{62}{subsection.4.5.1}
+\contentsline {subsubsection}{\numberline {4.5.1.1}Hard-sphere potential}{63}{subsubsection.4.5.1.1}
+\contentsline {subsubsection}{\numberline {4.5.1.2}Lennard-Jones potential}{64}{subsubsection.4.5.1.2}
+\contentsline {subsection}{\numberline {4.5.2}Force-driven Poiseuille flows}{64}{subsection.4.5.2}
+\contentsline {subsection}{\numberline {4.5.3}Thermal transpiration}{65}{subsection.4.5.3}
+\contentsline {section}{\numberline {4.6}Linearization}{68}{section.4.6}
+\contentsline {subsection}{\numberline {4.6.1}Lennard-Jones potential}{70}{subsection.4.6.1}
+\contentsline {subsection}{\numberline {4.6.2}Accurate transport coefficients}{71}{subsection.4.6.2}
+\contentsline {subsection}{\numberline {4.6.3}Poiseuille flow}{72}{subsection.4.6.3}
+\contentsline {section}{\numberline {4.7}Concluding remarks}{73}{section.4.7}
+\contentsline {chapter}{\numberline {第5章}单原子气体的简化动理论模型}{74}{chapter.5}
+\contentsline {section}{\numberline {5.1}模型方程}{74}{section.5.1}
+\contentsline {subsection}{\numberline {5.1.1}BGK 模型}{74}{subsection.5.1.1}
+\contentsline {subsection}{\numberline {5.1.2}ES-BGK 模型}{75}{subsection.5.1.2}
+\contentsline {subsection}{\numberline {5.1.3}Shakhov 模型}{76}{subsection.5.1.3}
+\contentsline {subsection}{\numberline {5.1.4}Gross-Jackson 模型及其非线性化}{76}{subsection.5.1.4}
+\contentsline {chapter}{\numberline {第6章}合成迭代加速算法}{79}{chapter.6}
+\contentsline {section}{\numberline {6.1}Problems of CIS}{79}{section.6.1}
+\contentsline {subsection}{\numberline {6.1.1}Slow convergence}{79}{subsection.6.1.1}
+\contentsline {subsection}{\numberline {6.1.2}False convergence}{81}{subsection.6.1.2}
+\contentsline {section}{\numberline {6.2}General synthetic iterative scheme}{82}{section.6.2}
+\contentsline {subsection}{\numberline {6.2.1}Scheme-I GSIS}{83}{subsection.6.2.1}
+\contentsline {subsection}{\numberline {6.2.2}Scheme-II GSIS}{85}{subsection.6.2.2}
+\contentsline {section}{\numberline {6.3}Properties of GSIS}{85}{section.6.3}
+\contentsline {subsection}{\numberline {6.3.1}Super convergence}{85}{subsection.6.3.1}
+\contentsline {subsection}{\numberline {6.3.2}Asymptotic preserving}{87}{subsection.6.3.2}
+\contentsline {subsubsection}{\numberline {6.3.2.1}Scheme I}{88}{subsubsection.6.3.2.1}
+\contentsline {subsubsection}{\numberline {6.3.2.2}Scheme II}{88}{subsubsection.6.3.2.2}
+\contentsline {section}{\numberline {6.4}Numerical tests}{88}{section.6.4}
+\contentsline {subsection}{\numberline {6.4.1}Coherent Rayleigh-Brillouin scattering}{89}{subsection.6.4.1}
+\contentsline {subsection}{\numberline {6.4.2}Planar Fourier flow}{91}{subsection.6.4.2}
+\contentsline {subsection}{\numberline {6.4.3}Couette flow between eccentric cylinders}{94}{subsection.6.4.3}
+\contentsline {section}{\numberline {6.5}Concluding remarks and Outlooks}{95}{section.6.5}
+\contentsline {chapter}{\numberline {第7章}Couette流动}{97}{chapter.7}
+\contentsline {section}{\numberline {7.1}Planar Couette flow}{97}{section.7.1}
+\contentsline {section}{\numberline {7.2}Viscous slip}{97}{section.7.2}
+\contentsline {subsection}{\numberline {7.2.1}Viscous slip coefficient}{98}{subsection.7.2.1}
+\contentsline {subsection}{\numberline {7.2.2}Knudsen layer function }{99}{subsection.7.2.2}
+\contentsline {subsubsection}{\numberline {7.2.2.1}Influence of intermolecular potential}{100}{subsubsection.7.2.2.1}
+\contentsline {subsubsection}{\numberline {7.2.2.2}Influence of boundary condition}{102}{subsubsection.7.2.2.2}
+\contentsline {subsubsection}{\numberline {7.2.2.3}Similarity in Knudsen layer function}{102}{subsubsection.7.2.2.3}
+\contentsline {subsection}{\numberline {7.2.3}Comparison with experiments}{103}{subsection.7.2.3}
+\contentsline {section}{\numberline {7.3}Planar Fourier flows}{106}{section.7.3}
+\contentsline {section}{\numberline {7.4}Thermal transpiration}{106}{section.7.4}
+\contentsline {section}{\numberline {7.5}Poiseuille flow }{108}{section.7.5}
+\contentsline {subsubsection}{\numberline {7.5.0.1}Poiseuille flow between parallel plates}{109}{subsubsection.7.5.0.1}
+\contentsline {subsubsection}{\numberline {7.5.0.2}Poiseuille flow through a long duct}{111}{subsubsection.7.5.0.2}
+\contentsline {subsection}{\numberline {7.5.1}Onsager-Casimir relation}{112}{subsection.7.5.1}
+\contentsline {section}{\numberline {7.6}Influence of intermolecular potential}{113}{section.7.6}
+\contentsline {section}{\numberline {7.7}Cercignani-Lampis boundary condition}{113}{section.7.7}
+\contentsline {subsection}{\numberline {7.7.1}Poiseuille flow through parallel plates}{113}{subsection.7.7.1}
+\contentsline {subsection}{\numberline {7.7.2}Poiseuille flow through long tube}{115}{subsection.7.7.2}
+\contentsline {chapter}{\numberline {第8章}分子气体的简化动理论模型}{119}{chapter.8}
+\contentsline {section}{\numberline {8.1}分子气体的特性}{119}{section.8.1}
+\contentsline {subsection}{\numberline {8.1.1}体积粘性}{121}{subsection.8.1.1}
+\contentsline {subsection}{\numberline {8.1.2}热导率}{122}{subsection.8.1.2}
+\contentsline {subsection}{\numberline {8.1.3}DSMC中的热弛豫速率}{124}{subsection.8.1.3}
+\contentsline {section}{\numberline {8.2}分子气体的动理论模型及精度}{126}{section.8.2}
+\contentsline {subsection}{\numberline {8.2.1}Hanson-Morse线性化 模型}{127}{subsection.8.2.1}
+\contentsline {subsection}{\numberline {8.2.2}Hanson-Morse模型的约化及非线性化}{129}{subsection.8.2.2}
+\contentsline {subsection}{\numberline {8.2.3}非线性模型}{131}{subsection.8.2.3}
+\contentsline {subsubsection}{\numberline {8.2.3.1}Rykov 模型}{131}{subsubsection.8.2.3.1}
+\contentsline {subsubsection}{\numberline {8.2.3.2}ES-BGK 模型}{132}{subsubsection.8.2.3.2}
+\contentsline {subsubsection}{\numberline {8.2.3.3}吴模型}{133}{subsubsection.8.2.3.3}
+\contentsline {subsection}{\numberline {8.2.4}模型方程精度比较}{134}{subsection.8.2.4}
+\contentsline {subsubsection}{\numberline {8.2.4.1}正激波}{136}{subsubsection.8.2.4.1}
+\contentsline {subsubsection}{\numberline {8.2.4.2}库特 流动}{136}{subsubsection.8.2.4.2}
+\contentsline {subsubsection}{\numberline {8.2.4.3}麦克斯韦妖驱动的微流动}{137}{subsubsection.8.2.4.3}
+\contentsline {subsubsection}{\numberline {8.2.4.4}封闭方腔中的热蠕动}{137}{subsubsection.8.2.4.4}
+\contentsline {section}{\numberline {8.3}热弛豫速率不确定度量化}{138}{section.8.3}
+\contentsline {subsection}{\numberline {8.3.1}正激波}{138}{subsection.8.3.1}
+\contentsline {subsection}{\numberline {8.3.2}麦克斯韦 妖驱动的微流动}{139}{subsection.8.3.2}
+\contentsline {section}{\numberline {8.4}确定热流弛豫速率的方法}{140}{section.8.4}
+\contentsline {subsection}{\numberline {8.4.1}分子动力学模拟}{140}{subsection.8.4.1}
+\contentsline {subsection}{\numberline {8.4.2}瑞利-布里渊散射}{141}{subsection.8.4.2}
+\contentsline {subsection}{\numberline {8.4.3}氮气分子的体积粘性与Eucken因子}{142}{subsection.8.4.3}
+\contentsline {subsection}{\numberline {8.4.4}Bulk viscosity and Eucken factor of $\operatorname {N_2}$}{142}{subsection.8.4.4}
+\contentsline {section}{\numberline {8.5}总结与展望}{144}{section.8.5}
+\contentsline {chapter}{\numberline {第9章}Slip and Jump Coefficients}{152}{chapter.9}
+\contentsline {section}{\numberline {9.1}State of the problem}{152}{section.9.1}
+\contentsline {section}{\numberline {9.2}Thermal slip}{153}{section.9.2}
+\contentsline {subsection}{\numberline {9.2.1}Thermal slip coefficient}{153}{subsection.9.2.1}
+\contentsline {subsection}{\numberline {9.2.2}Knudsen layer function}{156}{subsection.9.2.2}
+\contentsline {subsection}{\numberline {9.2.3}Molecular gases}{157}{subsection.9.2.3}
+\contentsline {subsection}{\numberline {9.2.4}Comparison with experiments}{159}{subsection.9.2.4}
+\contentsline {subsubsection}{\numberline {9.2.4.1}Air}{160}{subsubsection.9.2.4.1}
+\contentsline {subsubsection}{\numberline {9.2.4.2}Carbon dioxide}{161}{subsubsection.9.2.4.2}
+\contentsline {section}{\numberline {9.3}Temperature jump}{162}{section.9.3}
+\contentsline {subsubsection}{\numberline {9.3.0.1}Influence of intermolecular potential}{162}{subsubsection.9.3.0.1}
+\contentsline {subsubsection}{\numberline {9.3.0.2}Influence of rotational collision number}{163}{subsubsection.9.3.0.2}
+\contentsline {subsubsection}{\numberline {9.3.0.3}Influence of thermal relaxation}{164}{subsubsection.9.3.0.3}
+\setcounter {tocdepth}{0}
+\contentsline {chapter}{参考文献}{167}{section*.82}
+\setcounter {tocdepth}{0}
+\contentsfinish 

@@ -1,0 +1,75 @@
+\chapter{Implementation of FSM}
+\label{appen1}
+
+Algorithm 1: calculation of the collision operator by the zero-padding technique
+\vskip 0.5cm
+\fbox{
+\parbox{13.2cm}{
+\begin{description}
+    \item[step 1.]  \hskip 0.5cm              $\hat{f}=\operatorname{FFTSHIFT}\{\operatorname{IFFT}[\operatorname{FFTSHIFT}(f)]\} $
+    \item[step 2.]  \hskip 0.5cm              $\hat{Q}^+=0$
+    \item[\ \ \ \ \ \ \ \ \ ]  \hskip 0.5cm   For $\theta_p=(1,2,\cdots,M-1)\pi/M$ and $\varphi_q=(1,2,\cdots,M)\pi/M$
+    \item[\ \ \ \ \ \ \ \ \ ]  \hskip 1.5cm   $t_1=\hat{f}\cdot\phi_{\alpha+\gamma}(\xi_l,\theta_p,\varphi_q)$;  $t_2=\hat{f}\cdot\psi_{\gamma}(\xi_m,\theta_p,\varphi_q)$
+    \item[\ \ \ \ \ \ \ \ \ ]  \hskip 1.5cm   zero-padding $t_1, t_2$ to the dimension $\ge{}\frac{3N_1}{2}\times{}\frac{3N_2}{2}\times{}\frac{3N_3}{2}$
+    \item[\ \ \ \ \ \ \ \ \ ]  \hskip 1.5cm   $\hat{Q}^{+}=\hat{Q}^{+}+\operatorname{FFT}(t_1)\cdot    \operatorname{FFT}(t_2)\cdot\sin\theta_p    $
+    \item[\ \ \ \ \ \ \ \ \ ]  \hskip 0.5cm   End
+    \item[step 3.]  \hskip 0.5cm              $t_1=\hat{f}$; $t_2=\hat{f}\cdot\phi_{loss}$
+    \item[\ \ \ \ \ \ \ \ \ ]  \hskip 0.5cm   zero-padding $t_1,
+    t_2$ to the dimension $\ge{}\frac{3N_1}{2}\times{}\frac{3N_2}{2}\times{}\frac{3N_3}{2}$
+    \item[\ \ \ \ \ \ \ \ \ ]  \hskip 0.5cm   $\hat{Q}^{-}=\operatorname{FFT}(t_1)\cdot    \operatorname{FFT}(t_2)$
+    \item[step 4.]  \hskip 0.5cm             $\hat{Q}=\operatorname{IFFT}(\hat{Q}^{+}-\hat{Q}^{-})$;
+           delete the
+    redundant data in $\hat{Q}$
+    \item[step 5.]  \hskip 0.5cm     $Q=({4\pi^2}/{\operatorname{Kn}'M^2})\operatorname{FFTSHIFT}\{ \Re[\operatorname{FFT}[\operatorname{FFTSHIFT}(\hat{Q})]]\}$
+   \end{description}
+  }
+}
+
+
+\newpage
+
+Algorithm 2: simpler and faster calculation of the collision operator
+\vskip 0.5cm
+\fbox{
+\parbox{13.2cm}{
+\begin{description}
+    \item[step 1.]  \hskip 0.5cm              $\hat{f}=\operatorname{FFTSHIFT}\{\operatorname{IFFT}[\operatorname{FFTSHIFT}(f)]\} $
+    \item[step 2.]  \hskip 0.5cm              ${Q}^+=0$
+    \item[\ \ \ \ \ \ \ \ \ ]  \hskip 0.5cm   For $\theta_p=(1,2,\cdots,M-1)\pi/M$ and $\varphi_q=(1,2,\cdots,M)\pi/M$
+    \item[\ \ \ \ \ \ \ \ \ ]  \hskip 1.0cm   ${Q}^{+}={Q}^{+}+\operatorname{FFT}[\hat{f}\cdot\phi_{\alpha+\gamma}(\xi_l,\theta_p,\varphi_q)]\cdot
+    \operatorname{FFT}[\hat{f}\cdot\psi_{\gamma}(\xi_m,\theta_p,\varphi_q)]\cdot\sin\theta_p    $
+    \item[\ \ \ \ \ \ \ \ \ ]  \hskip 0.5cm   End
+   \item[\ \ \ \ \ \ \ \ \ ]  \hskip 0.5cm   $Q^{+}=({4\pi^2}/{\operatorname{Kn}'M^2})\operatorname{FFTSHIFT}[\Re({Q}^{+})]$
+    \item[step 3.]  \hskip 0.5cm             $\nu=({4\pi^2}/{\operatorname{Kn}'M^2})\operatorname{FFTSHIFT\{\Re[\operatorname{FFT}[\operatorname{FFTSHIFT}(\hat{f}\cdot\phi_{loss})]]\}}$
+    \item[\ \ \ \ \ \ \ \ \ ]  \hskip 0.5cm             $Q^{-}=\nu{}f$
+    \item[step 4.]  \hskip 0.5cm             $Q=Q^{+}-Q^{-} $
+       \end{description}
+  }
+}
+\vskip 1cm
+
+
+Algorithm 3: accurate calculation of the collision frequency technique
+\vskip 0.5cm
+\fbox{
+\parbox{13cm}{
+\begin{description}
+     \item[\hskip 0.5cm ]
+    \item[step 1.]  \hskip 0.5cm           get $\phi^{ex}_{loss}$  from Eq.~\eqref{phi_loss}  with $L^{ex}=2L$ and $R^{ex}=\sqrt{2}L$
+    \item[step 2.]  \hskip 0.5cm               create a zero-value array $f^{ex}$ of
+    size $2N_1\times{2N_2}\times{2N_3}$
+    \item[step 3.]  \hskip 0.5cm  copy the value of $f$ to the middle of $f^{ex}$
+    \item[step 4.]  \hskip 0.5cm              $\hat{f}^{ex}=\operatorname{FFTSHIFT}\{\operatorname{FFT}[\operatorname{FFTSHIFT}(f^{ex})]\} $
+    \item[step 5.]  \hskip 0.5cm             $\nu^{ex}=({4\pi^2}/{\operatorname{Kn}'M^2})\operatorname{FFTSHIFT\{\Re[\operatorname{IFFT}
+                                              [\operatorname{FFTSHIFT}(\hat{f}^{ex}\cdot\phi^{ex}_{loss})]]\}}$
+    \item[step 6.]  \hskip 0.5cm             copy the middle region value of $\nu^{ex}$ to $\nu$.
+\end{description}
+  }
+}\\
+
+
+
+Note: FFTSHIFT represents the Matlab function that shifts the zero-frequency component to the center of
+    spectrum, IFFT is the inverse FFT, and
+    the function $\Re$ gets the real parts of
+    complex numbers.

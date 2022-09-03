@@ -1,0 +1,876 @@
+\begin{thebibliography}{100}
+
+\bibitem{DSA2002}
+M.~L. Adams and E.~W. Larsen.
+\newblock Fast iterative methods for discrete-ordinates particle transport
+  calculations.
+\newblock {\em Progr. Nucl. Energy}, 40:3--159, 2002.
+
+\bibitem{Alsmeyer1976JFM}
+A.~Alsmeyer.
+\newblock Density profiles in argon and nitrogen shock waves measured by the
+  absorption of an electron beam.
+\newblock {\em J. Fluid Mech.}, 74:497--513, 1976.
+
+\bibitem{Ambrus2012PRE}
+V.~E. Ambru\c{s} and V.~Sofonea.
+\newblock {High-order thermal lattice Boltzmann models derived by means of
+  Gauss quadrature in the spherical coordinate system}.
+\newblock {\em Phys. Rev. E}, 86:016708, 2012.
+
+\bibitem{annis1972thermal}
+B.~K. Annis.
+\newblock Thermal creep in gases.
+\newblock {\em The Journal of Chemical Physics}, 57(7):2898--2905, 1972.
+
+\bibitem{arney1962addendum}
+G.~D. Arney and A.~B. Bailey.
+\newblock An investigation of the equilibrium pressure along unequally heated
+  tubes.
+\newblock Technical report, Arnold Engineering Development Center Arnold Air
+  Force Station TENN, 1962.
+
+\bibitem{Beylich2000}
+A.~A. Beylich.
+\newblock An interlaced system for {Nitrogen} gas.
+\newblock In {\em Proceedings of CECAM Workshop}, 2000.
+
+\bibitem{Bhatnagar1954}
+P.~L. Bhatnagar, E.~P. Gross, and M.~Krook.
+\newblock A model for collision processes in gases. {I}. {S}mall amplitude
+  processes in charged and neutral one-component systems.
+\newblock {\em Phys. Rev.}, 94:511--525, 1954.
+
+\bibitem{bhatnagar1954model}
+P.~L. Bhatnagar, E.~P. Gross, and M.~Krook.
+\newblock A model for collision processes in gases. {I}. {Small} amplitude
+  processes in charged and neutral one-component systems.
+\newblock {\em Phys. Rev.}, 94:511, 1954.
+
+\bibitem{Bird1994}
+G.~A. Bird.
+\newblock {\em Molecular Gas Dynamics and the Direct Simulation of Gas Flows}.
+\newblock Oxford Science Publications, Oxford University Press Inc, New York,
+  1994.
+
+\bibitem{Bobylev2006}
+A.~V. Bobylev.
+\newblock Instabilities in the {Chapman-Enskog expansion and hyperbolic Burnett
+  equations}.
+\newblock {\em J. Stat. Phys.}, 124:371--399, 2006.
+
+\bibitem{Boley1972CanJPhys}
+C.~D. Boley, R.~C. Desai, and G.~Tenti.
+\newblock Kinetic models and {Brillouin} scattering in a moleular gas.
+\newblock {\em Can. J. Phys.}, 50:2158--2172, 1972.
+
+\bibitem{Borgnakke1975}
+C.~Borgnakke and P.~Larsen.
+\newblock {Statistical collision model for Monte Carlo simulation of polyatomic
+  gas mixture}.
+\newblock {\em J. Comput. Phys.}, 18(4):405--420, 1975.
+
+\bibitem{Boyd1991PoFA}
+I.~D. Boyd.
+\newblock Rotational-translational energy transfer in rarefied nonequilibrium
+  flows.
+\newblock {\em Phys. Fluids A}, 2:447, 1990.
+
+\bibitem{Bruno2015PoF}
+D.~Bruno, A.~Frezzotti, and G.~P. Ghiroldi.
+\newblock Oxygen transport properties estimation by classical
+  trajectory--direct simulation {Monte C}arlo.
+\newblock {\em Phys. Fluids}, 27:057101, 2015.
+
+\bibitem{Cai2010Siam}
+Z.~N. Cai and R.~Li.
+\newblock Numerical regularized moment method of arbitrary order for
+  {Boltzmann-BGK} equation.
+\newblock {\em {SIAM J. Scientific Computing}}, 32:2875--2907, 2010.
+
+\bibitem{Canuto1998}
+C.~Canuto, M.~Y. Hussaini, and A.~Quarteroni.
+\newblock {\em {Spectral Method in Fluid Dynamics}}.
+\newblock Springer-verlag, 1998.
+
+\bibitem{Cercignanibook1988}
+C.~Cercignani.
+\newblock {\em The Boltzmann Equation and its Applications}.
+\newblock Springer-Verlag, New York, 1988.
+
+\bibitem{Cercignani1990}
+C.~Cercignani.
+\newblock {\em Mathematical Methods in Kinetic Theory}.
+\newblock Plenum Publishing Inc., 223 Spring Street, New York, N.Y. 10013,
+  1990.
+
+\bibitem{Chapman1916}
+S.~Chapman.
+\newblock On the law of distribution of molecular velocities, and the theory of
+  viscosity and thermal conduction, in a non-uniform simple monatomic gas.
+\newblock {\em Phil. Trans. R. Soc. A}, 216:538--548, 1916.
+
+\bibitem{CE}
+S.~Chapman and T.G. Cowling.
+\newblock {\em {The Mathematical Theory of Non-uniform Gases}}.
+\newblock Cambridge University Press, 1970.
+
+\bibitem{Doi2010}
+T.~Doi.
+\newblock {Numerical analysis of the Poiseuille flow and thermal transpiration
+  of a rarefied gas through a pipe with a rectangular cross section based on
+  the linearized Boltzmann equation for a hard sphere molecular gas}.
+\newblock {\em J. Vac. Sci. Technol. A}, 28:603--612, 2010.
+
+\bibitem{enskog1917}
+D.~Enskog.
+\newblock {\em Kinetische Theorie der Vorg{\"a}nge in m{\"a}ssig verd{\"u}nnten
+  Gasen}.
+\newblock Uppsala University, Sweden, 1917.
+
+\bibitem{Ewart2007}
+T.~Ewart, P.~Perrier, I.~A. Graur, and J.~G. M\'{e}olans.
+\newblock Mass flow rate measurements in a microchannel, from hydrodynamic to
+  near free molecular regimes.
+\newblock {\em J. Fluid Mech.}, 584:337--356, 2007.
+
+\bibitem{Fan2002}
+J.~Fan.
+\newblock {A generalized soft-sphere model for Monte Carlo simulation}.
+\newblock {\em Phys. Fluids}, {14}({12}):{4399--4405}, {2002}.
+
+\bibitem{variational}
+J.~H. Ferziger and H.~G. Kaper.
+\newblock {\em Mathematical Theory of Transport Processes in Gases}.
+\newblock North-Holland Publishing Company, Amsterdam, 1972.
+
+\bibitem{Filbet2006}
+F.~Filbet, C.~Mouhot, and L.~Pareschi.
+\newblock {Solving the Boltzmann equation in NlogN}.
+\newblock {\em {SIAM J. Scientific Computing}}, {28}({3}):1029--1053, {2006}.
+
+\bibitem{Gad-el-Hak1999}
+M.~Gad{\--}el{\--}Hak.
+\newblock The fluid mechanics of microdevices - the {F}reeman {S}cholar
+  {l}ecture.
+\newblock {\em J. Fluids Eng.}, 121(1):5--33, 1999.
+
+\bibitem{Gamba2009}
+I.~M. Gamba and S.~H. Tharkabhushanam.
+\newblock {Spectral-Lagrangian methods for collisional models of
+  non-equilibrium statistical states}.
+\newblock {\em J. Comput. Phys.}, {228}({6}):{2012--2036}, {2009}.
+
+\bibitem{Colin2008}
+L.~S. Garcia-Colin, R.~M. Velasco, and F.~J. Uribe.
+\newblock Beyond the {Navier-Stokes} equations: {Burnett} hydrodynamics.
+\newblock {\em Phys. Rep.}, 465:149--189, 2008.
+
+\bibitem{Lavin2002PoF}
+N.~E. Gimelshein, S.~F. Gimelshein, and D.~A. Lavin.
+\newblock {Vibrational relaxation rates in the direct simulation Monte Carlo
+  method}.
+\newblock {\em Phys. Fluids}, 14:4452, 2002.
+
+\bibitem{Gorji2013}
+M.~H. Gorji and P.~Jenny.
+\newblock A {Fokker-Planck} based kinetic model for diatomic rarefied gas
+  flows.
+\newblock {\em Phys. Fluids}, 25:062002, 2013.
+
+\bibitem{Gorji2011}
+M.~H. Gorji, M.~Torrilhon, and P.~Jenny.
+\newblock {Fokker-Planck model for computational studies of monatomic rarefied
+  gas flows}.
+\newblock {\em J. Fluid Mech.}, 680:574--601, 2011.
+
+\bibitem{Grad1949}
+H.~Grad.
+\newblock On the kinetic theory of rarefied gases.
+\newblock {\em Comm. Pure Appl. Math.}, 2:331--407, 1949.
+
+\bibitem{Green1954}
+M.~S. Green.
+\newblock Markoff random processes and the statistical mechanics of
+  time-dependent phenomena. ii. irreversible processes in fluids.
+\newblock {\em The Journal of Chemical Physics}, 22:398--413, 1954.
+
+\bibitem{Gressman2010}
+P.~T. Gressman and R.~M. Strain.
+\newblock {Global classical solutions of the Boltzmann equation with long-range
+  interactions}.
+\newblock {\em Proc. Natl. Acad. Sci. U.S.A}, {107}({13}):{5744--5749}, {2010}.
+
+\bibitem{Greytak1966PRL}
+T.~J. Greytak and G.~B. Benedek.
+\newblock Spectrum of light scattered from thermal fluctuations in gases.
+\newblock {\em Phys. Rev. Lett.}, 17:179--182, 1966.
+
+\bibitem{GrossJackson1959}
+E.~P. Gross and E.~A. Jackson.
+\newblock Kinetic models and the linearized {B}oltzmann equation.
+\newblock {\em Phys. Fluids}, 2(4):432--441, 1959.
+
+\bibitem{Gu2009JFM}
+X.~J. Gu and D.~R. Emerson.
+\newblock A high-order moment approach for capturing non-equilibrium phenomena
+  in the transition regime.
+\newblock {\em J. Fluid Mech.}, 636:177--216, 2009.
+
+\bibitem{guziyu}
+Z.~Gu and W.~Ubachs.
+\newblock {Temperature-dependent bulk viscosity of nitrogen gas determined from
+  spontaneous Rayleigh-Brillouin scattering}.
+\newblock {\em Opt. Lett.}, 38(7):1110, 2013.
+
+\bibitem{guo2013discrete}
+Z.~L. Guo, K.~Xu, and R.~J. Wang.
+\newblock Discrete unified gas kinetic scheme for all {K}nudsen number flows:
+  Low-speed isothermal case.
+\newblock {\em Physical Review E}, 88:033305, 2013.
+
+\bibitem{gupta1970analysis}
+A.~D. Gupta and T.~S. Storvick.
+\newblock Analysis of the heat conductivity data for polar and nonpolar gases
+  using thermal transpiration measurements.
+\newblock {\em J. Chem. Phys.}, 52(2):742--749, 1970.
+
+\bibitem{Haas1994}
+B.~L. Haas, D.~B. Hash, G.~A. Bird, F.~E. {Lumpkin III}, and H.~A. Hassan.
+\newblock Rates of thermal relaxation in direct simulation {Monte Carlo}
+  methods.
+\newblock {\em Phys. Fluids}, 6:2191, 1994.
+
+\bibitem{Hanson1967PoF}
+F.~B. Hanson and T.~F. Morse.
+\newblock Kinetic models for a gas with internal structure.
+\newblock {\em Phys. Fluids}, 10:345, 1967.
+
+\bibitem{Hassan1993}
+H.~A. Hassan and D.~B. Hash.
+\newblock A generalized hard-sphere model for {M}onte-{C}arlo simulation.
+\newblock {\em Phys. Fluids A: Fluid Dynamics}, {5}({3}):{738--744}, {1993}.
+
+\bibitem{Hilbert1902}
+D.~Hilbert.
+\newblock Mathematical problems.
+\newblock {\em Bull. Am. Math. Soc.}, 8:437--479, 1902.
+
+\bibitem{Hilbert1912}
+D.~Hilbert.
+\newblock Begrundung der kinetische gastheorie.
+\newblock {\em Math. Ann.}, 72:562--577, 1912.
+
+\bibitem{Hu2012}
+J.~W. Hu and L.~X. Ying.
+\newblock {A fast spectral algorithm for the quantum Boltzmann collision
+  operator}.
+\newblock {\em Commun. Math. Sci}, {10}({3}):{989--999}, {2012}.
+
+\bibitem{Jaeger2018JCP}
+F.~Jaeger, O.~K. Matar, and E.~A. Muller.
+\newblock Bulk viscosity of molecular fluids.
+\newblock {\em J. Chem. Phys.}, 148:174504, 2018.
+
+\bibitem{Jiang2016JCP}
+S.~Jiang and L.~S. Luo.
+\newblock {Analysis and accurate numerical solutions of the integral equation
+  derived from the linearized {BGKW} equation for the steady {Couette} flow}.
+\newblock {\em J. Comput. Phys.}, 316:416--434, 2016.
+
+\bibitem{Beskok_book}
+G.~Karniadakis, A.~Beskok, and N.~R. Aluru.
+\newblock {\em {Microflows and Manoflows: Fundamentals and Simulations}}.
+\newblock Springer, New York, 2005.
+
+\bibitem{Kennard1938}
+E.~Kennard.
+\newblock {\em Kinetic Theory of Gases}.
+\newblock McGraw-Hill Book Company, Inc., New York and London, 1938.
+
+\bibitem{Kowalczyk2008}
+P.~Kowalczyk, A.~Palczewski, G.~Russo, and Z.~Walenta.
+\newblock {Numerical solutions of the Boltzmann equation: comparison of
+  different algorithms}.
+\newblock {\em Eur. J. Mech.B/Fluids}, {27}({1}):{62--74}, {2008}.
+
+\bibitem{Kremer2009book}
+G.~M. Kremer.
+\newblock {\em {An Introduction to the Boltzmann Equation and Transport
+  Processes in Gases}}.
+\newblock Springer, 2009.
+
+\bibitem{BKW}
+M.~Krook and T.~T. Wu.
+\newblock Exact solutions of the {B}oltzmann equation.
+\newblock {\em Phys. Fluids}, 20:1589, 1977.
+
+\bibitem{Kubo1957Japan}
+R.~Kubo.
+\newblock Statistical-mechanical theory of irreversible processes. i. general
+  theory and simple applications to magnetic and conduction problems.
+\newblock {\em Journal of the Physical Society of Japan.}, 12:570--586, 1957.
+
+\bibitem{Lambert1977}
+L.~Lambert.
+\newblock {\em {Vibrational and Rotational Relaxation in Gases}}.
+\newblock Clarendon, 1977.
+
+\bibitem{leontidis2014numerical}
+V.~Leontidis, J.~Chen, L.~Baldas, and S.~Colin.
+\newblock Numerical design of a {Knudsen} pump with curved channels operating
+  in the slip flow regime.
+\newblock {\em Heat and Mass Transfer}, 50:1065--1080, 2014.
+
+\bibitem{Li2021JFM}
+Q.~Li, J.~N. Zeng, W.~Su, and L.~Wu.
+\newblock Uncertainty quantification in rarefied dynamics of molecular gas:
+  rate effect of thermal relaxation.
+\newblock {\em J. Fluid Mech.}, 917:338, 2021.
+
+\bibitem{Lihnaropoulos2007}
+J.~Lihnaropoulos, S.~Naris, and D.~Valougeorgis.
+\newblock Formulation and stability analysis of rapidly convergent iteration
+  schemes for the 2‐{D} linearized {BGK} equation.
+\newblock {\em Transport Theory and Statistical Physics}, 36(4-6):513--528,
+  2007.
+
+\bibitem{lilley2007velocity}
+C.~R. Lilley and J.~E. Sader.
+\newblock Velocity gradient singularity and structure of the velocity profile
+  in the {Knudsen} layer according to the {B}oltzmann equation.
+\newblock {\em Phys. Rev. E}, 76:026315, 2007.
+
+\bibitem{lilley2008velocity}
+C.~R. Lilley and J.~E. Sader.
+\newblock Velocity profile in the {Knudsen} layer according to the {B}oltzmann
+  equation.
+\newblock {\em Proc. Royal Soc. A}, 464:2015--2035, 2008.
+
+\bibitem{Lin1972}
+J.~T. Lin and D.~R. Willis.
+\newblock Kinetic theory analysis of temperature jump in a polyatomic gas.
+\newblock {\em The Physics of Fluids}, 15(1):31--38, 1972.
+
+\bibitem{Liu2021Callway}
+J.~Liu and L.~Wu.
+\newblock {A fast-converging scheme for the Phonon Boltzmann equation with dual
+  relaxation times}.
+\newblock {\em arXiv}, page 2107.06688, 2021.
+
+\bibitem{lo1989flow}
+S.~S. Lo and S.~K. Loyalka.
+\newblock Flow of a rarefied polyatomic gas between parallel plates.
+\newblock {\em J. Vac. Sci. Technol. A: Vacuum, Surfaces, and Films},
+  7:2766--2773, 1989.
+
+\bibitem{lockerby2004velocity}
+D.~A. Lockerby, J.~M. Reese, D.~R. Emerson, and R.~W. Barber.
+\newblock Velocity boundary condition at solid walls in rarefied gas
+  calculations.
+\newblock {\em Physical Review E}, 70:017303, 2004.
+
+\bibitem{lockerby2005capturing}
+D.~A. Lockerby, J.~M. Reese, and M.~A. Gallis.
+\newblock Capturing the {Knudsen} layer in continuum-fluid models of
+  nonequilibrium gas flows.
+\newblock {\em AIAA Journal}, 43:1391--1393, 2005.
+
+\bibitem{loyalka1975velocity}
+S.~K. Loyalka.
+\newblock Velocity profile in the {Knudsen} layer for the {K}ramer's problem.
+\newblock {\em Phys. Fluids}, 18:1666--1669, 1975.
+
+\bibitem{Loyalka1979Polyatomic}
+S.~K. Loyalka and T.~S. Storvick.
+\newblock Kinetic theory of thermal transpiration and mechanocaloric effect.
+  iii. flow of a polyatomic gas between parallel plates.
+\newblock {\em J. Chem. Phys.}, 71:339--350, 1979.
+
+\bibitem{loyalka1982thermal}
+S.~K. Loyalka, T.~S. Storvick, and S.~S. Lo.
+\newblock {Thermal transpiration and mechanocaloric effect. IV. Flow of a
+  polyatomic gas in a cylindrical tube}.
+\newblock {\em J. Chem. Phys.}, 76(8):4157--4170, 1982.
+
+\bibitem{loyalka1976}
+S.~K. Loyalka, T.~S. Storvick, and H.~S. Park.
+\newblock Poiseuille flow and thermal creep flow in long, rectangular channels
+  in the molecular and transition flow regimes.
+\newblock {\em J. Vac. Sci. Technol.}, 13:1188, 1976.
+
+\bibitem{Marques1993}
+W.~{Marques~Jr} and G.~M. Kremer.
+\newblock Spectral distribution of scattered light in polyatomic gases.
+\newblock {\em Physica A}, 197:352--363, 1993.
+
+\bibitem{Mason1963JCP}
+E.~A. Mason.
+\newblock Molecular relaxation times from thermal transpiration measurements.
+\newblock {\em J. Chem. Phys.}, 39:522--526, 1963.
+
+\bibitem{Matsumoto2002}
+H.~Matsumoto.
+\newblock {Variable sphere molecular model for inverse power law and
+  Lennard-Jones potentials in Monte Carlo simulations}.
+\newblock {\em Phys. Fluids}, {14}({12}):{4256--4265}, {2002}.
+
+\bibitem{Maxwell1879vii}
+J.~C. Maxwell.
+\newblock {VII}. {On} stresses in rarified gases arising from inequalities of
+  temperature.
+\newblock {\em Proc. Royal Soc. Lond.}, 170:231--256, 1879.
+
+\bibitem{Meador1996PoF}
+W.~E. Meador, G.~A. Miner, and L.~W. Townsend.
+\newblock {Bulk viscosity as a relaxation parameter: Fact or fiction?}
+\newblock {\em Phys. Fluids}, 8:258, 1996.
+
+\bibitem{CRBS_JCP}
+A.~S. Meijer, A.~S. de~Wijn, M.~F.~E. Peters, N.~J. Dam, and W.~van~de Water.
+\newblock Coherent {Rayleigh-Brillouin} scattering measurements of bulk
+  viscosity of polar and nonpolar gases, and kinetic theory.
+\newblock {\em J. Chem. Phys.}, 133:164315, 2010.
+
+\bibitem{Meng2013JCP}
+J.~P. Meng, L.~Wu an~J.~M.~Reese, and Y.~H. Zhang.
+\newblock {Assessment of the ellipsoidal-statistical Bhatnagar--Gross--Krook
+  model for force-driven Poiseuille flows}.
+\newblock {\em J. Comput. Phys.}, 251:383--395, 2013.
+
+\bibitem{Mieussens2004}
+L.~Mieussens and H.~Struchtrup.
+\newblock {Numerical comparison of Bhatnagar-Gross-Krook models with proper
+  Prandtl number}.
+\newblock {\em Phys. Fluids}, 16(8):2297--2813, 2004.
+
+\bibitem{Morse1964}
+T.~F. Morse.
+\newblock Kinetic model for gases with internal degrees of freedom.
+\newblock {\em Phys. Fluids}, 7:159--169, 1964.
+
+\bibitem{Mouhot2006}
+C.~Mouhot and L.~Pareschi.
+\newblock {Fast algorithms for computing the Boltzmann collision operator}.
+\newblock {\em Math. Comput}, {75}({256}):{1833--1852}, {2006}.
+
+\bibitem{Naris_pof}
+S.~Naris and D.~Valougeorgis.
+\newblock {The driven cavity flow over the whole range of the Knudsen number}.
+\newblock {\em Phys. Fluids}, 17:097106, 2005.
+
+\bibitem{NARIS2004294}
+S.~Naris, D.~Valougeorgis, D.~Kalempa, and F.~Sharipov.
+\newblock Gaseous mixture flow between two parallel plates in the whole range
+  of the gas rarefaction.
+\newblock {\em Physica A: Statistical Mechanics and its Applications},
+  336:294--318, 2004.
+
+\bibitem{Naris2005Pof}
+S.~Naris, D.~Valougeorgis, D.~Kalempa, and F.~Sharipov.
+\newblock {Flow of gaseous mixtures through rectangular microchannels driven by
+  pressure, temperature, and concentration gradients}.
+\newblock {\em Phys. Fluids}, 17:100607, 2005.
+
+\bibitem{NARIS2004629}
+S.~Naris, D.~Valougeorgis, F.~Sharipov, and D.~Kalempa.
+\newblock Discrete velocity modelling of gaseous mixture flows in {MEMS}.
+\newblock {\em Superlattices and Microstructures}, 35:629--643, 2004.
+
+\bibitem{Ohwada1993}
+T.~Ohwada.
+\newblock Structure of normal shock-waves: Direct numerical analysis of the
+  {B}oltzmann equation for hard-sphere molecules.
+\newblock {\em Phys. Fluids A-Fluid Dynamics}, {5}({1}):{217--234}, {1993}.
+
+\bibitem{Ohwada_sone_1989}
+T.~Ohwada, Y.~Sone, and K~Aoki.
+\newblock {Numerical analysis of the Poiseuille and thermal transpiration flows
+  between two parallel plates on the basis of the Boltzmann equation for hard
+  sphere molecules}.
+\newblock {\em Phys. Fluids}, 1:2042, 1989.
+
+\bibitem{ohwada1989numerical}
+T.~Ohwada, Y.~Sone, and K.~Aoki.
+\newblock Numerical analysis of the shear and thermal creep flows of a rarefied
+  gas over a plane wall on the basis of the linearized {B}oltzmann equation for
+  hard-sphere molecules.
+\newblock {\em Phys. Fluids A}, 1:1588--1599, 1989.
+
+\bibitem{Pan2002}
+X.~Pan, M.~N. Shneider, and R.~B. Miles.
+\newblock {Coherent Rayleigh-Brillouin Scattering}.
+\newblock {\em Phys. Rev. Lett.}, 89(18):183001, 2002.
+
+\bibitem{Pan2004}
+X.~Pan, M.~N. Shneider, and R.~B. Miles.
+\newblock {Coherent Rayleigh-Brillouin scattering in molecular gases}.
+\newblock {\em Phys. Rev. A}, 69:033814, 2004.
+
+\bibitem{Pareschi2000}
+L.~Pareschi and G.~Russo.
+\newblock {Numerical solution of the Boltzmann equation I: Spectrally accurate
+  approximation of the collision operator}.
+\newblock {\em SIAM J. Numerical Analysis}, {37}({4}):{1217--1245}, {2000}.
+
+\bibitem{porodnov1978thermal}
+B.~T. Porodnov, A.~N. Kulev, and F.~T. Tuchvetov.
+\newblock Thermal transpiration in a circular capillary with a small
+  temperature difference.
+\newblock {\em J. Fluid Mech.}, 88:609--622, 1978.
+
+\bibitem{Radtke2011}
+G.~A. Radtke, N.~G. Hadjiconstantinou, and W.~Wagner.
+\newblock Low-noise {M}onte {C}arlo simulation of the variable hard sphere gas.
+\newblock {\em Phys. Fluids}, 23(3):030606, 2011.
+
+\bibitem{Rana2013}
+A.~Rana, M.~Torrilhon, and H.~Struchtrup.
+\newblock {A robust numerical method for the R13 equations of rarefied gas
+  dynamics: Application to lid driven cavity}.
+\newblock {\em J. Comput. Phys.}, 236:169--186, 2013.
+
+\bibitem{Reichl2016}
+L.~E. Reichl.
+\newblock {\em A Modern Course in Statistical Physics}.
+\newblock John Wiley \& Sons, 2016.
+
+\bibitem{reynolds1974velocity}
+M.~A. Reynolds, J.~J. Smolderen, and J.~F. Wendt.
+\newblock Velocity profile measurements in the {Knudsen} layer for the
+  {K}ramers problem.
+\newblock Technical report, In Proceedings of the Ninth International Symposium
+  of Rarefied Gas Dynamics, M. Becker and M. Fiebig, eds., Dfvlr-Press, 1974.
+
+\bibitem{Reynolds1879}
+O.~Reynolds.
+\newblock On certain dimensional properties of matter in the gaseous state.
+\newblock {\em Philos. Trans. R. Soc. Part 1}, 170:727--845, 1879.
+
+\bibitem{rojas2015new}
+M.~Rojas-C{\'a}rdenas, I.~Graur, P.~Perrier, and J.~G. M{\'e}olans.
+\newblock A new method to measure the thermal slip coefficient.
+\newblock {\em Int. J. Heat Mass Transfer}, 88:766--774, 2015.
+
+\bibitem{Rykov}
+V.~Rykov.
+\newblock A model kinetic equation for a gas with rotational degrees of
+  freedom.
+\newblock {\em Fluid Dyn.}, 10:959--966, 1975.
+
+\bibitem{Schotter1974}
+R.~Schotter.
+\newblock Rarefied gas acoustics in the noble gases.
+\newblock {\em Phys. Fluids}, 17:1163, 1974.
+
+\bibitem{Shakhov_S}
+E.~M. Shakhov.
+\newblock {Generalization of the Krook kinetic relaxation equation}.
+\newblock {\em Fluid Dyn.}, 3(5):95--96, 1968.
+
+\bibitem{Shan2006JFM}
+X.~W. Shan, X.~F. Yuan, and H.~D. Chen.
+\newblock {Kinetic theory representation of hydrodynamics: a way beyond the
+  Navier--Stokes equation}.
+\newblock {\em J. Fluid Mech.}, 550:413--441, 2006.
+
+\bibitem{Sharipov2002CL}
+F.~Sharipov.
+\newblock {Application of the Cercignani--Lampis scattering kernel to
+  calculations of rarefied gas flows. I. Plane flow between two parallel
+  plates}.
+\newblock {\em Eur. J. Mech. B/Fluids}, 21:113--123, 2002.
+
+\bibitem{Sharipov2003CL}
+F.~Sharipov.
+\newblock {Application of the {Cercignani}--{Lampis} scattering kernel to
+  calculations of rarefied gas flows. {II}. {S}lip and jump coefficients}.
+\newblock {\em Eur. J. Mech. B-Fluids}, 22:133--143, 2003.
+
+\bibitem{sharipov2015rarefied}
+F.~Sharipov.
+\newblock {\em Rarefied Gas Dynamics: Fundamentals for Research and Practice}.
+\newblock John Wiley \& Sons, 2015.
+
+\bibitem{Sharipov2018Vacuum}
+F.~Sharipov.
+\newblock Influence of quantum intermolecular interaction on internal flows of
+  rarefied gases.
+\newblock {\em Vacuum}, 156:146--153, 2018.
+
+\bibitem{Sharipov2008Couette}
+F.~Sharipov and D.~Kalempa.
+\newblock {Oscillatory Couette flow at arbitrary oscillation frequency over the
+  whole range of the Knudsen number}.
+\newblock {\em Microfluidics and Nanofluidics}, 4:363--374, 2008.
+
+\bibitem{sharipov1998data}
+F.~Sharipov and V.~Seleznev.
+\newblock Data on internal rarefied gas flows.
+\newblock {\em J. Phys. Chem. Ref. Data}, 27:657--706, 1998.
+
+\bibitem{Shavaliyev1993}
+M.~Sh. Shavaliyev.
+\newblock {Super-Burnett corrections to the stress tensor and the heat flux in
+  a gas of Maxwellian molecules}.
+\newblock {\em J. Appl. Maths. Mechs.}, 57:573--576, 1993.
+
+\bibitem{siewert2003linearized}
+C.~E. Siewert.
+\newblock The linearized {B}oltzmann equation: concise and accurate solutions
+  to basic flow problems.
+\newblock {\em Z. Angew. Math. Phys.}, 54:273--303, 2003.
+
+\bibitem{siewert2003viscous}
+C.~E. Siewert.
+\newblock {Viscous-slip, thermal-slip, and temperature-jump coefficients as
+  defined by the linearized Boltzmann equation and the Cercignani--Lampis
+  boundary condition}.
+\newblock {\em Phys. Fluids}, 15(6):1696--1701, 2003.
+
+\bibitem{Sone2002Book}
+Y.~Sone.
+\newblock {\em {Kinetic Theory and Fluid Dynamics}}.
+\newblock Birkhauser Boston, 2002.
+
+\bibitem{henning}
+H.~Struchtrup.
+\newblock {\em Macroscopic Transport Equations for Rarefied Gas Fows:
+  Approximation Methods in Kinetic Theory}.
+\newblock Heidelberg, Germany: Springer, 2005.
+
+\bibitem{Struchtrup2011}
+H.~Struchtrup.
+\newblock Resonance in rarefied gases.
+\newblock {\em Cont. Mech. Theromodyn.}, 34:361--376, 2011.
+
+\bibitem{StruchtrupTorrihon2003}
+H.~Struchtrup and M.~Torrilhon.
+\newblock Regularization of {Grad's} 13 moment equations: {Derivation and
+  linear analysis}.
+\newblock {\em Phys. Fluids}, 15:2668--2690, 2003.
+
+\bibitem{Su2020CAF}
+W.~Su, M.~T. Ho, Y.~H. Zhang, and L.~Wu.
+\newblock {GSIS:} an efficient and accurate numerical method to obtain the
+  apparent gas permeability of porous media.
+\newblock {\em Comput. Fluids}, 206:104576, 2020.
+
+\bibitem{Su2007PRE}
+W.~Su, S.~Lindsay, H.~H. Liu, and L.~Wu.
+\newblock {Comparative study of the discrete velocity and lattice Boltzmann
+  methods for rarefied gas flows through irregular channels}.
+\newblock {\em Phys. Rev. E}, 96:023309, 2017.
+
+\bibitem{SU2019573}
+W.~Su, P.~Wang, H.~H. Liu, and L.~Wu.
+\newblock Accurate and efficient computation of the {B}oltzmann equation for
+  {C}ouette flow: Influence of intermolecular potentials on {K}nudsen layer
+  function and viscous slip coefficient.
+\newblock {\em J. Comput. Phys.}, 378:573--590, 2019.
+
+\bibitem{Su2021CMAME}
+W.~Su, Y.~H. Zhang, and L.~Wu.
+\newblock Multiscale simulation of molecular gas flows by the general synthetic
+  iterative scheme.
+\newblock {\em Comput. Methods Appl. Mech. Engrg.}, 373:113548, 2021.
+
+\bibitem{SuArXiv2019}
+W.~Su, L.~H. Zhu, P.~Wang, Y.~H. Zhang, and L.~Wu.
+\newblock Can we find steady-state solutions to multiscale rarefied gas flows
+  within dozens of iterations?
+\newblock {\em J. Comput. Phys.}, 407:109245, 2020.
+
+\bibitem{Su2020SIAM}
+W.~Su, L.~H. Zhu, and L.~Wu.
+\newblock Fast convergence and asymptotic preserving of the general synthetic
+  iterative scheme.
+\newblock {\em SIAM J. Sci. Comput.}, 42:B1517--B1540, 2020.
+
+\bibitem{Sugawara1968PoF}
+A.~Sugawara, S.~Yip, and L.~Sirovich.
+\newblock Spectrum of density fluctuations in gases.
+\newblock {\em Phys. Fluids}, 11:925--932, 1968.
+
+\bibitem{SZALMAS201691}
+L.~Szalm{\'a}s.
+\newblock An accelerated discrete velocity method for flows of rarefied ternary
+  gas mixtures in long rectangular channels.
+\newblock {\em Comput. \& Fluids}, 128:91--97, 2016.
+
+\bibitem{SZALMAS20104315}
+L.~Szalm{\'a}s and D.~Valougeorgis.
+\newblock A fast iterative model for discrete velocity calculations on
+  triangular grids.
+\newblock {\em J. Comput. Phys.}, 229:4315--4326, 2010.
+
+\bibitem{Takata2011}
+S.~Takata and H.~Funagane.
+\newblock Poiseuille and thermal transpiration flows of a highly rarefied gas:
+  over-concentration in the velocity distribution function.
+\newblock {\em J. Fluid Mech.}, 669:242--259, 2011.
+
+\bibitem{takata2013singular}
+S.~Takata and H.~Funagane.
+\newblock Singular behaviour of a rarefied gas on a planar boundary.
+\newblock {\em J. Fluid Mech.}, 717:30--47, 2013.
+
+\bibitem{Tcheremissine2008AIP}
+F.~G. Tcheremissine and R.~K. Agarwal.
+\newblock Computation of hypersonic shock waves in diatomic gases using the
+  generalized {Boltzmann} equation.
+\newblock {\em AIP Conf. Proc.}, 1084:427--433, 2008.
+
+\bibitem{Tenti1974}
+G.~Tenti, C.~Boley, and R.~Desai.
+\newblock {On the kinetic model description of Rayleigh-Brillouin scattering
+  from molecular gases}.
+\newblock {\em Can. J. Phys.}, 52:285, 1974.
+
+\bibitem{Titarev2018}
+V.~A. Titarev and A.~A. Frolova.
+\newblock Application of model kinetic equations to calculations of super- and
+  hypersonic molecular gas flows.
+\newblock {\em Fluid Dyn.}, 53:536--551, 2018.
+
+\bibitem{Qian1946}
+H.~S. Tsien.
+\newblock Superaerodynamics, mechanics of rarefied gases.
+\newblock {\em J. Aero. Sci.}, 13:653--664, 1946.
+
+\bibitem{Valentini2009}
+P.~Valentini and T.~E. Schwartzentruber.
+\newblock {Large-scale molecular dynamics simulations of normal shock waves in
+  dilute argon}.
+\newblock {\em Phys. Fluids}, {21}({6}), {2009}.
+
+\bibitem{Valougeorgis:2003zr}
+D.~Valougeorgis and S.~Naris.
+\newblock Acceleration schemes of the discrete velocity method: {Gaseous} flows
+  in rectangular microchannels.
+\newblock {\em SIAM J. Sci. Comput.}, 25:534--552, 2003.
+
+\bibitem{Vieitez2010}
+M.~O. Vieitez, E.~J. van Duijn, W.~Ubachs, B.~Witschas, A.~Meijer, A.~S.
+  de~Wijn, N.~J. Dam, and W.~van~de Water.
+\newblock {Coherent and spontaneous Rayleigh-Brillouin scattering in atomic and
+  molecular gases and gas mixtures}.
+\newblock {\em Phys. Rev. A}, 82:043836, 2010.
+
+\bibitem{wagner_consist}
+W.~Wagner.
+\newblock A convergence proof for {B}ird's direct simulation {M}onte {C}arlo
+  method for the {B}oltzmann equation.
+\newblock {\em J. Stat. Phys.}, 66:1011--1044, 1992.
+
+\bibitem{wakabayashi1996numerical}
+M.~Wakabayashi, T.~Ohwada, and F.~Golse.
+\newblock Numerical analysis of the shear and thermal creep flows of a rarefied
+  gas over the plane wall of a {Maxwell}-type boundary on the basis of the
+  linearized {B}oltzmann equation for hard-sphere molecules.
+\newblock {\em Eur. J. Mech. B-Fluids}, 15:175--201, 1996.
+
+\bibitem{WANG201833}
+P.~Wang, M.~T. Ho, L.~Wu, Z.~L. Guo, and Y.~H. Zhang.
+\newblock A comparative study of discrete velocity methods for low-speed
+  rarefied gas flows.
+\newblock {\em Comput. Fluids}, 161:33 -- 46, 2018.
+
+\bibitem{Wang2020PoF}
+P.~Wang, W.~Su, and L.~Wu.
+\newblock Thermal transpiration in molecular gas.
+\newblock {\em Phys. Fluids}, 32:082005, 2020.
+
+\bibitem{WangCS}
+C.~S. Wang-Chang and G.~E. Uhlenbeck.
+\newblock {\em {Transport Phenomena in Polyatomic Gases}}.
+\newblock University of Michigan Engineering Research Rept. No. CM-681, 1951.
+
+\bibitem{Weiss1995}
+W.~Weiss.
+\newblock Continuous shock structure in extended thermodynamics.
+\newblock {\em Phys. Rev. E}, 52:5760, 1995.
+
+\bibitem{Wu2013PhDthesis}
+L.~Wu.
+\newblock {\em Deterministic Numerical Simulation of the {B}oltzmann and
+  Kinetic Model Equations for Classical and Quantum Dilute Gases}.
+\newblock PhD thesis, University of Strathclyde, Glasgow, 9 2013.
+
+\bibitem{Wu2020AIA}
+L.~Wu and X.~J. Gu.
+\newblock On the accuracy of macroscopic equations for linearized rarefied gas
+  flows.
+\newblock {\em Advances in Aerodynamics}, 2:2, 2020.
+
+\bibitem{Wu2020JFM}
+L.~Wu, Q.~Li, H.~Liu, and W.~Ubachs.
+\newblock Extraction of the translational {Eucken} factor from light scattering
+  by molecular gas.
+\newblock {\em J. Fluid Mech.}, 901:A23, 2020.
+
+\bibitem{Wu2016JFM}
+L.~Wu, H.~H. Liu, J.~M. Reese, and Y.~H. Zhang.
+\newblock Non-equilibrium dynamics of dense gas under tight confinement.
+\newblock {\em J. Fluid Mech.}, 794:252--266, 2016.
+
+\bibitem{wuPoF2015}
+L.~Wu, H.~H. Liu, Y.~H. Zhang, and J.~M. Reese.
+\newblock {Influence of intermolecular potentials on rarefied gas flows: Fast
+  spectral solutions of the Boltzmann equation}.
+\newblock {\em Phys. Fluids}, 27:082002, 2015.
+
+\bibitem{lei_Jfm}
+L.~Wu, J.~M. Reese, and Y.~H. Zhang.
+\newblock {Solving the Boltzmann equation by the fast spectral method:
+  application to microflows}.
+\newblock {\em J. Fluid Mech.}, 746:53--84, 2014.
+
+\bibitem{WuStruchtrupJFM2017}
+L.~Wu and H.~Struchtrup.
+\newblock {Assessment and development of the gas kinetic boundary condition for
+  the {B}oltzmann equation}.
+\newblock {\em J. Fluid Mech.}, 823:511--537, 2017.
+
+\bibitem{LeiJFM2015}
+L.~Wu, C.~White, T.~J. Scanlon, J.~M. Reese, and Y.~H. Zhang.
+\newblock A kinetic model of the {Boltzmann equation for} non-vibrating
+  polyatomic gases.
+\newblock {\em J. Fluid Mech.}, 763:24--50, 2015.
+
+\bibitem{LeiJCP2017}
+L.~Wu, J.~Zhang, H.~H. Liu, Y.~H. Zhang, and J.~M. Reese.
+\newblock A fast iterative scheme for the linearized {Boltzmann} equation.
+\newblock {\em J. Comput. Phys.}, 338:431--451, 2017.
+
+\bibitem{Lei2015Enskog}
+L.~Wu, Y.~Zhang, and J.~M. Reese.
+\newblock {Fast spectral solution of the generalized Enskog equation for dense
+  gases}.
+\newblock {\em J. Comput. Phys.}, 303:66--79, 2015.
+
+\bibitem{Yamaguchi2016JFM}
+H.~Yamaguchi, P.~Perrier, M.~T. Ho, J.~G. M\'{e}olans, T.~Niimi, and I.~A.
+  Graur.
+\newblock Mass flow rate measurement of thermal creep flow from transitional to
+  slip flow regime.
+\newblock {\em J. Fluid Mech.}, 795:690--707, 2016.
+
+\bibitem{Zheng2002}
+Y.~Zheng, A.~L. Garcia, and B.~J. Alder.
+\newblock {Comparison of kinetic theory and hydrodynamics for Poiseuille flow}.
+\newblock {\em J. Stat. Phys.}, 109:495--505, 2002.
+
+\bibitem{Zhong1993}
+X.~Zhong, R.~W. MacCormack, and D.~R. Chapman.
+\newblock Stabilization of the {Burnett} equation and applications to
+  hypersonic flows.
+\newblock {\em AIAA Journal}, 31:1036, 1993.
+
+\bibitem{Zhu2021JCP}
+L.~H. Zhu, X.~C. Pi, W.~Su, Z.~H. Li, Y.~H. Zhang, and L.~Wu.
+\newblock General synthetic iterative scheme for nonlinear gas kinetic
+  simulation of multi-scale rarefied gas flows.
+\newblock {\em J. Comput. Phys.}, 430:110091, 2021.
+
+\end{thebibliography}

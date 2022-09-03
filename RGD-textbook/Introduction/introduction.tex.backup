@@ -1,0 +1,291 @@
+\chapter{Introduction}
+\label{chap:introduction}
+
+\begin{flushright}
+  \emph{Somewhere, something incredible is waiting to be known}.\\
+  -  Carl Sagan
+\end{flushright}
+
+\section{Motivation}
+\label{sec:motivation}
+In this thesis we investigate computationally the interesting and non-intuitive behaviour of rarefied gas flows. Rarefied gas dynamics is the study of fluid flows at a length scale $L$ comparable to the mean free path $\lambda$ of the gas molecules (the average distance a gas molecule travels before encountering another gas molecule), and where the gas behaviour cannot be predicted by traditional methods, such as the Navier-Stokes-Fourier (NSF) equations. These rarefied flows can typically be found in low density hypersonic applications, such as re-entry of spacecraft~\cite{Reese2003}. However, more recently the development of advanced fabrication techniques, which enable the manufacturing of micro- and nano-scale devices, has resulted in rarefied gas flows being found at standard atmospheric pressure and very low Mach number in these devices~\cite{Gad-el-Hak1999}.
+
+Numerical experiments are an essential tool in the study of rarefied gas dynamics because physical experiments are often difficult to perform accurately, and the data that can be obtained is limited. For high temperature hypersonic applications, modern experimental data is scarce due to the high financial costs involved in performing the experiments. For example, much of the experimental data available for dissociation reactions at high temperature are from the 1960s and 1970s, and are subject to significant uncertainties~\cite{Gallis2009}. It is important to accurately predict the aero-thermo-mechanical loads on a spacecraft during the re-entry portion of the mission so that the thermal protection systems are designed both safely and efficiently. Since the gas surrounding the spacecraft can be rarefied, we must take care to use numerical methods that can account for rarefaction. Examples of computational rarefied gas dynamics techniques being applied to hypersonic engineering problems include re-entry of the Apollo capsule~\cite{Moss2006}, de-orbiting of the Mir space station~\cite{Ivanov1999}, and to provide supporting evidence for the failure scenario that resulted in the loss of Space Shuttle \emph{Columbia} in 2003~\cite{Gallis2004}.
+
+At the micro-scale, detailed experimental results are often unavailable due to current technological limitations of measurement equipment. As such, experimental results are often limited to measurements of integral flow parameters such as mass flow rates~\cite{Ewart2007}. Computer simulation provides an opportunity to supplement any available experimental data in a cost effective manner, and any available experimental data is vital in order to validate and benchmark numerical methods. It is important to accurately predict flow parameters to maximise the performance of these devices; this can most efficiently be done by gaining an understanding of the fundamental behaviour of low speed rarefied gases, which can differ greatly from that of its macro-scale companion. At the micro-scale, rarefied gas dynamics is still used primarily to gain more of a fundamental understanding of the unconventional physics involved in the operation of microelectromechanical systems (MEMS), rather than to engineer systems. However, micro-scale applications that rarefied gas dynamics has helped develop include micro-fuel cells, micro-pumps, and micro-turbines.
+
+% Computer simulations are a powerful tool that can offer insights into both hypersonic and micro-scale gas behaviour that cannot be obtained experimentally. 
+
+In this thesis, we will only consider dilute gases. So long as the gas molecular diameter $d$ is small compared to the mean molecular separation $\delta$, i.e.\ $d \ll \delta$, the gas can be considered dilute and the kinetic theory of dilute gases can be applied to describe the state of the gas at any given point. The large molecular separation allows the assumption that inter-molecular potentials can be neglected (and hence Boltzmann's molecular chaos assumption can be applied) and that only binary collisions will occur. It is therefore considered that molecules move in free paths until they encounter another molecule, and then they undergo an elastic collision.
+
+The rest of this chapter provides an outline of this thesis and an introduction to rarefied gas dynamics.
+
+\section{Thesis Outline}
+\label{sec:outline}
+In Chapter~\ref{chap:DSMC} we describe direct simulation Monte Carlo (DSMC), the numerical technique used to perform all of the simulations in this thesis. A history of the method from the first publication in 1963 to modern state-of-the-art is discussed.
+
+In Chapter~\ref{chap:benchmarking} we perform some benchmark cases with \emph{dsmcFoam}, a new open-source DSMC solver. Our results are compared to analytical solutions, established DSMC codes, and experimental measurements.
+
+The expansion of \emph{dsmcFoam} to include vibrational energy, a state-of-the-art chemical reaction model, a robust macroscopic properties measurement framework, and the Cercignani-Lampis-Lord gas-surface interaction model is described in Chapter~\ref{chap:development}.
+
+Chapter~\ref{chap:microscale} deals with the implementation of subsonic pressure boundary conditions in \emph{dsmcFoam}, and we then propose an extension to these that accounts for rotational non-equilibrium at the exit of a micro-channel. Micro-channels with sharp ninety-degree bends are studied using DSMC, and we find that a small mass flow enhancement can be achieved by including bends in a micro-channel geometry.
+
+Taking inspiration from the classical Crookes radiometer, rarefied gas effects on high area-to-mass ratio spacecraft in low Earth orbit are studied in Chapter~\ref{chap:spaceChips}. True radiometric forces are not found to exist due to the near vacuum wake created behind the spacecraft, but it is still possible to take advantage of rarefied gas effects as control techniques without the need for any propellent.
+
+The key findings of this research presented in this thesis and discussion of future work based on it, is covered in Chapter~\ref{chap:conclusions}.
+% 
+% Measurement techniques for polyatomic molecules which have been implemented in our MD solver are described in Chapter~\ref{chap:BCMD}. These techniques build on the measurement framework created by Borg~\cite{borgThesis}. The role of boundary conditions in MD is then discussed, with a focus on studies of liquid flow through nanotubes. Novel boundary conditions for generating pressure-driven flow for such problems are introduced.
+% 
+% In Chapter~\ref{chap:argonCNT} we investigate two nanoscale fluid dynamics problems using MD simulation: a CNT in uniform fluid cross-flow, and fluid flow through a CNT membrane. The aim of the first case is to investigate the performance of our new boundary conditions and the improvement in computational efficiency which can be achieved. The second set of simulations allows us to study the behaviour of a simple fluid under extreme confinement. The accuracy of corresponding hydrodynamic predictions is assessed, and the effect of changing the molecular interaction parameters is investigated.
+% 
+% In Chapter~\ref{chap:waterMDresults} we focus on pressure-driven water transport in CNTs using MD simulation. First, we evaluate the effect that changing the length of a defect-free (7,7) CNT has on the fluid transport along it. By looking at fluid properties, such as water density distributions and pressure profiles along the CNTs, we draw conclusions about the fundamental transport mechanisms of water inside small-diameter CNTs. In the later part of this chapter, vacancy site defects are included into the wall of a (7,7) CNT, in order to understand what effect this has on the contained fluid behaviour.
+% 
+% The main findings of this research and a discussion of how the work can be advanced in the future are presented in Chapter~\ref{chap:conc}.
+\section{Rarefied Gas Dynamics}
+\label{sec:RGD}
+\subsection{The Knudsen number}
+\label{subsec:knudsenNumber}
+Rarefied gas dynamics is the study of gases in which the molecular mean free path $\lambda$ is not negligible with respect to the characteristic length scale $L$ of the problem under consideration. The degree of rarefaction is defined by the Knudsen number
+\begin{equation}
+ Kn = \frac{\lambda}{L}.
+ \label{eq:Kn}
+\end{equation}
+In the limit of zero Knudsen number, inter-molecular collisions dominate and the gas is in perfect thermodynamic equilibrium. As the Knudsen number increases, molecular collisions become less likely to occur until the free-molecular limit is reached, when inter-molecular collisions are very unlikely. Since it is inter-molecular collisions and gas-surface interactions that drive a system towards thermodynamic equilibrium, it is clear that non-equilibrium effects become dominant with increasing Knudsen number. The different Knudsen number regimes are illustrated in Figure~\ref{fig:KnRegimes}. 
+\\
+\begin{figure}[h]
+ \centering
+ \includegraphics[width=0.95\textwidth,keepaspectratio]{../Introduction/IMG/Kn.eps}
+ \caption[Knudsen number regimes.]{Knudsen number regimes, adapted from \cite{Gad-el-Hak1999}.}
+ \label{fig:KnRegimes}
+\end{figure}
+
+A description of each regime and the appropriate numerical approach for each one can be summarised as:
+\begin{itemize}
+ \item $Kn \rightarrow$ 0: inviscid flow (Euler equations);
+ \item $Kn \le 0.001$: continuum regime (Navier-Stokes-Fourier equations);
+ \item $0.001 \le Kn \le 0.1$: slip regime (Navier-Stokes-Fourier
+equations with velocity slip and temperature jump boundary conditions);
+ \item $0.1 \le Kn \le 10$: transition regime (Boltzmann equation or particle
+methods);
+ \item $Kn \ge 10$: free-molecular regime (collisionless Boltzmann equation or particle
+methods).
+\end{itemize}
+
+\subsubsection{Continuum Regime}
+\label{subsubsec:continuumRegime}
+In the inviscid and continuum flow regimes, the familiar Euler and Navier-Stokes-Fourier (NSF) equations provide an excellent approximation for gas flows that are very close to equilibrium. At this low Knudsen number it is assumed that local macro-properties can be described as averages over elements large compared to the microscopic structure of the fluid, but small enough with respect to the macroscopic phenomena to permit the use of differential calculus to describe them. Inter-molecular collisions are dominant at low Knudsen number; there are enough molecular collisions occurring for thermodynamic equilibrium to be reached in a very short time compared to the macroscopic time scale.
+
+\subsubsection{Slip Regime}
+\label{subsubsec:slipRegime}
+As the Knudsen number becomes significant, molecule-surface interactions become less frequent and regions of non-equilibrium start to appear near surfaces. This non-equilibrium can be observed from a macroscopic point of view as the gas velocity and temperature ($U_{g}$ and $T_{g}$) at a surface not obtaining the same values as the surface ($U_{s}$ and $T_{s}$). These phenomena are known as velocity slip and temperature jump. Despite this form of non-equilibrium becoming important, the range of validity of the NSF equations can be extended to the slip regime by applying Maxwell's velocity slip~\cite{Maxwell1879} and Von Smoluchowski's temperature jump~\cite{VonSmoluchowski1898} boundary conditions, which for planar surfaces have the form
+\begin{equation}
+ U_{g} - U_{s} = \frac{2 - \sigma_{\upsilon}}{\sigma_{\upsilon}} \lambda \left( \frac{\partial u}{\partial y} \right)_{s} +
+ \frac{3}{4} \frac{\mu}{\rho T_{g}} \left( \frac{\partial T}{ \partial x} \right)_{s},
+\label{eq:uSlip}
+\end{equation}
+and
+\begin{equation}
+ T_{g} - T_{s} = \frac{2 - \sigma_{T}}{\sigma_{T}} \left[ \frac{2 \gamma}{\left(\gamma + 1 \right)} \right]
+ \frac{\lambda}{Pr} \nabla_n T,
+\label{eq:tJump}
+\end{equation}
+respectively, where $\sigma_{\upsilon}$ and $\sigma_{T}$ are the tangential-momentum-accommodation coefficient (TMAC) and the thermal-accommodation coefficient respectively, $\rho$, $\mu$, $Pr$ and $\lambda$ are the fluid density, viscosity, Prandtl number, and mean free path at the surface, respectively, and $\gamma$ is the specific heat ratio; $\nabla_n$ is the gradient normal to the surface.
+
+\subsubsection{Transition and Free-Molecular Regimes}
+\label{subsubsec:transitionFreeMoleculeRegimes}
+In the transition and free-molecular regimes non-equilibrium effects dominate and a solution to the Boltzmann equation must be sought, as the assumption of linear constitutive relations in the NSF equations is no longer valid. For a single species, monatomic gas, the Boltzmann equation has the form
+\begin{equation}
+ \frac{\partial \left(nf\right)}{\partial t} + \mathbf{c} \frac{\partial
+\left(nf\right)}{\partial \mathbf{r}} + \mathbf{F} \frac{\partial
+\left(nf\right)}{\partial \mathbf{c}} = J\left(f,f^*\right),
+\label{eq:Boltzmann}
+\end{equation}
+where $nf$ is the product of the number density and the normalised velocity distribution function, $\mathbf{r}$ and $\mathbf{c}$ are the position and velocity vectors of a molecule, respectively, $\mathbf{F}$ is an external force, $J\left(f,f^*\right)$ is a non-linear integral that describes the binary collisions, and the superscript $*$ represent post-collision properties. The collision integral takes the form:
+\begin{equation}
+ J\left(f,f^*\right) = \int_{-\infty}^{\infty} \int_{0}^{4 \pi} n^2 \left( f^* f_1^* - ff_1 \right)c_r \sigma d\Omega d\mathbf{c}_1,
+ \label{eq:collisionIntegral}
+\end{equation}
+where $f$ and $f_1$ are the velocity distribution function at $\mathbf{c}$ and $\mathbf{c}_1$ respectively, $c_r$ is the relative speed of two colliding molecules, $\sigma$ is the molecular cross-section, and $\Omega$ is the solid angle.
+
+So long as the assumptions of molecular chaos and binary collisions are met, the Boltzmann equation is valid for all ranges of Knudsen number. It is, however, difficult to obtain exact analytical solutions to the Boltzmann equation due to the non-linear nature of the collision integral. In the free-molecular regime, the collision integral can be ignored and the Boltzmann equation can then be solved with relative ease. It is the transition regime that presents most difficulty in finding a solution; the Knudsen number is significant, but inter-molecular collisions are still important. Several analytical methods for solving the Boltzmann equation in the transition regime have been proposed; however, these solutions depend either on arbitrary assumptions being made about the form of the velocity distribution function (Moment methods)~\cite{Grad1949,MottSmith1951,Liu1961}, or on a simplification of the collision term on the right hand side of the Boltzmann equation (model equations), e.g.\ the Bhatnagar-Gross-Krook (BGK) method~\cite{Bhatnagar1954}. The Moment methods are not suitable for two dimensional or higher problems, and the BGK method is only valid for small perturbations from equilibrium.
+
+Attention has therefore turned to numerical methods to find solutions to the Boltzmann equation. Direct simulation methods enable the difficulties associated with the particulate nature of the gas in analytical solutions to be used to advantage. Simulation particles represent real molecules, and their positions, velocities and energies are stored and updated with time as the simulation proceeds. By far, the most successful numerical method for solving rarefied gas flows in the transition regime has been the direct simulation Monte Carlo method (DSMC)~\cite{Bird1994}. DSMC is a stochastic particle-based method based on the kinetic theory of dilute gases. It is the technique that we apply throughout this thesis to perform numerical experiments in a wide variety of different situations, that shows strength of this numerical method. We give a comprehensive history of the method in the following chapter, along with a detailed description of the DSMC algorithm and sub-routines, before describing the state-of-the-art in DSMC and the different DSMC codes available.
+
+% The molecular dynamics (MD) method~\cite{Alder1959} was the first physical simulation method and solves the molecular interactions with one another and any boundaries in a deterministic manner. It is valid for rarefied gas problems, but difficult to apply because of the large computational expense of the method; long range interactions are considered and these must be calculated and updated every time step for every molecule in the system. The physical time step must be small enough to capture the 
+
+\subsection{Kinetic Theory}
+\label{subsec:kineticTheory}
+Kinetic theory is a statistical theory of the dynamics of systems formed from a great number of individual molecules. It describes the macroscopic behaviour of a system in terms of the microscopic molecule movements and interactions, utilising probability theory. These molecule interactions are always considered as binary collisions in kinetic theory; since the gas is dilute it is very unlikely that three or more molecules will be involved in a single collision event~\cite{Cercignani1990}.
+
+Molecular interactions can be described using classical Newtonian mechanics and assuming the molecules interact with a force relative to their separation distance, $\mathbf{F}_{ij}$ --- the force imparted on molecule $i$ by molecule $j$ --- the equations of motion for all molecules in the system can be written as a set of coupled ordinary differential equations (ODEs) of the form
+\begin{equation}
+\frac{d^2}{dt^2}\mathbf{r}_i = \frac{1}{m} \sum_{\substack{j=1\\j\neq i}}^N \mathbf{F}_{ij},
+\label{eq:MD}
+\end{equation}
+where $m$ is the mass of one molecule and $\mathbf{r}_i$ is its position. Molecular dynamics~\cite{Alder1959} (MD) is a numerical technique that solves these coupled ODEs deterministically. It is a very computationally demanding technique; a cubic centimetre of dilute gas at standard temperature and pressure contains 2.687 $\times$ 10$^{19}$ molecules. Even on modern high performance computers using parallel processing techniques, MD is restricted to very small volumes and timescales~\cite{Garcia2000}.
+
+Statistical mechanics is used in order to treat these large numbers as an advantage, rather than a hindrance. No attempt is made to calculate the exact state of each individual molecule; probability theory is employed along with averaging techniques, making the large numbers an advantage as even in a small system there will be a large statistical sample. In a dilute gas, it is assumed that all of a molecule's energy is kinetic energy. This is a fair assumption because of the relatively large distances between molecules for the most part, so short-range inter-molecular forces can be ignored.
+
+\subsubsection{The Maxwell-Boltzmann distribution}
+\label{subsubsec:maxwellBoltzmannDistribution}
+The probability $P$ that a molecule's thermal speed is between $c'$ and $c' + dc'$ is given by the probability distribution;
+\begin{equation}
+P_{c^{\prime}}\left( c^{\prime} \right) dc^{\prime} = 4 \pi \left( \frac{m}{2 \pi k_B T} \right)^{3/2} \left(c^{\prime} \right)^2 e^{\frac{1}{2}m \upsilon^2 / kT} dc^{\prime}.
+\label{eq:maxBoltz}
+\end{equation}
+This is the well known equilibrium Maxwell-Boltzmann distribution function, where $k_B$ is Boltzmann's constant, $T$ is the local macroscopic translational temperature of the gas and $m$ is the molecular mass. Various average properties of an equilibrium gas be calculated easily from this distribution function. For example, the average molecular speed is
+\begin{equation}
+ \overline{c^{\prime}} = \int_{0}^{\infty} c^{\prime} P_{c^{\prime}} dc^{\prime} = \frac{2\sqrt{2}}{\sqrt{\pi}}\sqrt{\frac{k_BT}{m}}.
+\label{eq:avc}
+\end{equation}
+The most probable thermal velocity $c^{\prime}_{mp}$ is the point where the Maxwell-Boltzmann distribution has a maximum; i.e.
+\begin{equation}
+ \frac{d}{dc^{\prime}} P_{c^{\prime}}\left( c^{\prime} \right) \bigg|_{c^{\prime} = c^{\prime}_{mp}} = 0,
+\label{eq:vmp1}
+\end{equation}
+which gives
+\begin{equation}
+ c^{\prime}_{mp} = \sqrt{\frac{2 k_B T}{m}}.
+\label{eq:vmp2}
+\end{equation}
+Figure \ref{fig:maxBoltz} shows equilibrium Maxwell-Boltzmann speed distributions at temperatures of 173 K and 293 K. The most probable thermal speed at 293 K is also plotted.
+
+\begin{figure}[h]
+\centering
+ \includegraphics[width=0.95\textwidth,keepaspectratio]{../Introduction/IMG/maxwellBoltzmannDistribution.eps}
+\caption{Maxwell-Boltzmann molecular speed distribution for argon at two different temperatures.}
+\label{fig:maxBoltz}
+\end{figure}
+
+\subsubsection{Macroscopic Properties}
+\label{subsec:macroscopicProperties}
+In engineering applications, it is important to be able to define macroscopic properties such as temperature and density, rather than consider only molecular properties. Here we describe how to recover a variety of macroscopic flow properties from the individual molecular properties. For the sake of succinctness, we restrict our analysis here to a single species gas with rotational energy, but no vibrational energy. All definitions are valid for equilibrium and non-equilibrium gases. The simplest property is the number density $n$, which is defined as the number of molecules $N$ in the volume of interest $V$;
+\begin{equation}
+n = \frac{N}{V},
+\label{eq:numberDensity}
+\end{equation}
+and the mass density $\rho$ is simply the product of the molecular mass $m$ and the number density;
+\begin{equation}
+\rho = nm.
+\label{eq:massDensity}
+\end{equation}
+
+Other macroscopic properties are related to the transport of mass, momentum, and energy via molecular motion in a system. The macroscopic, or stream, velocity $\mathbf{c}_0$ is the mean of the instantaneous molecular velocities $\mathbf{c}$
+\begin{equation}
+\mathbf{c}_0 = \frac{\displaystyle\sum\limits_{i=1}^N \mathbf{c}}{N}.
+\label{eq:streamVel}
+\end{equation}
+The instantaneous velocity of a molecule relative to the stream velocity is called the peculiar, or thermal, velocity $\mathbf{c}^{\prime}$;
+\begin{equation}
+\mathbf{c}^{\prime} = \mathbf{c} - \mathbf{c}_0.
+\label{eq:thermalVel}
+\end{equation}
+We now consider the gas from a reference frame moving with the stream velocity, such that properties can be defined as averages of the thermal velocities.
+
+The pressure tensor $\mathbf{p}$ is a tensor with nine components and can be written in shorthand as:
+\begin{equation}
+ \mathbf{p}_{ij} = \rho \overline{c_i^{\prime} c_j^{\prime}},
+ \label{eq:pressureTensor}
+\end{equation}
+with the subscripts $i$ and $j$ having three values each, representing a single component of the velocity vector each, i.e.
+\begin{equation}
+c_1^{\prime} = u^{\prime}, \hspace{5mm} c_2^{\prime} = v^{\prime}, \hspace{5mm} c_3^{\prime} = w^{\prime},
+ \label{eq:velocityComponents}
+\end{equation}
+where $u$, $v$ and $w$ are the velocity components in the $x$, $y$ and $z$ directions, respectively. The scalar pressure $p$ is the average of the three normal components of the pressure tensor ($\mathbf{p}_{xx}$, $\mathbf{p}_{yy}$ and $\mathbf{p}_{zz}$):
+\begin{equation}
+ p = \frac{1}{3} \rho \left( \overline{u^{\prime2}} + \overline{v^{\prime2}} + \overline{w^{\prime2}}  \right).
+ \label{eq:scalarPressure}
+\end{equation}
+In an equilibrium gas all three normal components of the pressure tensor are equal; in regions of non-equilibrium they will differ from one another.
+
+The viscous stress tensor $\boldsymbol\tau$ is the negative of the pressure tensor with the scalar pressure subtracted from the normal components, i.e.
+\begin{equation}
+ \boldsymbol\tau \equiv \tau_{ij} = - \left(  \rho \overline{c_i^{\prime} c_j^{\prime}} - \delta_{ij}p\right),
+ \label{eq:stressTensor}
+\end{equation}
+where $\delta_{ij}$ is the Kronecker delta such that  $\delta_{ij} = 1$ if $i = j$, or  $\delta_{ij} = 0$ if $i \neq j$.
+
+The average specific kinetic energy associated with the thermal velocity of a molecule can be given as
+\begin{equation}
+ e_{tr} = \frac{1}{2} \left( \overline{u^{\prime2}} + \overline{v^{\prime2}} + \overline{w^{\prime2}}  \right),
+ \label{eq:specificTranslationalEnergy}
+\end{equation}
+which can be combined with Eq.~\eqref{eq:scalarPressure} to give
+\begin{equation}
+ p = \frac{2}{3} \rho e_{tr}.
+ \label{eq:pressure1}
+\end{equation}
+This can finally be compared to the equation of state for an ideal gas to allow for the definition of a translational temperature $T_{tr}$:
+\begin{equation}
+T_{tr} = \frac{1}{3k_B} m \left( \overline{u^{\prime2}} + \overline{v^{\prime2}} + \overline{w^{\prime2}}  \right).
+\label{eq:translationalTemperature}
+\end{equation}
+This shows that the equation of state is valid for a dilute gas, even in a state of non-equilibrium, as long as the pressure is based only on the translational temperature. It is also possible to define a translational temperature for each component, e.g.
+\begin{equation}
+ T_{tr_{x}} = \frac{m}{k_B} \overline{u^{\prime2}},
+ \label{eq:translationalTempratureComponent}
+\end{equation}
+and the departure of each component from $T_{tr}$ can then be used as a measure of the translational non-equilibrium.
+
+In a dilute monatomic gas, molecules are considered to have translational temperature only, so $T_{tr}$ is the actual temperature. However, a diatomic or polyatomic molecule will also have rotational energy (vibrational energy is ignored for now). The rotational temperature $T_{rot}$ is defined in a manner consistent with Eq.~\eqref{eq:translationalTemperature} to give
+\begin{equation}
+ T_{rot} = \frac{2 m e_{rot}}{k_B \zeta_{rot}},
+ \label{eq:rotationalTemperature}
+\end{equation}
+where $e_{rot}$ is the specific rotational energy and $\zeta_{rot}$ is the number of rotational degrees of freedom. In equilibrium, $T_{tr}$ will be equal to $T_{rot}$. An overall temperature $T_{ov}$ can be defined for a non-equilibrium gas as the weighted average of the translational and rotational modes;
+\begin{equation}
+ T_{ov} = \frac{3T_{tr} + \overline{\zeta}_{rot} T_{rot}}{3 + \overline{\zeta}_{rot}}.
+ \label{eq:overallTemperature}
+\end{equation}
+It is important to note that this overall temperature does not apply to the equation of state if the gas is in a state of non-equilibrium.
+
+Finally, the heat flux vector $\mathbf{q}$ is defined as
+\begin{equation}
+ \mathbf{q} \equiv q_i = \frac{1}{2} \rho \overline{c^{\prime2}c_i^{\prime}} + n \overline{\varepsilon_{rot}c_i^{\prime}}.
+ \label{eq:heatFluxVector}
+\end{equation}
+where $\varepsilon_{rot}$ is the rotational energy of a single molecule.
+
+
+\section{Project Objectives}
+\label{sec:objectives}
+In this thesis, we aim to benchmark a recently developed free and open source DSMC code against existing experimental data, analytical solutions, and results from more established DSMC codes. We use the free and open source parallelised DSMC solver, \emph{dsmcFoam}, that is part of the Open Field Operation and Manipulation (OpenFOAM) C++ fluid dynamics toolbox~\cite{OpenFOAM}. This code is then extended to include vibrational energy, a modern approach to simulating chemical reactions, various boundary conditions and surface-molecule interaction models, and macroscopic property measurements. Finally, the code is applied to engineering problems including micro-channels with bends, and high area-to-mass ratio spacecraft in low Earth orbit.
+
+% In this thesis, we aim to increase understanding of fluid dynamic behaviour at the nanoscale using molecular dynamics, in particular water transport through CNTs. In addition, an important objective of this work is to improve the way in which nanoscale fluid problems are modelled using MD, e.g.\ users must be able to apply continuum-like boundary conditions in nanofluidic systems to enable real engineering problems to be solved. MD simulations of water transport through CNTs must be able to be simulated using OpenFOAM as the computational tool, this is of particular importance for future developments of the OpenFOAM which will enable hybrid MD-CFD simulations to be performed using water as the working fluid.
+
+\section{Key Developments}
+\label{sec:developments}
+Recently, an open source DSMC code in OpenFOAM was created as a collaboration between OpenFOAM and the University of Strathclyde, as a natural extension to the MD code developed by Macpherson~\cite{MacphersonThesis}. This work benchmarks this new DSMC solver, named \emph{dsmcFoam}, and provides additional functionality to greatly improve the range of applicability of this new DSMC code. These new developments allow \emph{dsmcFoam} to take chemical reactions into account for hypersonic applications, and to be applied to low speed micro-channel simulations. In addition, some of the new measurement and control features have direct application to a hybrid continuum-particle solver. The main contributions of this work are outlined below.
+
+% The MD code within OpenFOAM was created originally by Macpherson~\cite{macphersonThesis} and further developed by Borg in recent years. Additional contributions to the MD code have been made throughout this work to enable simulations involving CNTs and pressure driven flow of polyatomic liquids. These developments permitted OpenFOAM to be used to investigate liquid argon flow in and around CNTs and water transport through (7,7) CNTs with and without structural defects. The main contributions of this work are outlined below.
+
+\begin{itemize}
+\item Benchmarking of the open source \emph{dsmcFoam} solver against experimental, analytical, and simulation data.
+\item Vibrational energy has been implemented within the \emph{dsmcFoam} framework and validated accordingly, allowing the code to be used for more realistic high temperature applications where the vibrational mode is active and plays an important role in the flow characteristics.
+\item The modern quantum-kinetic (QK) chemical reaction model has been implemented in \emph{dsmcFoam}, and the simulated chemical reaction rates for dissociation and exchange reactions are compared with theoretical predictions, other chemical reaction models, and accepted rates from the literature.
+\item \emph{dsmcFoam} has been extended to include more boundary conditions, such as the Cercignani-Lampis-Lord (CLL) surface interaction model and implicit, prescribed pressure inlets and outlets for low speed flows. The low speed pressure outlets were then extended to take rotational non-equilibrium into account.
+\item A robust measurement framework, based on that of the open source MD solver, \emph{mdFoam}, by Borg~\cite{BorgThesis}, has been implemented and various tools to measure macroscopic properties such as vibrational temperature, heat flux vector and mass flux have been implemented and validated against existing numerical results in the literature. This will be important for a hybrid multiscale method (HMM) solver that is being implemented in OpenFOAM.
+% \item Similar to the macroscopic measurements, a framework for controlling macroscopic properties such as density and temperature has been implemented in \emph{dsmcFoam}. Both the measurement and control frameworks will be important for a hybrid multiscale method (HMM) solver that is being implemented in OpenFOAM.
+\item DSMC simulations of argon gas in micro-channels with bends have been performed. The pressure and Mach number profiles are presented and compared with those of an equivalent straight micro-channel. It is found that in a small range of Knudsen number, the addition of a bend in a micro-channel system increases the amount of mass that can be carried, and that adding a second bend continues the trend. This could allow for increases in the efficiency of MEMS devices that rely on gases being delivered through micro-channels.
+\item Rarefied gas effects on small spacecraft characterised by a high area-to-mass ratio in low Earth orbit are considered, with the aim of taking advantage of them for position and attitude control within a swarm. DSMC simulations and analytical solutions for the drag coefficient are in excellent agreement with one another and both indicate that it is possible to change the drag coefficient by controlling the temperature of the spacecraft.
+\end{itemize}
+
+\section{Published papers}
+\label{sec:publishedPapers}
+The work from this thesis has contributed to the following published research papers:
+\begin{enumerate}
+\item Thomas J.~Scanlon, Ehsan Roohi, Craig White, Masoud Darbandi and Jason M.~Reese. An open source, parallel DSMC code for rarefied gas flows in arbitrary geometries, \emph{Computers \& Fluids}, 39(10):2078–-2089, 2010.
+
+\item Thomas J.~Scanlon, Craig White, Matthias Schuebler, Richard E.~Brown and Jason M.~Reese. Thermochemistry modelling in an open source DSMC code, \emph{Proceedings of the 28th International Symposium on Shock Waves}, Part III, 145--151, 2011.
+
+\item Nam T.~P.~Le, Craig White, Jason M.~Reese and Rho S.~Myong. Langmuir-Maxwell and Langmuir-Smoluchowski boundary conditions for thermal gas flow simulations in hypersonic aerodynamics, \emph{International Journal of Heat and Mass Transfer}, 55(19--20):5032--5043, 2012.
+
+\item Craig White, Matthew K.~Borg, Thomas J.~Scanlon and Jason M.~Reese. Accounting for rotational non-equilibrium effects in subsonic DSMC boundary conditions, \emph{Journal of Physics: Conference Series}, 362:012016, 2012.
+
+\item Nishanth Dongari, Craig White, Thomas J.~Scanlon, Yonghao Zhang and Jason M.~Reese. Rarefaction effects in gas flows over curved surfaces, \emph{Proceedings of the 28th International Symposium on Rarefied Gas Dynamics}, accepted, 2012.
+
+\item Craig White, Camilla Colombo, Thomas J.~Scanlon, Colin R.~McInnes and Jason M.~Reese. Rarefied gas effects on the aerodynamics of high area-to-mass ratio spacecraft in orbit, \emph{Advances in Space Research}, under review, 2012.
+
+\item Craig White, Matthew K.~Borg, Thomas J.~Scanlon and Jason M.~Reese. An investigation of micro-channel gas flows with bends using DSMC, \emph{Computers \& Fluids}, accepted, 2012.
+\end{enumerate} 

@@ -1,0 +1,354 @@
+\chapter{Introduction}
+\label{chap:intro}
+\section{Motivation}
+In this thesis we investigate computationally the remarkable behaviour of fluids at the nanoscale. Nanoscale fluid dynamics is the study of fluid flows at a length scale below $\sim$100 nm~\cite{whatisNano2005,nanoscalePhysiologicalFlows}. The development of advanced fabrication techniques, which enable the manufacturing of nanosized devices, has resulted in a rapid growth of the study of fluid dynamics at this scale~\cite{nanoBuildingChannels}.
+
+Numerical modelling plays a crucial role in nanoscale fluid dynamics because physical experiments are often difficult to perform accurately and obtaining the necessary instrumentation can be very expensive. Computer simulation provides a cheap, reliable alternative to experiments. Mathematical models are used to predict what would happen in reality and provide a level of detail that is very often unattainable by experiments. An example of this is measuring fluid velocity profiles in a nanotube only a few nanometers in diameter; this is currently not possible in physical experiments but, by using an appropriate numerical approach, we can extract this particular profile with reasonable accuracy.
+
+It is now widely accepted that the fundamental properties of a fluid can be significantly altered under extreme confinement~\cite{travisDepartFromNS,CNTwaterTransitionSubcontinuum}. This thesis focuses on computational modelling of liquid flows at the nanoscale, more specifically, where hydrodynamic predictions fail to accurately predict fluid behaviour and we must rely upon atomistic simulation techniques such as molecular dynamics (MD).
+
+%for which, a continuum description of the fluid may not be valid and we are reliant upon atomistic techniques such as molecular dynamics, this is a focal point throughout this thesis.
+
+%The most common phenomenon observed at the nanoscale is fluid layering under extreme confinement, adjacent to a solid surface. Under these conditions, the continuum approximation, which specifies...is not be valid. However continuum approaches can be changed to include phenomenological models to account for molecular phenomena, such as fluid slip at a surface~\cite{fillotTribolLett2011}.
+
+Nanoscale technologies are currently addressing important issues in energy, environment, health, and transport. Examples of these are:
+\begin{itemize}
+ \item superhydrophobic surfaces~\cite{CNTarrayHydrophobicSurface} could lead to more energy efficient ships and aircraft by reducing skin friction drag;
+ \item lab-on-a-chip devices~\cite{multiscalePhenomena,CNTlabOnAChipReview} are extremely small scale systems that will help to bring cheap and efficient health care to everyone by reducing costs for faster disease detection and treatment;
+ \item efficient nanotube membranes for water purification and desalination~\cite{kahPengMembraneReview2011,DaigujiIonTransport2010};
+ %   CNT~\cite{CNTdesalinationCorry} and BNNT~\cite{CNTboronNitrideReverseOsmosis2008}.
+ \item nanofiltration to separate uranium from seawater~\cite{nanofiltrationUranium};
+ \item advanced cooling systems for electronic circuits~\cite{nanoBuildingChannels};
+ \item sensitive flow sensors~\cite{flowSensors}.
+%deal with extremely small scale fluid systems which manipulate miniscule volumes of fluids or individual molecules and allow samples to be analysed more rapidly and at a cheaper cost. reagent mixing and separation and disease/cancer detection and treatment.
+% \item Self-cleaning surfaces (lotus effect) - is this useful for aircraft wings, wind turbines?.
+%- manipulation of the evaporation of a liquid to occur at specific ``hot-spots'' can lead to greater heat transfer from electronic components, cooling them more efficiently.
+% \item Lubrication for micromachinery?.
+% \item Hydrogen storage for fuel cells~\cite{CNThydrogenStorage1999}.
+% \item Nanodentistry - health - diagnosis of oral cancer, local anaesthesia, improved tooth strength and durability by replacing tooth enamel with nanostructured composite materials~\cite{nanoDentistry}.
+\end{itemize}
+
+The majority of these applications use carbon nanotubes (CNTs). These rolled sheets of graphene have attracted major research and development attention since their rediscovery in 1991, and their impressive fluid transport properties feature strongly in this thesis. A full description of CNTs can be found in Chapter 2.
+
+In the remainder of this chapter we provide an outline of this thesis and a description of MD, including the software which we use throughout this work.
+
+\section{Thesis outline}
+In Chapter 2 we discuss the properties of CNTs and how they are manufactured. The manufacturing of CNT membranes is also described. A review of recent experimental work investigating water flow through carbon nanostructures is presented, and the CNT defects which can occur during manufacturing are introduced. Finally, a novel method for generating CNTs in an MD simulation is described.
+
+Measurement techniques for polyatomic molecules which have been implemented in our MD solver are described in Chapter 3. These techniques build on the measurement framework created by Borg~\cite{borgThesis}. The role of boundary conditions in MD is then discussed, with a focus on studies of liquid flow through nanotubes. Novel boundary conditions for generating pressure-driven flow for such problems are introduced.
+
+%used throughout this work are described in Chapter 3.
+
+In Chapter 4 we investigate two nanoscale fluid dynamics problems using MD simulation: a CNT in uniform fluid cross-flow, and fluid flow through a CNT membrane. The aim of the first case is to investigate the performance of our new boundary conditions and the improvement in computational efficiency which can be achieved. The second set of simulations allows us to study the behaviour of a simple fluid under extreme confinement. The accuracy of corresponding hydrodynamic predictions is assessed, and the effect of changing the molecular interaction parameters is investigated.
+
+In Chapter 5 we focus on pressure-driven water transport in CNTs. First, we evaluate the effect that changing the length of a defect-free (7,7) CNT has on the fluid transport along it. By looking at fluid properties, such as water density distributions and pressure profiles along the CNTs, we draw conclusions about the fundamental transport mechanisms of water inside small-diameter CNTs. In the later part of this chapter, vacancy site defects are included into the wall of a (7,7) CNT, in order to understand what effect this has on the contained fluid behaviour.
+
+The main findings of this research and a discussion of how the work can be advanced in the future are presented in Chapter 6.
+
+%It is clear from this wide range of applications that nanoscale technology is a multidisciplinary subject, e.g. engineering, medicine, physics, chemistry,, etc., and through collaboration between the various disciplines will nanotechnology continue to flourish.
+
+%Generating fluid motion at the nanoscale is often performed by applying pressure or temperature gradients or by applying an electric field across the domain. The pressure difference required to drive flow in nanoscale channels is often very high due to the flow rate being inversely proportional to the fourth power of the channel height~\cite{multiscalePhenomena}.
+
+%The Reynolds number, $Re$, is a dimensionless number which is the ratio of inertial forces to viscous forces. One of the most important differences between fluid flows at the macroscale and the nanoscale is that the Reynolds number in nanochannels is very small meaning that flow is \emph{always} laminar i.e. turbulence is not present. This is a problem when fluid mixing is required; at the macroscale, turbulence is employed to enhance mixing rates whereas at the nanoscale mixing is dependent on the slow process of diffusion~\cite{multiscalePhenomena}.
+
+
+\section{Molecular dynamics}
+\label{sec:MD}
+Molecular dynamics (MD) is the study of a system of simulated atoms or molecules that interact with one another via specified intermolecular potentials. These potentials represent the attractive and repulsive forces between molecules (with no net electrical charge) known as Van der Waals interactions. The movement of each molecule in the system is described by the classical equations of motion, i.e.\ Lagrangian or Hamiltonian mechanics. When modelling a simple molecule, $i$, which has no rotational or internal degrees of freedom, the classical equations produce the following form of Newton's second law of motion~\cite{rapaport}:
+\begin{equation}
+m_{i}\mathbf{a}_{i}=\mathbf{f}_{i} ,
+\end{equation}
+where $\mathbf{f}_{i}$ is the total force acting on molecule $i$, and $m_{i}$ and $\mathbf{a}_{i}$ are the atomic mass and acceleration, respectively.
+%For polyatomic molecules which have more than three degrees of freedom...
+
+%%%%%%%%%%%%%%%% begin figure %%%%%%%%%%%%%%%%%%%
+\begin{figure}[!ht]
+\centerline{\hbox{
+\includegraphics[width=5in]{../Introduction/LJOOscaled.eps}
+}
+}
+\caption{A Lennard-Jones interaction potential.}
+\label{fig:LJ}
+\end{figure}
+%%%%%%%%%%%%%%%% end figure %%%%%%%%%%%%%%%%%%%
+
+The force between two molecules, $\mathbf{f}_{ij}$, is calculated by differentiating the intermolecular potential, which is a function of their separation in space, $r_{ij}$:
+\begin{equation}
+\mathbf{f}_{ij}=-\nabla{U(r_{ij})}.
+\label{eq:forceDerivation}
+\end{equation}
+\noindent
+The most commonly-used potential to describe Van der Waals interactions between non-bonded molecules is the Lennard-Jones (LJ) potential:
+%\begin{equation}
+%U(r_{ij}) = \left\{ \begin{array}{rl}
+% 4\epsilon\left(\left(\frac{r_{ij}}{\sigma}\right)^{-12} - \left(\frac{r_{ij}}{\sigma}\right)^{-6}\right), &r_{ij}\leq{r_{cut}} \\
+%  0, &r_{ij}>{r_{cut}}
+%       \end{array} \right\} ,
+%\label{eq:LJ}
+%\end{equation}
+\begin{equation}
+U(r_{ij}) = 4{\epsilon}_{ij}\left(\displaystyle{\left(\frac{r_{ij}}{{\sigma}_{ij}}\right)^{-12}} - \displaystyle{\left(\frac{r_{ij}}{{\sigma}_{ij}}\right)^{-6}}\right),
+\label{eq:LJ}
+\end{equation}
+where ${\epsilon}_{ij}$ is the well-depth and ${\sigma}_{ij}$ is the collision diameter and corresponds to where the potential energy is zero. The collision diameter is based upon the Van der Waals radii of the interacting molecules. The shape of this potential is shown in Fig.\ \ref{fig:LJ} (where the parameters for an oxygen-oxygen interaction are used). The potential is repulsive at small molecular separations and is attractive at long separations; potential energy is zero for infinite separation lengths. The attractive part of the LJ potential has been
+
+The net force on an individual molecule, $\mathbf{f}_{i}$, is the sum of all pair interactive forces between the molecule and its $N$ neighbours:
+\begin{equation}
+\mathbf{f}_{i} = \displaystyle\sum^{N}_{\substack{j = 1 \\ j \neq i}}\mathbf{f}_{ij}.
+\label{eq:forceSum}
+\end{equation}
+
+A cut-off radius, $r_{c}$, is most often applied to each molecule to reduce the computational demand of the MD simulation by only allowing molecules to interact with other molecules that reside in a spherical volume defined by the cut-off radius. The equations of motion are integrated numerically using an integration algorithm, e.g.\ the Verlet Leapfrog scheme~\cite{allenTild}, to obtain molecule velocities and positions from their accelerations.
+
+When simulating polyatomic molecules there is an increase in the number of molecular degrees of freedom as the molecules then possess angular momentum. To simulate polyatomic molecules, we use the symplectic splitting method of Dullweber~\emph{et al.\ }\cite{symplecticSplitting}. This models molecules as fully rigid structures that are composed of point masses, referred to as sites, which represent the individual atoms. Intramolecular interactions are neglected as the site positions are fixed and cannot move relative to one another.
+
+The integration of each molecule is then split into two parts: translational displacement and rotational operations. Interactions between sites of one molecule and another are treated as before, and are only a function of their separation distance (and of course the interaction type). So for a polyatomic molecule, the total intermolecular force, $\mathbf{f}_{i}$ acting upon it is the sum of the net force of each intramolecular site:
+\begin{equation}
+\mathbf{f}_{i} = \displaystyle\sum\limits_{a = 1}^{N_s} \mathbf{f}_a,
+\label{eq:totForce}
+\end{equation}
+\noindent
+where $\mathbf{f}_a$ is the total force acting on site $a$ and $N_s$ is the total number of sites. Translational displacement is performed by moving the centre of mass of the rigid molecule using the total force and its total mass (the sum of the individual site masses), the same as for monatomic molecules.
+
+%The total force acting on molecule $i$ is:
+
+%The sites positions are later updated based on the centre of mass displacement.
+
+The rotation of a rigid polyatomic molecule is based upon the total torque acting about its centre of mass. The contribution of each site torque is calculated by multiplying the net site force by its distance from the centre of mass, ${r}_{ia}$ i.e.\
+\begin{equation}
+\boldsymbol\tau_{a} = \mathbf{f}_a \cdot {r}_{ia}.
+\label{eq:netTorque}
+\end{equation}
+\noindent
+Therefore the total torque acting on molecule $i$ is:
+\begin{equation}
+\tau_{i} = \displaystyle\sum\limits_{a = 1}^{N_s} \boldsymbol\tau_a.
+\label{eq:totTorque}
+\end{equation}
+\noindent
+%where  the distance between site $a$ and the centre of mass of molecule $i$.
+The total torque is then used to update the angular momentum of the molecule. A number of consecutive rotations of the molecule are performed, using its angular momentum. A full description of this technique, including instructions on its implementation in an MD solver, is available in~\cite{symplecticSplitting}.
+
+%The net torque on site $a$ is given by:
+
+MD can also incorporate intramolecular potentials, which represent bond stretching, bending and torsion. However, with this new level of detail comes greater computational demand as the time step size must be reduced to capture the bond dynamics. Molecules are often modelled as rigid to improve the efficiency of the MD simulation; whether or not this affects the accuracy of the simulation overall is problem-specific.
+
+The SHAKE algorithm~\cite{shakePaper} is a popular alternative to the method described above. This technique moves all atoms of a molecule independently and then performs a number of corrections to the atom positions to ensure bond lengths and angles remain constant. The computational time associated with this iterative procedure can be significant and comes with additional complexity (in the solution of nonlinear systems). The splitting technique has been shown to conserve linear and angular momentum and remains stable over long time periods, providing an alternative, efficient rigid body scheme.
+
+%Used to model multiphase flow~\cite{kotsalisKoumotsakosMultiphaseWaterCNT2004}.
+
+\subsection{Molecule interactions using OpenFOAM}
+All MD simulations presented in this thesis are performed using OpenFOAM~\cite{openFoam}, which incorporates an MD solver known as \emph{mdFoam}. This code is fully parallelised and can perform MD simulations in arbitrary, complex, 3D geometries~\cite{mdGrahamTracking,mdGrahamParallelForces}. The MD code is based upon the Arbitrary Interacting Cells Algorithm (AICA)~\cite{mdGrahamParallelForces}.
+
+%Conventionally, MD simulations rely on the generation of neighbour lists to calculate intermolecular pair forces between molecules. This involves calculating the distance between all pairs of molecules and if they are closer than the cut-off radius then they must interact and are therefore added to the neighbour list. There are drawbacks in using this method; the most considerable being that in large and non-equilibrium simulations the neighbour list is required to be rebuilt more often due to high molecular velocities, causing the computational cost to increase~\cite{mdGrahamParallelForces}. This is a significant problem when simulating fluids at the nanoscale where flows are often in non-equilibrium states.
+
+The MD simulation domain is split into numerical mesh cells, similar to conventional computational dynamics. The AICA uses a direct interaction list (DIL) to store a list of cells that must interact with other cells based on their cut-off radii. Molecules must interact with other molecules that reside in their cell, and the cells which are present on the DIL. The advantage of this method is that the DIL is only built once at the start of the simulation and remains valid throughout the simulation (assuming the mesh is static). Molecules always know which cell they reside in \--- this was adapted from OpenFOAM's particle tracking method~\cite{mdGrahamTracking} and was one of the main reasons for choosing to implement an MD solver in OpenFOAM.
+
+%\emph{change} Eventually it would be desirable to have a hybrid method which would update the MD/CFD regions automatically based on continuum breakdown parameters. This would result in the DIL having to be reconstructed after every mesh adaption which could potentially lead to a significant increase in computational time.
+
+%\subsection{Water Models}
+%Computer simulations of water, the most ubiquitous fluid in nature, have been the focus of over 30 years of research~\cite{holtWaterNanoReview}. Despite the huge amount of time devoted to this task, there is no potential model in the literature which can accurately reproduce all of the properties of water. The essential characteristics of any water model are that it must be as simple as possible and capable of reproducing the basic properties of water, such as the self diffusion coefficient, viscosity, radial distribution function, heat capacity, and hydrogen bond structure~\cite{waterModelReviewGuillot}. Of the vast number of water models produced over the years, the most commonly used are~\cite{tip4pWaterMeltingTemp}:
+%
+%\begin{itemize}
+% \item SPC \cite{spc};
+% \item SPC/E \cite{spcEberendsen1987};
+% \item TIP3P \cite{tip3p4pOriginal};
+% \item TIP4P \cite{tip4pOriginal1985};
+% \item TIP4P/2005 \cite{tip4pWaterMeltingTemp};
+% \item TIP5P \cite{tip5pOriginal2000}.
+%\end{itemize}
+%
+%The SPC, SPC/E and TIP3P are three-site models of the form shown in Fig. \ref{fig:water3site}. The TIP4P and TIP4P/2005 are four-site models, and the TIP5P is a five-site model, shown in Figs. \ref{fig:water4site} and \ref{fig:water5site} respectively.
+%
+%\begin{figure}[h!]
+%\centerline{\hbox{
+%\includegraphics[scale=0.1]{../Introduction/Water/water3site.eps}
+%}
+%}
+%\caption{A three-site model for water.}
+%\label{fig:water3site}
+%\end{figure}
+%
+%
+%\begin{figure}[h!]
+%\centerline{\hbox{
+%\includegraphics[scale=0.1]{../Introduction/Water/water4site.eps}
+%}
+%}
+%\caption{A four-site model for water.}
+%\label{fig:water4site}
+%\end{figure}
+%
+%\begin{figure}[h!]
+%\centerline{\hbox{
+%\includegraphics[scale=0.1]{../Introduction/Water/water5site.eps}
+%}
+%}
+%\caption{A five-site model for water.}
+%\label{fig:water5site}
+%\end{figure}
+%
+%The performance of each of these models varies depending on the phase of the water under investigation, e.g. liquid-solid, and the physical property being measured, e.g. self-diffusion coefficient. Some models are more accurate than others under certain circumstances but no single model is accurate for all conditions, which makes the selection of a model more difficult.
+%
+%Many different water models are used in CNT water simulations see reference~\cite{waterInCNTsReview2008alexiadis}.
+%
+%The rigid TIP4P water model is used, which consists of a Lennard-Jones (LJ) interaction potential at the oxygen atom site (O), positive Coulomb charges at the two hydrogen sites (H) and a negative charge at a site M, located above O along the bisector of the HOH angle. The O-O LJ interactions use the following parameters: $\sigma_{OO} = 3.154$ {\AA} and $\epsilon_{OO} = 0.6502$ kJ mol$^{-1}$. The electrostatic point charge values for water are -0.8476e and +0.4238e for the M and hydrogen sites, respectively. The carbon-water interaction is solely represented by a carbon-oxygen LJ potential using the following parameters: $\sigma_{CO} = 3.19 {\AA}$ and $\epsilon_{CO} = 0.392$ kJ mol$^{-1}$~\cite{CNTwaterInteractionContactAngleWerder}. Electrostatic and LJ interactions are smoothly truncated at 1.0 nm.
+%
+%The TIP4P model has been shown to be the least affected by the smoothly truncated Coulomb potential~\cite{vanderSpoelArtifactsWater2006}.
+
+\subsection{Electrostatics}
+When simulating ionic or polar molecular systems, long-range electrostatic interactions must be accounted for, e.g.\ by the Coulomb potential:
+
+\begin{equation}
+ U_{C}(r_{ij}) = \frac{1}{4\pi\epsilon_{0}}\frac{q_{i}q_{j}}{r_{ij}},
+\label{eq:coulomb}
+\end{equation}
+\noindent
+% Unlike the previously described intermolecular potentials such as LJ potential, these interactions are independant of position and the net force on each molecule is simply the sum of all pairs of electrostatic interactions.
+where $\epsilon_{0}$ is the electric constant and $q_{i}$ and $q_{j}$ are the charges of molecules $i$ and $j$, respectively. The use of simple truncation (cut-off radius) methods is not recommended for systems which contain ions, as the electrostatic interaction potential decays slowly ($r^{-1}$). Ideally the method for computing electrostatic interactions should be no more computationally demanding than simple truncation schemes but should possess greater accuracy. For periodic systems, electrostatic interactions are handled using lattice sum methods~\cite{electroComments96,ewaldSummationTechniquesReview,electroMeshUpEwald1,electroDLpoly}, which split the interaction into short range and long range parts. These techniques are implemented in many available MD solvers such as NAMD~\cite{NAMD}, LAMMPS~\cite{LAMMPS}, and Amber~\cite{Amber}, but are not currently available in OpenFOAM. Short-range interactions are evaluated directly using molecule separation distances and the long-range part is calculated in Fourier space over all period images. The implementation of such techniques is complicated, increases the computational cost of an MD simulation, and they are restricted to fully periodic simulations. However, if the simulated system contains only water (which is polar but overall charge neutral) then we can truncate the electrostatic interaction without significantly affecting the dynamics of the system~\cite{andrea1983forceTruncation}.
+%; treatment of electrostatics using these methods may introduce significant errors~\cite{PPPMnpbc1996water,reactionField1992,reactionField1995}
+
+%Electrostatic interactions are generally accounted for by using an Ewald sums approach, see Chapter~\ref{chap:intro} for more details.
+
+
+
+%%%%%%%%%%%%%%%% begin figure %%%%%%%%%%%%%%%%%%%
+\begin{figure}[!ht]
+\centerline{\hbox{
+\includegraphics[width=5in]{../Introduction/coulombsScaled.eps}
+}
+}
+\caption{Original and smoothed Coulomb interaction potentials.}
+\label{fig:coulombs}
+\end{figure}
+%%%%%%%%%%%%%%%% end figure %%%%%%%%%%%%%%%%%%%
+
+When performing simulations involving water molecules (without ions) we use the truncated, smoothed Coulomb potential:
+\begin{equation}
+ U_{C}(r_{ij}) = \frac{1}{4\pi\epsilon_{0}}\left(\frac{q_{i}q_{j}}{r_{ij}} - E_s(r_{ij})\right),
+\label{eq:coulombSmooth}
+\end{equation}
+\noindent
+where $E_s(r_{ij})$ is a smoothing function of the form:
+\begin{equation}
+ E_s(r_{ij}) = \frac{q_{i}q_{j}}{r_{c}} - (r_{ij} - r_{c})\frac{q_{i}q_{j}}{r_{c}^2}.
+\label{eq:smoothFunc}
+\end{equation}
+\noindent
+The original and smoothed Coulomb potentials are shown in Fig.\ \ref{fig:coulombs}. By using the smoothing function we ensure that there is no discontinuity in the potential energy at the cut-off which can introduce errors~\cite{vanderSpoelArtifactsWater2006}. The choice of cut-off radius truncation can have a significant effect on an MD simulation and bad choices of it can lead to artifacts such as unexpected water layer formation~\cite{vanderSpoelArtifactsWater2006}, however it is accepted that a value of $\sim$1 nm is adequate.
+%This technique was tested and compared with a lattice sums method to assess its accuracy~\cite{andrea1983forceTruncation,electroShiftedDampedCoulomb}. The performance of the shifted, damped Coulomb method was evaluated by comparing force and torque vectors with those obtained by the SPME method for a system of 1000 water molecules and 40 ions. The results produced by the shifted, damped Coulomb method were in good agreement with the reference Ewald method.
+
+%The shifted Coulomb with a smoothing function...justification when using only water. Inhomogeneous charge distribution of inhomogeneous distribution of mass~\cite{Rodgers2011truncationEffects,Rodgers2009truncationEffects,electroShiftedDampedCoulomb,waterModelTesting1997}. Different cutoff treatments such as shifting, smoothing, or simple truncation can change the results obtained from an MD simulation~\cite{vanderSpoelArtifactsWater2006}.
+
+%\subsubsection{Ewald sums methods}
+%
+%The particle-particle particle-mesh (PPPM) method is a lattice sum method and was developed by Hockney and Eastwood~\cite{electroPPPMhockney}. Short-range interactions are computed in exactly the same way as other lattice sum methods --- by direct particle-particle summation. What makes this method unique is its treatment of long-range interactions. The three stages of the calculation of long-range interactions are illustrated in Fig.\ \ref{fig:pppm} and are as follows:
+%\begin{enumerate}
+%    \item a system of charged particles are interpolated onto a square grid which fills the entire domain, which may be 2D or 3D;
+%    \item the long-range electrostatic potential is calculated at grid points by solving Poisson's equation using the Fast Fourier Transform (FFT) method, which is then differentiated to obtain the forces;
+%    \item the particle positions are updated by interpolating the calculated forces from the grid onto the particles.
+%\end{enumerate}
+%
+%\begin{figure}[h!]
+%\centerline{\hbox{
+%\includegraphics[width=5in]{../Introduction/Electrostatics/pppm.eps}
+%}
+%}
+%\caption{The particle-particle particle-mesh method (PPPM).}
+%\label{fig:pppm}
+%\end{figure}
+%
+%The PPPM method also relies on periodic boundary conditions but is more efficient than the standard Ewald summation as it scales like $N$log$(N)$. It has been shown that greater accuracy of the potential/force computation can be achieved by using a finer mesh and/or a better interpolation scheme but will come with a greater computational cost~\cite{ewaldSummationTechniquesReview}. Of all lattice sums methods the PPPM method is the logical choice due to its greater efficiency over the Ewald summation and its greater accuracy compared to similar methods such as the Smoothed Particle Mesh Ewald (SPME)~\cite{electroMeshUpEwald1}. Many modern MD codes use the SPME...implementation of these methods is difficult and time consuming - not needed for pure water simulations, but definitely for ionic mixtures.
+%
+%\subsubsection{Truncation techniques}
+%
+%In addition to lattice sums methods there exist techniques which are based on simple truncation methods but are developed to be more accurate. The reaction field method~\cite{reactionField1992,reactionField1995} represents electrostatic interactions by the combination of an atomistic (short range) and a continuum (long range) description. A cut-off sphere is applied to each molecule, within which electrostatic interactions are calculated explicitly using the finite Coulomb sum. Beyond the cut-off sphere, also referred to as a spherical cavity, the system (including explicitly modelled boundaries) is treated as a dielectric continuum. If a net dipole is present within the cavity it polarises the dielectric continuum which then interacts with the molecule at the centre of the spherical cavity. This method has been shown to be more accurate than simple truncation methods at no extra computational cost~\cite{reactionField1995}. Another advantage of this method is that unlike other electrostatic methods, such as the Ewald sum, the reaction field method may be used in the presence of non-periodic boundary conditions, which is a vital attribute for hybrid simulations.
+%
+%\vspace{5mm}
+%
+%However the treatment of the system as a continuum outside of the spherical cavity will cause inaccuracies when simulating inhomogeneous systems~\cite{inhomogeneousSystems} e.g. a fluid flowing adjacent to a surface. The dielectric properties of the fluid are dependent on the assumption that the fluid is homogeneous, therefore a molecule close to a wall would not be aware of its presence until the wall is within its spherical cavity and included in the electrostatic interaction explicitly. The reaction field method was used by Kotsalis~\emph{et al.}~\cite{hybridWaterKoumoutsakos} to calculate the the electrostatic interactions in a hybrid simulation of Couette flow of water in a channel 12$nm$ in height. The MD region was applied to the centre of the channel rather than at the fluid-surface interface. For this reason, the use of the reaction field method is acceptable as the fluid is far enough away from the physical boundary to disregard its electrostatic contribution without any real loss in accuracy.
+%
+%\begin{figure}[h!]
+%\centerline{\hbox{
+%\includegraphics[width=5in]{../Introduction/Electrostatics/reactionField.eps}
+%}
+%}
+%\caption{The reaction field method. Electrostatic interactions are handled explicitly within a cut-off radius, $R_{C}$, after which they are calculated using a dielectric continuum.}
+%\label{fig:reactionField}
+%\end{figure}
+%
+%The damped, shifted force method, originally proposed by Wolf~\emph{et al.}~\cite{electroWolfDampedShifted} and recently adapted by Fennell~\emph{et al.}~\cite{electroShiftedDampedCoulomb} is an electrostatic summation method which ensures that the potential and forces at the cut-off radius are continuous and accelerates convergence by the use of a damping function. The electrostatic potential adapted by Fennell~\emph{et al.} is shown by Eq.\ \ref{eq:Ushifted}.
+%
+%\begin{equation}
+%U_{\mbox{DSF}}(r)  =  q_{i}q_{j}\left[\frac{\mbox{erfc}({\alpha}r)}{r} - \frac{\mbox{erfc}({\alpha}R_{c})}{R_{c}} + \left(\frac{\mbox{erfc}({\alpha}R_{c})}{R_{c}^{2}} \\
+%                   +  \frac{2\alpha}{\pi^{1/2}}\frac{\mbox{exp}({-\alpha^{2}}R_{c}^{2})}{R_{c}}\right)(r-R_{c})\right]
+%                   %, r\leq R_{c}
+%\label{eq:Ushifted}
+%\end{equation}
+%
+%The damping function chosen is a complementary error function, $\mbox{erfc}$, chosen because of its close connection with the Ewald method~\cite{electroShiftedDampedCoulomb}. In Eq.\ \ref{eq:Ushifted}: $\alpha$ is a damping parameter which controls the speed of convergence, $R_{c}$ is the cut-off radius, and $r$ is the separation vector which is equivalent to $r_{ij}$. The force shifting aspect of this method is illustrated in Fig. \ref{fig:shiftedCoul}. Every charged ion $j$ which surrounds the central ion $i$ has a copy of itself with the opposite charge located at the cut-off radius, effectivley shielding the effect of any charge beyond the truncation sphere. By performing this operation the charge contained within the cut-off radius is neutralised as the central ion $i$ only interacts with neutral pairs.
+%
+%\begin{figure}[h!]
+%\centerline{\hbox{
+%\includegraphics[width=5in]{../Introduction/Electrostatics/shiftedCoulomb.eps}
+%}
+%}
+%\caption{The damped, shifted force method. This technique is applied to all molecules which reside in the cut-off sphere.}
+%\label{fig:shiftedCoul}
+%\end{figure}
+%
+%\vspace{5mm}
+%
+%This method does not depend on periodicity in any direction and is therefore applicable to non-periodic systems. Another advantage of using this method is that it does not require estimations of physical properties, e.g. the dielectric constant required by the reaction field method. This technique, and any pairwise cut-off method for that matter, will scale approximately linearly with the number of particles in the system resulting in a substantial saving in computational effort compared with lattice sums techniques. However this technique will also suffer when simulating inhomogenous systems, for reasons similar to the reaction field method previously discussed.
+
+%\vspace{5mm}
+
+%\section{Project objectives}
+
+\section{Hybrid methods}
+Many of the simulation techniques (e.g.\ pressure boundary conditions) detailed in this thesis are derived from or inspired by hybrid methods and it is only right to briefly describe them here. The advantage of using a hybrid approach at the nano and microscales is that it combines the detail and accuracy of MD with the computational efficiency of a less detailed approach. A hybrid method uses two or more numerical descriptions in the same simulation domain, e.g.\ MD coupled with a computational fluid dynamics (CFD) solver.
+
+Hybrid solvers generally use a combination of MD and CFD for liquids, but MD and direct simulation Monte Carlo (DSMC) have also been coupled for simulating gas flows~\cite{hybridMDMCeindhoven}. The aim of this approach is to accurately capture gas-surface interactions by explicitly modelling the wall as molecules rather than using an implicit DSMC boundary condition.
+
+Classically, the different solvers would be spatially discretised with each being responsible for separate parts of the domain~\cite{hybridDenseFluidsWerder,hybridMesoChannelYen,hybridHydrophobicSurfaces2009}, this type of hybrid technique is known as domain decomposition (DD). The DD method decouples the length scale of the problem but not the time scale, meaning that the MD and continuum solvers must advance in time by the same amount. This restricts the application of the technique to small scale (both length and time) systems.
+
+A second, less common hybrid technique is the heterogeneous multiscale method (HMM)~\cite{hybridHMM2005}. The HMM solves the entire flow domain using CFD but applies small MD domains at the nodes and/or faces of the CFD mesh. The HMM is both spatially and temporally decoupled, which enables it to be used for larger scale systems than the DD technique.
+
+%The MD simulations are used to extract the stress tensor from the fluid which is then passed to the continuum solver.
+
+While both of these hybrid techniques are different in application, they both include communication between an atomistic and a continuum solver in order to exchange boundary condition information. It is through the exploitation of the CFD to MD communication that we are able to improve existing boundary conditions for full MD simulations, as will be described in Chapter~\ref{chap:BCMD}.
+
+%Hybrid MD-DSMC has been used to model nanoscale heat exchangers which when extended to the microscale can be used to simulate advanced cooling of electronic circuits.
+
+%Due to the significant computational cost associated with MD it would be beneficial to combine this technique with another which is less computationally demanding whose accuracy would benefit from coupling with MD.
+
+%Hybrid MD-CFD techniques are available in two different forms: domain decomposition (DD) methods or heterogenous multiscale methods (HMM). The first defines fixed regions of the simulation domain to be solved using each solver with zones where boundary conditions are exchanged. An example of using the DD method would be fluid adjacent to a surface, shown in FIGURE.
+
+
+
+%Flow problems solved using hybrid techniques include:...
+
+%Hybrid references~\cite{hybridBuscalioniEmbeddingFluctHydro2007,hybridBuscalioniWater2009,hybridBuscalioniTripleScale2008,hybridMassMomEneBuscalioni2003,hybridBuscalioni2004,hybridFlekkoyFlux2005,hybridFlekkoy2000}
+%and~\cite{hybridHadjiContactLine2,hybridhadji1997,hybridWaterKoumoutsakos,hybridHydrophobicSurfaces2009,hybridReview2010,hybridCornerFlowNie2004} and ~\cite{hybridNieRobbins,hybridOriginalThompsonOconnell,AdReS2006,hybridHMM2005,hybridDSMCboyd2007,hybridFluxFlekkoy2004,hybridFlekkoy2002,hybridCouplingWang2007} and ~\cite{hybridDenseFluidsWerder,hybridHadji3DMultiscale,hybridHadjiMultiScaleHydro,hybridYasudaYamamoto2008,hybridMesoChannelYen}
+
+%\section{Thesis overview}
+%\subsection{Present contributions}
+%MD code was created originally by Macpherson~\cite{macphersonThesis} and further developed by Borg~\cite{borgThesis} in recent years. Additional contributions to the MD code have been made throughout this work and flow problems in nanofluidics addressed. The outline of this thesis and the main contributions of this work are outlined below.
+%
+%\begin{enumerate}
+%\item In Chapter~\ref{chap:BCMD} we extend the measurement-toolbox created by Borg~\cite{borgThesis} for the measurement of polyatomic fluids in MD simulations. The role of non-periodic MD systems are discussed and a novel pressure boundary condition is introduced. These techniques are then tested and results are presented.
+%\item A detailed review of experiments involving water flow through CNTs is presented in Chapter~\ref{chap:cnt}. A review of liquid flows through CNTs using MD simulations is also included in this chapter.
+%\item In Chapter~\ref{chap:argonCNT} we present results of an MD simulation of liquid argon flow past a CNT and compare results with existing simulation results and empirical predictions. MD simulation results of liquid argon flow through a CNT membrane using novel BCs are then compared with a continuum CFD solution.
+%\item MD simulations are then performed to investigate the role of CNT length in the resulting fluid flow rate of water through CNTs.
+%\end{enumerate}
+\section{Published papers}
+The work from this thesis has contributed to the following published research papers:
+\begin{enumerate}
+\item William D. Nicholls, Matthew K. Borg and Jason M. Reese, Molecular dynamics simulations of liquid flow in and around carbon nanotubes, \emph{ASME 8th International Conference on Nanochannels, Microchannels, and Minichannels Proceedings}, August 2010, Montreal, Canada.
+\item Matthew K. Borg, William D. Nicholls and Jason M. Reese, MD boundary conditions for pressure gradient flows: nano-mixing and nano-droplet deformation in extensional flows, \emph{NSTI Nanotech Conference}, June 2010, Anaheim, CA, USA.
+\item Matthew K. Borg, William D. Nicholls and Jason M. Reese, Hybrid molecular dynamics and navier-stokes method in complex nanoflow geometries, \emph{NSTI Nanotech Conference}, June 2010, Anaheim, CA, USA.
+\item William D. Nicholls, Matthew K. Borg and Jason M. Reese, Simulating the fast transport of water through carbon nanotubes, \emph{NSTI Nanotech Conference}, June 2011, Boston, MA, USA.
+\item Jason M. Reese and William D. Nicholls, Perspectives on the simulation of micro gas and nano liquid flows, \emph{ASME 9th International Conference on Nanochannels, Microchannels, and Minichannels Proceedings}, June 2011, Alberta, Canada.
+\item William D. Nicholls, Matthew K. Borg, Duncan A. Lockerby and Jason M. Reese, Water transport through (7,7) carbon nanotubes of different lengths using molecular dynamics, \emph{Microfluidics and Nanofluidics}, DOI:10.1007/s10404-011-0869-3, 2011.
+\item William D. Nicholls, Matthew K. Borg, Duncan A. Lockerby and Jason M. Reese, Simulating water transport through carbon nanotubes with defects, \emph{Molecular Simulation}, \emph{submitted}, 2011.
+\end{enumerate} 

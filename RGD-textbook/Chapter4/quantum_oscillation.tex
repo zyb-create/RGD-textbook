@@ -1,0 +1,303 @@
+\chapter{Collective oscillations in dilute quantum gas}
+\label{chap:oscillation}
+
+
+\section{Background}
+
+The realisation of quantum degeneracy in the ultracold atomic gases has attracted intensive research efforts to understand the interacting quantum systems~\cite{RMP1,RMP2}. The experimental controllability of the interactions, energy, and spin population makes these systems ideal to study the crossover from a Bose-Einstein condensation (BEC) to a Bardeen-Cooper-Schrieffer (BCS) superfluid, which is ubiquitous in high-temperature superconductivity, neutron stars, nuclear matter, and quark-gluon plasma~\cite{Cao2011}. 
+
+In the zero-temperature limit, the superfluid behaviour of the Fermi gases is well understood~\cite{RMP2,Menotti2002,Cozzini2003}. At high temperatures, the dilute quantum gases are in the normal phase and their dynamics can be described by the quantum BE~\cite{Uehling1933}. On the other hand, when the temperature is below the critical temperature for superfluidity, the superfluid and normal phases coexist. In this case, the BE for the dynamics of the quasiparticle distribution function and the Euler equations for the superfluid order parameter can be combined to describe the quantum gas dynamics~\cite{Jackson2002,Urban2006}. 
+
+
+The study of the low-lying excitation modes (see Figure~\ref{quan_demo}) is important for probing the properties of strongly correlated systems, revealing the underlying mechanics of BEC-BCS crossover. So far, the effects of temperature on the collective mode remain unclear. For instance, experimentally, in the same temperature range, Kinast~\textit{et al.}~demonstrated  that the frequency of the radial breathing mode stayed close to the hydrodynamic value~\cite{Kinast2005}, while Wright~\textit{et al.}~measured the scissors mode and found a clear transition from the hydrodynamic to collisionless behavior~\cite{Wright2007}. This discrepancy motivated Riedl~\textit{et al.}~to measure the frequency and damping of the radial compression (breathing), quadrupole, and scissors modes in a similar experimental condition and to compare the experimental data with the analytical prediction of the moment method~\cite{Riedl2008}. However, there are discrepancies between the experimental and theoretical results, especially for the radial quadrupole mode.
+
+
+\begin{figure}[t]
+\center
+\includegraphics[width=9cm]{quantum_demo.pdf}
+\caption[Sketch of the four typical collective oscillations in the external harmonic potential.]{Sketch of the four typical collective oscillations in the external harmonic potential. The solid lines: density shapes of the quantum gas at equilibrium. The dashed and dash-dotted lines: intermediate states. For the excitation of the breathing mode, the strength of the external potential is suddenly decreased and held at its new value hereafter, so that the density shape goes from the solid circle to the dashed one, and then back to the solid again, forming half of the oscillation period. Later on, the density shape changes to the dash-dotted circle and return to the solid-line shape, completing another half period of oscillation.  }
+\label{quan_demo}
+\end{figure}
+
+
+The analytical expressions for the mode frequency and damping were obtained by applying the method of moments to the linearised BE~\cite{AlKhawaja2000,Guery-Odelin1999,Massignan2005,Bruun2007,Riedl2008}. However, this method may not provide accurate predictions for the quantum gas in the transition regime~\cite{Riedl2008,Lepers2010}, which is caused by i) the spatially-dependent relaxation time is replaced by the spatially-average one and/or ii) only low orders of moments are included in the analytical method, which may not be adequate for capturing the important features of the collective oscillations. For example, one needs to consider high-order terms for the cloud surface deformation at large radii in the quadrupole mode if using average relaxation time~\cite{Lepers2010}. The other major drawback of the analytical method is that it is only limited to the external harmonic potentials, while experimentally anharmonic effects emerge at high temperatures where the external potential has a Gaussian profile~\cite{Riedl2008,Wright2007}. Therefore, it is necessary to solve the BE numerically to get the accurate mode frequency and damping. Only in this way can we know the applicability of the Boltzmann description in quantum gases. 
+
+
+Here we put forward a deterministic method to numerically solve the Boltzmann model equation in the hydrodynamic, transition, and collisionless regimes. This Chapter is divided into two parts. First, we solve the classical BGK model. We extract the frequency and damping of the radial quadrupole and scissors modes and compare them with the analytical and experimental data~\cite{Wright2007,AlKhawaja2000, Riedl2008,Bruun2007}. With the numerical results, we find that the difference between the experimental data and the analytical results of the BE in Refs.~\cite{Wright2007, Riedl2008} is reduced. Second, we solve the quantum BGK model and indicates the applicability of this model in describing the quadrupole oscillations in 2D Fermi gases.
+
+
+\section{Classical BGK model}
+
+We consider two-component balanced Fermi gases well above the degeneracy temperature, where the gases are statistically classical but the collisions are quantum. The dilute Fermi gas is in the normal phase and the up-spin and down-spin components have the same atom mass $m$.  Due to the Pauli's exclusion principle, collision happens between atoms with different spins. For most of the experiments the two components move together and one needs only consider one VDF. Furthermore, the experiments of Wright~\textit{et al.} and Riedl~\textit{et al.} are conducted in elongated traps so that one can focus only on the radial collective oscillations, neglecting the axial motion~\cite{Wright2007,Riedl2008,Altmeyer2007}. Thus, the problem is effectively 2D. In general, due to the presence of the Gaussian laser beam, the gas is trapped in the two-dimensional Gaussian potential
+\begin{equation}\label{gaussian}
+    U(x,y)=U_0\left[1-\exp\left(-\frac{x^2}{W_a^2}-\frac{y^2}{W_b^2}\right)\right],
+\end{equation}
+where $U_0$ is trap depth and $W_a$, $W_b$ are the trap widths.
+At low temperatures, the atom cloud is far smaller than the trap widths, so that the potential is nearly harmonic
+\begin{equation}\label{harmonic}
+    U(x,y)=\frac{m}{2}(\omega_x^2x^2+\omega_y^2y^2),
+\end{equation}
+where the trap frequencies satisfy $\omega_x=\sqrt{2U_0/m}/W_a$ and
+$\omega_y=\sqrt{2U_0/m}/W_b$.
+
+
+Instead of the quantum BE, we first begin with the classical BGK model; this model can capture the essential physics of the problem and has been widely used to describe rarefied gas dynamics. It reads
+\begin{equation}\label{bgk}
+    \frac{\partial f}{\partial t}+v_x\frac{\partial f}{\partial x}+v_y\frac{\partial f}{\partial y}+a_x\frac{\partial f}     {\partial v_x}+a_y\frac{\partial f}{\partial v_y}=\frac{f_{le}-f}{\tau(x,y)},
+\end{equation}
+where $(a_x,a_y)=-(\partial/\partial x,\partial/\partial y)U(x,y)/m$ are the accelerations, $\tau(x,y)$ is the local relaxation time, and $f_{le}$ is the local equilibrium distribution function 
+\begin{equation}\label{gle}
+   f_{le}=\frac{mn}{{2\pi     k_BT}}\exp\left[-m\frac{(v_x-V_x)^2+(v_y-V_y)^2}{2k_BT}\right],
+\end{equation}
+which is defined in terms of the local particle density $n(x,y)$, local temperature $T(x,y)$, and local macroscopic velocities $V_x(x,y)$ and $V_y(x,y)$. When the system is in global thermal equilibrium, $n=n_0\exp[-U(x,y)/k_BT_0]$, with $n_0$ being the particle density at the trap centre and $T_0$ the global equilibrium temperature.
+
+The shear viscosity plays a dominant role in the collective oscillations; the atom cloud remains nearly isothermal and the experiments~\cite{Kavoulakis1998,Braby2010} are not sensitive to the thermal conductivity. Therefore, the local relaxation time can be determined by equating the shear viscosity of the quantum BE with that derived from the BGK model~\eqref{bgk}, yielding $\tau=\mu/nk_BT$. When the vacuum expression for the cross-section is used~\cite{Massignan2005}, we have $\tau(x,y)={15}\sqrt{{m\pi}/{k_BT}}/{16\sigma n\int_0^\infty d\xi\xi^7e^{-\xi^2}(1+\xi^2T/T_B)^{-1}}$, where $\sigma=4\pi a_s^2$ is the total energy-independent cross-section and $T_B=\hbar^2/mk_Ba_s^2$ is the binding temperature of the dimer state. Two limiting cases will be considered. When the scattering length $a_s$ is small, the differential cross-section is energy-independent, and atoms behave like hard spheres. The local relaxation timeis  given by~\cite{Massignan2005,Nikuni1998,Watabe2010}
+\begin{equation}\label{nu}
+    \tau(x,y)=\frac{5}{16\sigma n(x,y)}\sqrt{\frac{m\pi}{k_BT(x,y)}}.
+\end{equation}
+On the contrary, in the unitarity limit where
+$a_s\rightarrow\infty$ (atoms interact through soft potentials), we have
+\begin{equation}\label{nu2}
+\tau(x,y)=\frac{15m^{3/2}}{64\hbar^2n(x,y)}\sqrt{\frac{k_BT(x,y)}{\pi}}.
+\end{equation}
+
+
+
+\subsection{Asymptomatic preserving numerical scheme}
+
+The relaxation time is a crucial parameter in the collective oscillations. A spatially uniform gas is in the hydrodynamic regime when $\omega_0\tau\ll1$. Here $\omega_0$ is the external trap frequency (the mode frequency is of the same order). In this circumstance, the Euler and NS equations can be derived
+from the BE by the Chapman-Enskog expansion~\cite{Nikuni1998}. On the contrary, the gas is collisionless when $\omega_0\tau\gg1$. When the gas is trapped, however, it could be in the hydrodynamic, transition ($\omega_0\tau\sim1$), or collisionless regime in the central region of the trap, whereas in the surface region it is always collisionless. The different order-of-magnitude of $\tau$ across the trap poses difficulty in numerical simulations: if one wants to resolve the details of the collision, the time step $\Delta{t}$ should be smaller than $\tau$, which is not practical for the long time behaviour when the gas is in the hydrodynamic regime ($\tau\rightarrow0$). Therefore, in a practical calculation, it is desirable to use a numerical scheme that can have practical time step across hydrodynamic and collisionless regimes as we are interested in the macroscopic behaviour of the gas.
+
+
+
+
+
+In order to have practical time step in hydrodynamic regime, we adopt the asymptotic preserving scheme to solve the BGK model numerically~\cite{Jin1999,Filbet2011}. The virtue of this scheme is that it can capture the macroscopic gas dynamics in the hydrodynamic limit even if the small scale determined by the relaxation time $\tau$ is not numerically resolved. The computational accuracy in the hydrodynamic regime is guaranteed by the fact that, using the Chapman-Enskog expansion~\cite{CE}, this numerical scheme yields the correct Euler equations when holding the spatial steps and time step fixed and letting $\tau$ goes to zero. Therefore, the computation of a hydrodynamic flow can be as fast and accurate as that of the transition and collisionless flows. This unique feature cannot be implemented by the probabilistic methods such as DSMC and MD.
+
+
+
+
+
+The transport part of the BGK model is treated explicitly, while the collision is treated implicitly to overcome its stiffness in the hydrodynamic regime, resulting
+\begin{equation}\label{discrete}
+    \frac{f^{j+1}-f^j}{\Delta
+    t}+Tr[f^j]=\frac{1}{\tau^{j+1}(x,y)}(f_{le}^{j+1}-f^{j+1}),
+\end{equation}
+where the variables with superscript $j$ denote the values of these variables at the $j$-th time step and $Tr[f^j]$ represents the spatial and velocity discretisation of the transport term. If the spatial and velocity ranges are wide enough such that $f$ is negligible small at the boundaries, $Tr[f^j]$ can be handled by the fast Fourier transformation to achieve the spectral accuracy. By using the conservative properties of the collision term, the nonlinear implicit equation~\eqref{discrete} can be solved explicitly. That is, given $f^j$, one can get $n^{j+1}$, $u_x^{j+1}$, $u_y^{j+1}$, and $T^{j+1}$ from the following equations: $n^{j+1}=\int Fdv_xdv_y$, $(V_x^{j+1},V_y^{j+1})=\int (v_x,v_y)Fdv_xdv_y/n^{j+1}$, and $T^{j+1}=m[\int {(v_x^2+v_y^2)}Fdv_xdv_y/{n^{j+1}} -(V_x^{j+1})^2-(V_y^{j+1})^2]/{2k_B}$, where $F=f^j-\Delta tT[f^j]$ and the numerical integration can be carried out by direct discrete sum or by the Simpson's rule. The above four macroscopic quantities at the $(j+1)$-th time step determine $f_{le}^{j+1}$ according to Eq.~\eqref{gle} and $\tau^{j+1}$ according to Eq.~\eqref{nu} or~\eqref{nu2}. Therefore, $f^{j+1}$ can be solved explicitly.
+
+%Courant-Friedrichs-Lewy (
+
+In practice, since $n(x,y)$ is very small near the boundary, numerical error emerges when calculating the macroscopic velocity. Hence it is possible to get negative temperature, which is not physical. To tackle this problem, the collision term in Eq.~\eqref{discrete} is neglected near the spatial boundary. This is justified by the fact that far from the trap centre the gas is in the collisionless limit so the collision term is negligible. Another point one should pay attention to is that, the maximum Courant–Friedrichs–Lewy number $\Delta t\cdot\operatorname{max}\{|v_x|/\Delta x+|v_y|/\Delta y+|a_x|/\Delta v_x+|a_y|/\Delta v_y\}$ with $\Delta x, \Delta y$ the spatial steps and $\Delta v_x, \Delta v_y$ the velocity steps, must be smaller than 1.
+
+
+
+\begin{figure}[t]
+\center
+\includegraphics[width=10cm]{Fig1_slosh_breath.pdf}
+\caption[Numerical simulation of the (a) sloshing mode and (b) breathing mode.]{Numerical simulation of the (a) sloshing mode and (b) breathing mode. The initial distribution function is $f=\exp\{-[\omega_0^2(x-0.3\l_{ho})^2+\omega_0^2y^2+v_x^2+v_y^2]/2\}/2\pi$ for the sloshing mode and $f=\exp\{-[\omega_0^2(x^2+y^2)+(v_x-0.8x)^2+(v_y-0.8y)^2]/2\}/2\pi$ for the breathing mode. In both simulations, $m=k_B=T_0=1, \omega_0=\sigma=4$, so that the characteristic length $\l_{ho}$ is $0.25$ and the system is in the transition regime. The spatial region $[-1.5,1.5]^2$ and the velocity region $[-8,8]^2$ are uniformly discretized into $64\times64$ and $32\times32$ meshes, respectively. The time step is $\Delta t=0.002$ and the maximum CFL number is 0.875. Here $<>$ means the spatial average. }
+\label{fig.1}
+\end{figure}
+
+\subsection{Numerical validations}
+
+
+To validate the numerical scheme, we simulate the radial sloshing and breathing modes in the isotropic harmonic trap with $\omega_x,\omega_y=\omega_0$. The local relaxation time is given by Eq. (\ref{nu}). However, the use of Eq.~\eqref{nu2} will give the same result because the cloud is nearly isothermal, i.e., after normalisation, only $n(x,y)$ affects $\tau(x,y)$.  The numerical results in Figure~\ref{fig.1} show that, as expected, the sloshing and breathing modes oscillate with the frequency $\omega_0$ and $2\omega_0$, respectively~\cite{Guery-Odelin1999, Lepers2010}. Note that the simulations were carried out in the transition regime, where damped modes decay rapidly. The two perfectly undamped modes prove the accuracy of the numerical scheme.
+
+
+
+\begin{figure}[tbp]
+\center
+\includegraphics[width=10cm]{fre_damp.pdf}
+\includegraphics[width=10cm]{quad.pdf} 
+\caption[(a) The normalised collective frequency and (b) damping of the radial quadrupole mode vs the nondimensional variable $\omega_0\widetilde{\tau}$. (c) Damping $\omega_i$ versus collective frequency $\omega_r$ of the radial quadrupole mode. ]{ (a) The normalised collective frequency and (b) damping of the radial quadrupole mode vs the nondimensional variable $\omega_0\widetilde{\tau}$. The results are obtained by fitting the quadrupole moment $Q=\langle x^2-y^2\rangle$ through the equation $Q(t)=A\exp(-\omega_i t)\sin(\omega_rt+\phi)+B\exp(-Ct)$. The quadrupole mode is excited by initial distribution function $\exp\{-[\omega_0^2(x^2+y^2)+(v_x-0.8x)^2+(v_y+0.8y)^2]/2\}/2\pi$. The value of cross-section $\sigma$ is varied to change the system from the hydrodynamic limit to the collisionless limit. Other parameters are the same as those in Figure~\ref{fig.1}. (c) Damping $\omega_i$ versus collective frequency $\omega_r$ of the radial quadrupole mode. For the experimental data (solid circles), $\omega_0$ represents the frequency of the sloshing mode when the gas is trapped in the Gaussian potential \cite{Riedl2008}.}
+\label{fig.2}
+\end{figure}
+
+
+\subsection{Results for the harmonic potential}
+
+
+Now we simulate the radial quadrupole mode and compare the results with the analytical and experimental ones. Analytically, replacing the local relaxation time $\tau(x,y)$ by the average relaxation time $\widetilde{\tau}=2\sqrt{2}\tau(0,0)$ and applying the method of moments up to the second-order, one finds that the mode frequency $\omega_r$ and damping rate $\omega_i$ satisfy~\cite{AlKhawaja2000, Buggle2005}
+\begin{equation}\label{quad}
+    \omega^2-2\omega_0^2
+-i\omega\widetilde{\tau}(\omega^2-4\omega_0^2)=0,
+\end{equation}
+where $\omega=\omega_r-i\omega_i$. This equation clearly shows that in the hydrodynamic regime, the mode frequency is $\omega_r=\sqrt{2}\omega_0$, while in the collisionless regime, it is $\omega_r=2\omega_0$.
+
+
+As mentioned above, the analytical solution~\eqref{quad} are not accurate due to the local relaxation time is replaced by the average one and/or only the second-order moments are included. Thus, in the numerical simulations, we use both the local and average relaxation times to see which factor affects the accuracy of the analytical results. Numerically extracted mode frequency and damping are depicted in Figure~\ref{fig.2}. When the average relaxation time is used, the numerical obtained mode frequency, damping, and their relations (stars) agree with the analytical results very well, so it is sufficient to include up to the second-order moments. The inaccuracy of the analytical results is therefore caused solely by replacing the local relaxation time with the average one. Comparing the analytical results with the numerical (squares, when the local relaxation time is used) and experimental ones (solid circles), one finds that the analytical mode frequency coincides with the numerical one [Figure~\ref{fig.2}(a)], while the analytical method underestimates the damping, especially in the transition regime [Figure~\ref{fig.2}(b) and (c)]. With the numerical results (squares), the difference between the experimental data and that of the BE in Ref.~\cite{Riedl2008} is greatly reduced.
+
+
+\begin{figure}[t]
+\center
+\includegraphics[width=9cm]{theta.pdf} 
+\caption[The angle (in degrees) of atom cloud vs the normalized time.]{The angle (in degrees) of atom cloud vs the normalized time. The scissors mode is excited by sudden rotation of the trap angle $\theta(0)$ by $5^o$. The trap frequencies are $\omega_x=2\omega_y=4$. The time step is $\Delta t=0.0025$ and the maximum CFL number is $0.82$. Other parameters are the same as those in Fiure~\ref{fig.1}, except the spatial region in the $y$ direction is now $[-3,3]$. The angle is obtained by $\theta(t)=90\operatorname{atan}[\langle xy\rangle/\langle x^2-y^2\rangle]/\pi$. } \label{theta}
+\end{figure}
+
+
+Finally, we simulate the radial scissors mode in the elliptical harmonic potential with $\omega_x=2\omega_y=4$. Analytically, the method of moments up to second-order predicts the following relation between the mode frequency and damping~\cite{Bruun2007}
+\begin{equation}\label{scissors}
+    {i\omega}(\omega^2-\omega_h^2)
+   +{\widetilde{\tau}}(\omega^2-\omega_{c1}^2)(\omega^2-\omega_{c2}^2)=0,
+\end{equation}
+where $\omega_h=(\omega_x^2+\omega_y^2)^{1/2}$ is the frequency in the hydrodynamic limit and $\omega_{c1}=\omega_x+\omega_y$, $\omega_{c2}=|\omega_x-\omega_y|$ are the frequencies at the collisionless limit.
+
+
+\begin{figure}[tb]
+\center
+\includegraphics[width=9cm]{scissors.pdf} 
+\caption[The normalized (a) collective frequency and (b) damping of the radial scissors mode vs the average relaxation time. (c) Damping $\omega_i$ vs collective frequency $\omega_r$ of the radial scissors mode.]
+{The normalized (a) collective frequency and (b) damping of the radial scissors mode vs the average relaxation time. The results are obtained by fitting the cloud angle to a sum of two damped sine functions each with their own free parameters. Only the higher frequency and the corresponding damping rate is plotted. (c) Damping $\omega_i$ versus collective frequency $\omega_r$ of the radial scissors mode. The experimental data (solid circles) are collected from Ref.~\cite{Wright2007}.}
+\label{fig_scissors}
+\end{figure}
+
+
+Typical oscillation sceneries of the radial scissors mode are shown in Figure~\ref{theta}. In the collisionless limit ($\sqrt{\omega_x\omega_y}\widetilde{\tau}=28$), the angle of atom cloud oscillates with two frequencies of $5.999$ and $2$, and the damping rate of $0.036$. As the value of $\sqrt{\omega_x\omega_y}\widetilde{\tau}$ decreases, both of the frequencies decrease, with the larger one gradually reducing to $2\sqrt{2}$ [Figure~\ref{fig_scissors}(a)] and the smaller one quickly approaching to zero. For example, when $\sqrt{\omega_x\omega_y}\widetilde{\tau}=0.316$, $\omega_r=4.609$ and the smaller frequency is already $0.012$; however, the damping corresponding to the larger frequency decreases with an initial increase  [Figure~\ref{fig_scissors}(b)]. The largest damping is achieved when $\sqrt{\omega_x\omega_y}\widetilde{\tau}=0.72$, where the scissors mode damps out within 2 oscillations. When the average relaxation time is used in the numerical simulation, the mode frequency (stars) overlaps with the analytical prediction [Figure~\ref{fig_scissors}(a)], while the damping agrees with the analytical prediction only in the hydrodynamic and collisionless regimes [Figure~\ref{fig_scissors}(b)]; in the transition regime the damping is slightly larger than that of the analytical prediction. This implies that, unlike the radial quadrupole mode, the analytical ansatz (see Eq.~(4) in Ref.~\cite{Bruun2007}) is not accurate enough. When the local relaxation time is used, both the mode frequency and damping do not agree with the analytical prediction, especially in the transition regime: the mode frequency is always larger than the analytical one, while the damping could be smaller or larger than the analytical one, depending on the value of $\sqrt{\omega_x\omega_y}\widetilde{\tau}$. For the relation between mode frequency and damping, the numerical results are always larger than the analytical one, see Figure~\ref{fig_scissors}(c). Like the radial quadrupole, the numerical results are closer to the experimental data than the analytical results at low temperatures. At higher temperatures, the anharmonic effect of the external Gaussian potential becomes important, and there are large errors in the frequency and damping, see the last three experimental data in Figure~\ref{fig_scissors}(c).
+
+
+
+\subsection{Numerical results for the Gaussian potential}
+
+Instead of the harmonic potential, the gases are trapped in the Gaussian potential at higher temperatures. The moment method fails to provide analytical solution for the Gaussian potential, so we have to rely on numerical simulations. To calculate the collective frequency and damping of the radial quadrupole mode, the following experimental data are used~\cite{Riedl2008}: $U_0=50k_B(\mu K)$, $W_a,W_b=32.8\mu{m}$, with the corresponding trap frequency $\omega_x,\omega_y=1800\times2\pi$(Hz). The trap frequency in the $z$ direction is $\omega_z=32\times2\pi$Hz, and the total number of atoms is $N_a=6\times10^5$. In the numerical simulations, the time, spatial coordinates, velocity, and temperature are respectively normalised by $a\sqrt{m/k_BT_F}$, $a$, $\sqrt{k_BT_F/m}$, and the Fermi temperature $T_F=2.73\mu K$. The distribution function is also normalised by the particle density at the trap centre. Therefore, the normalized accelerations in the $x$ and $y$ directions are respectively $-36.6x\exp(-x^2-y^2)$ and $-36.6y\exp(-x^2-y^2)$, and at the unitarity limit, the normalised local relaxation time is $\tau(x,y)=0.09(T/T_F)^2/n(x,y)$.
+
+
+Figure~\ref{gauss}(a) shows the frequency of the sloshing mode decreases as the temperature increases, which coincides with the experimental observations. This can be explained by the fact that the anharmonicity becomes stronger and stronger as the cloud size increases due to the temperature rise. Also, we find that the frequency decreases as the cloud's initial centre $x_0$ increases. Note that the sloshing mode is excited by shifting the Gaussian potential by $x_0$ in the $x$ direction.
+
+
+
+\begin{figure}[t]
+\center
+\includegraphics[width=8cm]{Fig4_compare.pdf}
+\caption[(a) The sloshing mode frequency versus the temperature in the Gaussian potential. (b) Damping rate $\omega_i$ versus collective frequency $\omega_r$ of the radial quadrupole mode.]
+{(a) The sloshing mode frequency versus the temperature in the Gaussian potential. (b) Damping rate $\omega_i$ versus collective frequency $\omega_r$ of the radial quadrupole mode. The spatial region $[-\sqrt{\widetilde{T}},\sqrt{\widetilde{T}}]\times[-\sqrt{\widetilde{T}},\sqrt{\widetilde{T}}]$ and the velocity region $[-8\sqrt{\widetilde{T}},8\sqrt{\widetilde{T}}]\times[-8\sqrt{\widetilde{T}},8\sqrt{\widetilde{T}}]$are uniformly discretized into $64\times64$ and $32\times32$ meshes, respectively. The time step is $\Delta t=0.0013$.}
+\label{gauss}
+\end{figure}
+
+
+Figure~\ref{gauss}(b) demonstrates the relation between the mode
+frequency and damping, where the local relaxation time is
+$\tau(x,y)=\alpha \widetilde{T}^2/n(x,y)$, the initial
+distribution function is
+$f=\exp\{-18.3[1-e^{-x^2/1.05^2-1.05^2y^2}]/\widetilde{T}\}\exp[-(v_x^2+v_y^2)/2\widetilde{T}]/2\pi\widetilde{T}$,
+and $\widetilde{T}=T/T_F$. {In the numerical simulation we use two
+values of $\alpha$, because if the repulsive mean-field potential
+is presented in the experiment, the atom density at the trap
+center will decrease and hence the coefficient will be lager than
+$0.09$. When $\alpha=0.09$, as the temperature increases
+(corresponding to the data from left to right), the mode frequency
+first increases, remains almost unchanged at
+$\omega_r/\omega_x\approx1.8$, and then slightly decreases. The
+constant frequency is due to the balance between the anharmonic
+and collisionless effects: the anharmonic effect reduces the
+effective trap frequency (and hence the mode frequency) while the
+collisionless effect tends to increase the mode frequency. When
+$\alpha=0.18$, the trend of the relation between the mode
+frequency and damping agrees with the experimental finding
+reasonably well. That is, from the hydrodynamic regime to the
+collisionless regime, the mode frequency first increases and then
+decreases. These results indicate that our numerical scheme can
+provide reasonable predictions for the collective oscillations in
+the Gaussian potentials. Also, it indicates that the difference
+between the numerical and experiment results may be a consequence
+of the approximation of the relaxation rate or the neglected
+mean-field potential term in Eq.~\eqref{bgk}, rather than the
+anharmonic effect~\cite{Riedl2008}.}
+
+
+
+\section{Quantum BGK model}
+
+
+Recently, the damping of the collective modes in the 2D Fermi gas has been investigated experimentally~\cite{Vogt2012}: the constant oscillation frequency (two times of the trap frequency) and small damping rate (the same order as that of the dipole mode, which is mainly caused by the anharmonicity of the external trap) of the breathing mode suggested the classical dynamic scaling symmetry of the 2D Fermi gas. In addition, the damping of the 2D quadrupole oscillations was also measured and the shear viscosity was extracted as a function of the temperature and the coupling strength. Theoretically, the shear viscosity has been calculated using the kinetic theory~\cite{bruun_2012, arxiv_sch} and the damping rates of the quadrupole mode were obtained~\cite{bruun_2012}, which agreed with the experimental data qualitatively. Generally speaking, kinetic theory is applicable at high temperature and weak coupling limits. However, for 3D Fermi gas at the unitary limit, it was shown qualitatively that the applicability can be down to $T\sim0.4T_F$~\cite{Massignan2005}, where $T_F$ is the Fermi temperature. Numerically, the damping of the radial quadrupole and scissors modes extracted from the numerical solution of the BE~\cite{Lepers2010,Chiacchiera2011} agrees with the experiment data~\cite{Riedl2008} qualitatively. Also, regarding the spin transport in the strong collision of two spin-polarized fermionic clouds~\cite{Somme2011, Sommer2011b}, the numerical simulation shows that the BE can reproduce the passing through, approaching, and bouncing off dynamics~\cite{Goulko2011}, although no comparison to the experimental data was made.
+
+Here we numerically solve the quantum BGK model and check its applicability range by comparing the damping of the quadrupole oscillations with the experimental data~\cite{Vogt2012}. Unlike the probabilistic method~\cite{Goulko2011}, we solve the Boltzmann model equation deterministically and observe the quantitative agreement between the numerical and experimental data in certain parameter regions. These parameter regions demonstrate the applicability range of the BE.
+
+Again, we consider the two-component Fermi gas in the normal fluid phase, where the up-spin and down-spin components have the same atom mass $m$ and atom numbers $N_a/2$. As experiment, the gas is tightly confined in the $z$ direction, so that the system is effectively 2D. The quantum BE is given by Eq.~\eqref{Boltzmann_b} with the differential cross-section given by Eq.~\eqref{two_d_s}. The form of quantum BGK model is like Eq.~\eqref{bgk}, but the local equilibrium VDF $f_{le}$ is replaced by the quantum one, given by Eq.~\eqref{quantum_equilibrium}. For isothermal problems, the local relaxation time $\tau$ is determined by equating the shear viscosity obtained from the quantum BGK model with that derived from the quantum BE, i.e., $\tau={\mu{}G_1(Z)}/{nk_BT}{G_2(Z)}$. The expression for the shear viscosity of the quantum BE has been calculated in
+\cite{bruun_2012,arxiv_sch}. It can be rewritten as
+\begin{equation}\label{eta2}
+    \mu=-\frac{\pi mk_BT}{8{\hbar}I_B(Z)}G_2^2(Z),
+\end{equation}
+where $I_B=\int{d}\xi (\xi_x\xi_y)    {L}[\xi_x\xi_y]$ and the linearized collision integral is
+\begin{equation}\label{coll_linearized}
+    {L}[\psi]=\int{d{{\xi}}_2}\int_0^{2\pi}{d}\Omega\frac{F}{K}\Delta\psi,
+\end{equation}
+with $\Delta\psi=\psi_4+\psi_3-\psi_2-\psi$,
+$F={{f^0f_2^0(1-f_3^0)(1-f_4^0)}}$,
+$K={\log^2(|\xi-\xi_2|^2T/2T_B)+\pi^2}$.
+Note that here $f^0(\xi)=(Z^{-1}e^{\xi^2}+1)^{-1}$ with the
+dimensionless quantity
+$\mathbf{\xi}=m(\textbf{v}-\textbf{V})/\sqrt{2mk_BT}$. In the
+near-classical limit ($z\rightarrow0$), the shear viscosity is~\cite{arxiv_sch}
+\begin{equation}\label{eta_classical}
+    \mu_{cl}=\frac{mk_BT}{2\pi^2\hbar}\left[\log^2\left(\frac{5T}{2T_B}\right)+\pi^2\right].
+\end{equation}
+
+
+
+
+We study the quadrupole oscillations of the 2D Fermi gas in the isotropic harmonic potential with the trapping frequency $\omega_\bot=2\pi\times125$Hz~\cite{Vogt2012}. We normalise the time by $1/\omega_\bot$,  the velocity by $v_F$, spatial length by $v_F/\omega_\bot$, the chemical potential by the Fermi energy $E_F=\hbar^2k_F^2/2m$, the temperature by the Fermi temperature $T_F=E_F/k_B$, the acceleration by $v_F\omega_\bot$, and the particle density by $n_0/\pi$, where $v_F=\hbar{k_F}/m$ with $k_F=\sqrt{2\pi{n_0}}$ being the Fermi wave vector. Note that $n_0$ is the particle density at the trap centre when the system is in equilibrium. Then, the quantum BGK model becomes
+\begin{equation}\label{BGK}
+    \frac{\partial f}{\partial t}+v_x \frac{\partial f}{\partial
+    x}+v_y \frac{\partial f}{\partial
+    y}-x\frac{\partial f}{\partial
+    v_x}-y\frac{\partial
+    f}{\partial v_y}=-\frac{f-f_{le}}{\tau(x,y)},
+\end{equation}
+where $f_{le}=\{Z^{-1}\exp[-(\textbf{v}-\textbf{V})^2/T]+1\}^{-1}$ is the normalised local equilibrium VDF,  and
+\begin{equation}\label{relaxation}
+    \tau(x,y)=-\frac{\pi^3G_1(Z)G_2(Z)}{8I_B}\frac{\hbar\omega_\bot}{E_F}\frac{1}{n(x,y)},
+\end{equation}
+is the normalised relaxation time. The normalised particle density is $n(x,y)=\int{d}\textbf{v} f$ and the normalised bulk velocity is $\textbf{v}(x,y)=\int{d}\textbf{v} \textbf{v}f/n(x,y)$.
+
+
+\begin{figure}[t]
+\centering
+\includegraphics[height=7cm]{Fig1-relaxation.pdf}
+\caption[The collision frequency vs the particle density for different values of interaction strength $\ln(k_Fa_2)$ at $T=0.47T_F$, $E_F=2\pi\hbar\times8.2$kHz, and $N_a=4300$.]{ The collision frequency vs the particle density for different values of interaction strength $\ln(k_Fa_2)$ at $T=0.47T_F$, $E_F=2\pi\hbar\times8.2$kHz, and $N_a=4300$. The system is in the hydrodynamic regime $(\omega_\bot\tau_{min}\ll1)$ at $\ln(k_Fa_2)=0$, in the transition regime $(\omega_\bot\tau_{min}\sim1)$ at $\ln(k_Fa_2)=2.7, 5.3$, and in the collisionless regime $(\omega_\bot\tau_{min}\gg1)$ at $\ln(k_Fa_2)=9.7$. Here $a_2$ is the s-wave scattering length in 2D velocity space.}
+\label{fig_relaxation}
+\end{figure}
+
+Unlike the 3D Fermi gas in the unitary limit, the collision frequency $1/\tau$ here is not a linear function of the particle density $n$~\cite{Massignan2005}. Since the fugacity is a function of the particle density (see Eq.~\eqref{zeroth}, the larger the particle density the larger the fugacity), the collision frequency, increases more slowly than $n$ [Figure~\ref{fig_relaxation}].
+
+\begin{figure}[t]
+\centering
+\includegraphics[width=10cm]{Fig2-compare11.pdf}
+\caption[(a) Frequency and (b) damping vs the interaction strength in the quadrupole oscillations of 2D Fermi gas at $T/T_F=0.47$ and $E_F=2\pi\hbar\times8.2$kHz.]{  (a) Frequency and (b) damping vs the interaction strength in the quadrupole oscillations of 2D Fermi gas at $T/T_F=0.47$ and $E_F=2\pi\hbar\times8.2$kHz. The experimental data are from Figure 1(a) and (b) of Ref.~\cite{Vogt2012}, the analytical results are obtained from Figure 3 in Ref.~\cite{bruun_2012} using $N_a=4300$, while the solid lines are the numerical results of Eq.~\eqref{BGK} for different particle number $N_a$. Note that $N$ in the legend is the atom number $N_a$.}
+\label{fig2}
+\end{figure}
+
+
+We use the asymptomatic preserving scheme to solve Eq.~\eqref{BGK}. The initial chemical potential $\mu'$ satisfies $N={2E_F^2}T^2G_2(e^{\mu'/T})/{\hbar^2\omega_\bot^2}$, and the initial fugacity corresponding to the excitation of quadrupole mode is $Z=\exp[(\mu'-1.1x^2-0.91y^2)/T]$.
+
+\begin{figure}[tb]
+\centering
+\includegraphics[width=12cm]{Fig3-compare22.pdf}
+\caption[The damping vs the interaction strength in the quadrupole oscillations of 2D Fermi gas at (a) $T=0.65T_F$, $E_F=2\pi\hbar\times9.0$kHz, (b) $T=0.89T_F$, $E_F=2\pi\hbar\times9.1$kHz, and (c) $T=0.30T_F$, $E_F=2\pi\hbar\times6.4$kHz.]
+{The damping vs the interaction strength in the quadrupole oscillations of 2D Fermi gas at (a) $T=0.65T_F$, $E_F=2\pi\hbar\times9.0$kHz, (b) $T=0.89T_F$, $E_F=2\pi\hbar\times9.1$kHz, and (c) $T=0.30T_F$, $E_F=2\pi\hbar\times6.4$kHz. The particle number is $N_a=3500$. The experimental data are from Figure 1(a) and (b) of Ref.~\cite{Vogt2012}.}
+\label{fig3}
+\end{figure}
+
+
+We first investigate the damping of the quadrupole modes as a function of the interaction strength for a fixed temperature $T=0.47T_F$ and the Fermi energy $E_F=2\pi\hbar\times8.2$kHz, corresponding to the experimental condition described in Figure 1 in Ref.~\cite{Vogt2012}. The particle number is estimated to be $3500\sim4300$~\cite{bruun_2012}. Note that the experiments are conducted in the presence of slightly anharmonic potential, where even the dipole modes decay at rate of $\Gamma_D=(0.04\pm0.01)\omega_\bot$ and the breathing modes decay near the average value $\Gamma_B\simeq0.05\omega_\bot$. In order to eliminate the effects of anharmonicity, the numerical and analytical damping rates will be added by $0.05\omega_\bot$.  Also note that the analytical results, i.e., Eq.~(12) in Ref.~\cite{bruun_2012}, are based on the hydrodynamics, so it should be accurate in the hydrodynamic regime. From Figure~\ref{fig_relaxation} we can see that the hydrodynamic regime is realised in the strong coupling regime when $\ln(k_Fa_2)\sim0$. Indeed, from Figure~\ref{fig2} we see that, the analytical (the dashed line) and numerical (the lines with crosses) damping rates agree with each other at $\ln(k_Fa_2)\leq1.5$. This demonstrates the accuracy of our numerical scheme. As the value of $\ln(k_Fa_2)$ increases, the system first enters into the transition regime and then the collisionless regime, where the hydrodynamic method breaks down. When $\ln(k_Fa_2)\geq1.5$, one can see the large deviation of the analytical results from the experimental data. However, our numerical results are in quantitative agreement with the experimental data. This indicates that the semi-classical BE can describe the damping of the quadrupole mode well, up to the strong interaction limit, i.e., $\ln(k_Fa_2)\simeq1.5$.
+
+For the oscillation frequency of the quadrupole mode, however, there are some discrepancies between the numerical and experimental data, see Figure~\ref{fig2}(a). This may be caused by the anharmonicity of the effective potential, which includes the external potential and additional potential caused by the mean-field or beyond mean-filed effects. Due to the anharmonicity of the external trap, the normalised quadrupole frequency should be increased by multiplying a prefactor which is larger than 1~\cite{Altmeyer2007}. Since the detailed trap anharmonicity is not given in the experiment, it is hard to estimate the value of the prefactor. On the other hand, the ellipticity of the trap, i.e., $e=|\omega_x-\omega_y|/\omega_\bot$, increases the normalised frequency by a factor of the order $e^2$. However, this incensement is negligible because of the small value of $e$ $(e\le0.04)$. As for the mean-field effect, when the gas is confined in harmonic trap, it has been shown that at the zero temperature the normalised frequency at the collisionless regime is $2\sqrt{(1-\widetilde{g}/2)/(1-\widetilde{g})}$, where $\widetilde{g}=1/\ln(k_Fa_{2})$~\cite{Ghosh2002,Vogt2012}. That is, the normalised frequency is $2.12$ at $\ln(k_Fa_{2})=5$ and $2.05$ at $\ln(k_Fa_{2})=10$. Thus in the numerical simulations, it is equivalent to set the effective harmonic trap frequency to be $\sim1.05\omega_\bot$. If we magnify the numerically extracted normalised frequency in Figure~\ref{fig.2}(a) by a factor of $1.05$, the results agree with the experimental date very well (not shown). With this kind of magnification, the numerically extracted damping in Figure~\ref{fig2}(b) agrees with the experimental data slightly better.
+
+
+The good prediction of the BE on the damping of quadrupole oscillation continues to hold at higher temperatures, see Figure~\ref{fig3} (a) and (b). However, at a lower temperature ($T=0.3T_F$), the BE ceases to give the correct prediction for the damping of quadrupole mode in the entire region of interaction strength, see Figure~\ref{fig3}(c).
+
+
+
+
+\section{Summary}
+
+
+To improve the accuracy and overcome the limitation of the method of moments, we have demonstrated a computationally efficient numerical scheme to solve the Boltzmann model equation. The advantage of the asymptotic preserving scheme is that it can deal with the harmonic and Gaussian potentials, as well as other forms of the potential, including the mean-field and other self-energy terms, which will help us to understand the properties of strongly interacting particles. In particular, the asymptotic preserving nature of the numerical scheme makes the computation of a hydrodynamic flow as fast and accurate as that of the transition and collisionless flows, which cannot be implemented by the probabilistic methods.
+
+
+
+The extracted mode frequency and damping of the radial quadrupole and scissors modes provide better agreement with the experimental data than the analytical solutions obtained from the method of moments. We have solved the quantum BGK model numerically. Eliminating the effect of the anharmonicity of the external potential, we have observed quantitative agreements between the numerically extracted damping of the 2D quadrupole oscillation and the experimental data. This indicates that the quantum BGK model can describe the collective oscillations of 2D Fermi gas at least in the parameter regions $T/T_F\geq0.47$ and $\ln(k_Fa_2)\geq1.5$.
+
+
+In addition to the study of collective oscillations, the present method can be useful for investigation of many other problems. For example, one can use it to study the expansion of the atom cloud after the trap being switched off; to examine the collision of two initially separated atom clouds to see the formation of quantum shock waves~\cite{Joseph2001}; to determine the effective transport coefficients such as the heat conductivity in very elongated traps~\cite{Meppelink2009a}. Also, the deterministic nature of the numerical scheme makes it suitable to solve the two-fluid equations (one for the normal phase and the other for the superfluid phase~\cite{Jackson2002}), where the numerical simulations will help us to understand the coupled dynamics of the superfluid and normal phases, i.e., the damping of superfluid flow by a thermal cloud~\cite{Meppelink2009}. Furthermore, it can help us to analyse the value spin drag coefficients in recent experiments~\cite{Somme2011, Sommer2011b}.
+
+
